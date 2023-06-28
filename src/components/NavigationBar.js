@@ -1,39 +1,54 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { PRODUCTS_PAGE, CATEGORIES_PAGE, DELIVERY_PAGE, ABOUT_PAGE, CONTACTS_PAGE } from "../utils/constants";
-import { LinkContainer } from "react-router-bootstrap";
+import { PRODUCTS_PAGE, CATEGORIES_PAGE, DELIVERY_PAGE, ABOUT_PAGE, CONTACTS_PAGE, LOGIN_PAGE, CART_PAGE } from "../utils/constants";
+import styles from "../style/NavigationBar.module.css";
+import { Link } from "react-router-dom";
+import logo from "../style/shopping.png";
+import account from "../style/account.png";
+import cart from "../style/cart.png";
 
 function NavigationBar() {
     return (
-      <Navbar expand="lg" className="bg-body-tertiary">
-        <Container>
-          <LinkContainer to={ PRODUCTS_PAGE }>
-            <Navbar.Brand>StorePj</Navbar.Brand>
-          </LinkContainer>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <LinkContainer to={ PRODUCTS_PAGE }>
-                <Nav.Link>Products</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to={ CATEGORIES_PAGE }>
-                <Nav.Link>Categories</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to={ DELIVERY_PAGE }>
-                <Nav.Link>Delivery</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to={ ABOUT_PAGE }>
-                <Nav.Link>About</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to={ CONTACTS_PAGE }>
-                <Nav.Link>Contacts</Nav.Link>
-              </LinkContainer>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar> 
+      <header className={styles.headerPrimary}>
+        <div className={styles.logoContainer}>
+          <Link className={styles.logoLink} to={PRODUCTS_PAGE}>
+            <img src={logo} alt="shopping" className={styles.logoIcon} />
+            <span className={styles.logoPrimary}>
+              Raccoon's
+            </span>
+          </Link>
+        </div>
+
+        <div className={styles.linksContainer}>
+          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={CATEGORIES_PAGE}>Categories</Link>
+          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={PRODUCTS_PAGE}>Products</Link>
+          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={DELIVERY_PAGE}>Delivery</Link>
+          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={CONTACTS_PAGE}>Contacts</Link>
+          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={ABOUT_PAGE}>About</Link>
+        </div>
+
+        <div className={styles.accountContainer}>
+          <div className={styles.languageSwitch}>
+            <a href="#" className={styles.languageButton}>🇬🇧</a>
+            <a href="#" className={styles.languageButton}>🇺🇦</a>
+          </div>
+          <a href={CART_PAGE} className={styles.cartButton}>
+            <img src={cart} alt="cart" className={styles.icon} />
+            <p>Cart</p>
+          </a>
+          <a href={LOGIN_PAGE} className={styles.accountButton}>
+            <img src={account} alt="account" className={styles.icon} />
+            <p>Account</p>
+          </a>
+        </div>
+      </header>
     );
+}
+
+const visibleStyle = {
+  display: "flex"
+};
+
+const hiddenStyle = {
+  display: "none"
 }
 
 export default NavigationBar;

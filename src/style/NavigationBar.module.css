@@ -1,0 +1,146 @@
+@media (max-width: 900px) {
+    .linksContainer .linkContainer {
+        display: none;
+    }
+
+    .accountContainer .accountButton {
+        display: none;
+    }
+
+    .accountContainer .cartButton {
+        display: none;
+    }
+
+    .accountContainer .languageButton {
+        display: none;
+    }
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #E6F4F1;
+}
+
+.headerPrimary {
+    position: fixed;
+    width: 100%;
+    height: 4em;
+    background-color: #2473FF;
+    display: flex;
+    align-items: center;
+}
+
+.logoContainer {
+    flex-basis: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+}
+
+.logoLink {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.logoIcon {
+    height: 4em;
+
+}
+
+.logoPrimary {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #E6F4F1;
+    text-shadow: 2px 2px #001F91;
+}
+
+.linksContainer {
+    flex-basis: 40%;
+    height: inherit;
+    display: flex;
+    justify-content: left;
+    margin-left: 10px
+}
+
+.linkContainer {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
+
+}
+
+.linkContainer:hover {
+    background-color: #E6F4F1;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    color: #001F91
+}
+
+.linkContainer:active {
+    background-color: powderblue;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    color: #001F91
+}
+
+.linkContainer:active {
+    background-color: powderblue;
+}
+
+.accountContainer {
+    flex-basis: 40%;
+    height: inherit;
+    display: flex;
+    justify-content: right;
+}
+
+.accountButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.3em;
+    color: #E6F4F1;
+    text-decoration: none;
+    margin-right: 5%;
+}
+
+.icon {
+    height: 2em;
+    width: 2em;
+}
+
+.cartButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.3em;
+    color: #E6F4F1;
+    text-decoration: none;
+    margin-right: 5%;
+}
+
+.languageSwitch {
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5%;
+}
+
+.languageButton {
+    text-decoration: none;
+    margin: 0.2em;
+}
+
+.headerLink {
+    text-decoration: none;
+    font-size: 1em;
+    color: #E6F4F1;
+}
+
+
