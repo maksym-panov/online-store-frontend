@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "../style/shopping.png";
 import account from "../style/account.png";
 import cart from "../style/cart.png";
+import menu from "../style/menu.png";
 
 function NavigationBar() {
     return (
@@ -38,6 +39,12 @@ function NavigationBar() {
             <img src={account} alt="account" className={styles.icon} />
             <p>Account</p>
           </a>
+          <div className={styles.menuContainer}>
+            <input type="checkbox" id="menuCheckBoxId" className={styles.menuCheckbox} />
+            <label for="menuCheckBoxId">
+              <img src={menu} alt="menu" className={styles.menuIcon} />
+            </label>
+          </div>
         </div>
       </header>
     );

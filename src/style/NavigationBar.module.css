@@ -14,6 +14,14 @@
     .accountContainer .languageButton {
         display: none;
     }
+
+    .accountContainer .menuContainer {
+        display: flex;
+    }
+
+    .accountContainer .menuIcon {
+        display: block;
+    }
 }
 
 body {
@@ -135,6 +143,33 @@ body {
 .languageButton {
     text-decoration: none;
     margin: 0.2em;
+}
+
+.menuContainer {
+    height: inherit;
+    display: flex;
+    align-items: center;
+    padding-right: 1em;
+    padding-left: 1em;
+    cursor: pointer
+}
+
+.menuIcon {
+    height: 3em;
+    display: none;
+    cursor: pointer
+}
+
+.menuCheckbox {
+    display: none;
+}
+
+.menuContainer:hover {
+    background-color: #001F91;
+}
+
+.menuCheckbox:checked {
+    border: 2px solid black
 }
 
 .headerLink {
