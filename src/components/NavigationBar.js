@@ -20,8 +20,8 @@ function NavigationBar() {
         </div>
 
         <div className={styles.linksContainer}>
-          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={CATEGORIES_PAGE}>Categories</Link>
           <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={PRODUCTS_PAGE}>Products</Link>
+          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={CATEGORIES_PAGE}>Categories</Link>
           <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={DELIVERY_PAGE}>Delivery</Link>
           <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={CONTACTS_PAGE}>Contacts</Link>
           <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={ABOUT_PAGE}>About</Link>
@@ -60,8 +60,8 @@ function NavigationBar() {
 
             <div className={styles.menuLinksBackgroundContainer}>
               <ul className={styles.menuLinksContainer}>
-                <Link className={styles.menuLinkContainer} to={CATEGORIES_PAGE}><li className={styles.menuLink}>Categories</li></Link>
                 <Link className={styles.menuLinkContainer} to={PRODUCTS_PAGE}><li className={styles.menuLink}>Products</li></Link>
+                <Link className={styles.menuLinkContainer} to={CATEGORIES_PAGE}><li className={styles.menuLink}>Categories</li></Link>
                 <Link className={styles.menuLinkContainer} to={DELIVERY_PAGE}><li className={styles.menuLink}>Delivery</li></Link>
                 <Link className={styles.menuLinkContainer} to={CONTACTS_PAGE}><li className={styles.menuLink}>Contacts</li></Link>
                 <Link className={styles.menuLinkContainer} to={ABOUT_PAGE}><li className={styles.menuLink}>About</li></Link>
