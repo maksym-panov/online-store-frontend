@@ -5,6 +5,7 @@ import logo from "../style/shopping.png";
 import account from "../style/account.png";
 import cart from "../style/cart.png";
 import menu from "../style/menu.png";
+import x from "../style/x.png";
 
 function NavigationBar() {
     return (
@@ -29,12 +30,16 @@ function NavigationBar() {
         <div className={styles.accountContainer}>
           <div className={styles.languageSwitch}>
             <div className={styles.languageButton}>
-              <input id="lang-eng" type="radio" value="eng" name="language" className={styles.radioHidden} />
-              <label for="lang-eng" className={styles.languageFlag}>🇬🇧</label>
+              <label className={styles.languageFlag}>
+                <input type="radio" value="eng" name="language" className={styles.radioHidden} />
+                🇬🇧
+              </label>
             </div>
             <div className={styles.languageButton}>
-              <input id="lang-ukr" type="radio" value="ukr" name="language" className={styles.radioHidden} />
-              <label for="lang-ukr" className={styles.languageFlag}>🇺🇦</label>
+              <label className={styles.languageFlag}>
+                <input type="radio" value="ukr" name="language" className={styles.radioHidden} />
+                  🇺🇦
+              </label>
             </div>
           </div>
           <Link to={CART_PAGE} className={styles.cartButton}>
@@ -48,22 +53,25 @@ function NavigationBar() {
         </div>
 
         <div className={styles.menuContainer}>
-          <label for="menuCheckBoxId" className={styles.menu}>
-            <div className={styles.menuButtonContainer}>
+          <button className={styles.menu}>
+            <div className={styles.menuButton}>
               <img src={menu} alt="menu" className={styles.menuIcon} />
             </div>
-          </label>  
-          <input type="checkbox" id="menuCheckBoxId" className={styles.menuCheckbox} />
+
+            <div className={styles.menuLinksBackgroundContainer}>
+              <ul className={styles.menuLinksContainer}>
+                <Link className={styles.menuLinkContainer} to={CATEGORIES_PAGE}><li className={styles.menuLink}>Categories</li></Link>
+                <Link className={styles.menuLinkContainer} to={PRODUCTS_PAGE}><li className={styles.menuLink}>Products</li></Link>
+                <Link className={styles.menuLinkContainer} to={DELIVERY_PAGE}><li className={styles.menuLink}>Delivery</li></Link>
+                <Link className={styles.menuLinkContainer} to={CONTACTS_PAGE}><li className={styles.menuLink}>Contacts</li></Link>
+                <Link className={styles.menuLinkContainer} to={ABOUT_PAGE}><li className={styles.menuLink}>About</li></Link>
+              </ul>
+            </div>
+          </button>  
+          <button className={styles.closeButton}>
+                <img src={x} alt="close" className={styles.closeIcon} />
+          </button>
           
-          <div className={styles.menuLinksBackgroundContainer}>
-            <ul className={styles.menuLinksContainer}>
-              <Link className={styles.menuLinkContainer} to={CATEGORIES_PAGE}><li className={styles.menuLink}>Categories</li></Link>
-              <Link className={styles.menuLinkContainer} to={PRODUCTS_PAGE}><li className={styles.menuLink}>Products</li></Link>
-              <Link className={styles.menuLinkContainer} to={DELIVERY_PAGE}><li className={styles.menuLink}>Delivery</li></Link>
-              <Link className={styles.menuLinkContainer} to={CONTACTS_PAGE}><li className={styles.menuLink}>Contacts</li></Link>
-              <Link className={styles.menuLinkContainer} to={ABOUT_PAGE}><li className={styles.menuLink}>About</li></Link>
-            </ul>
-          </div>
         </div>
       </header>
     );

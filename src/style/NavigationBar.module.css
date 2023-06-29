@@ -38,7 +38,11 @@ body {
 }
 
 .logoContainer:hover {
-    background-color: #E6F4F1;
+    background-color: rgba(0, 31, 145, 0.5);
+}
+
+.logoContainer:active {
+    background-color: rgba(0, 31, 145, 1);
 }
 
 .logoLink {
@@ -107,7 +111,11 @@ body {
 }
 
 .accountButton:hover {
-    background-color: #E6F4F1;
+    background-color: rgba(0, 31, 145, 0.5);
+}
+
+.accountButton:active {
+    background-color: rgba(0, 31, 145, 1);
 }
 
 .icon {
@@ -126,7 +134,11 @@ body {
 }
 
 .cartButton:hover {
-    background-color: #E6F4F1;
+    background-color: rgba(0, 31, 145, 0.5);
+}
+
+.cartButton:active {
+    background-color: rgba(0, 31, 145, 1);
 }
 
 .languageSwitch {
@@ -150,7 +162,7 @@ body {
 }
 
 .languageButton:active .languageFlag {
-    font-size: 0.7em;
+    font-size: 0.9em;
 }
 
 .radioHidden {
@@ -171,10 +183,6 @@ body {
     align-items: center;
 }
 
-.menuCheckbox {
-    display: none;
-}
-
 .menu {
     cursor: pointer;
     height: 4em;
@@ -182,18 +190,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: none;
+    border: none;
 }
 
-.menu:hover {
+.menu:hover:not(:focus-within) {
     background-color: rgba(0, 31, 145, 0.5);
-}
-
-.menu:active {
-    background-color: rgba(0, 31, 145, 1);
-}
-
-.menuButtonContainer {
-
 }
 
 .menuIcon {
@@ -201,16 +203,46 @@ body {
     width: 3em;
 }
 
-.menuCheckbox:checked + .menuLinksBackgroundContainer {
+.menu:focus-within > .menuLinksBackgroundContainer {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.menu:focus-within .menuButton {
+    display: none;
+}
+
+.menu:focus-within {
+    cursor: inherit
+}
+
+.closeButton {
+    display: none;
+    background: none;
+    border: none;
+    height: 4em;
+    width: 4em;
+}
+
+.menu:focus-within ~ .closeButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu:focus-within ~ .closeButton:hover {
+    background-color: rgba(0, 31, 145, 0.5);
+}
+
+.closeIcon {
+    height: 2em;
+}
+
 .menuLinksBackgroundContainer {
     display: none;
-    width: 70%;
-    height: 30em;
+    width: 100%;
+    height: fit-content;
     background-color: rgba(0, 31, 145, 0.5);
     position: fixed;
     top: 4em;
@@ -227,18 +259,32 @@ body {
     justify-content: space-around;
     padding: 0em;
     margin: 0em;
-    border: 1px solid black
 }
 
 .menuLinkContainer {
+    display: flex;
     width: inherit;
-    border: 1px black solid;
+    height: 3em;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 .menuLink {
-    width: inherit;
-    border: 1px solid black;
     text-decoration: none;
+    font-size: x-large;
     color: #E6F4F1;
+}
+
+.menuLinkContainer:hover {
+    background-color: rgba(230, 244, 241, 0.5);
+}
+
+.menuLinkContainer:hover .menuLink {
+    color: #001F91;
+}
+
+.menuLinkContainer:active {
+    background-color: rgba(230, 244, 241, 0.8);
 }
 
