@@ -43,12 +43,12 @@ function NavigationBar() {
             </div>
           </div>
           <Link to={CART_PAGE} className={styles.cartButton}>
-            <img src={cart} alt="cart" className={styles.icon} />
-            <p>Cart</p>
+              <img src={cart} alt="cart" className={styles.icon} />
+              <p>Cart</p>
           </Link>
           <Link to={LOGIN_PAGE} className={styles.accountButton}>
-            <img src={account} alt="account" className={styles.icon} />
-            <p>Account</p>
+              <img src={account} alt="account" className={styles.icon} />
+              <p>Account</p>
           </Link>
         </div>
 
@@ -66,6 +66,36 @@ function NavigationBar() {
                 <Link className={styles.menuLinkContainer} to={CONTACTS_PAGE}><li className={styles.menuLink}>Contacts</li></Link>
                 <Link className={styles.menuLinkContainer} to={ABOUT_PAGE}><li className={styles.menuLink}>About</li></Link>
               </ul>
+
+              <hr className={styles.horisontalRulerMenu} />
+
+              <div className={styles.menuAdditionalButtonsContainer}>
+                <div className={`${styles.languageSwitch} ${styles.languageSwitchMenu}`}>
+                  <div className={styles.languageButton}>
+                    <label className={styles.languageFlag}>
+                      <input type="radio" value="eng" name="language" className={styles.radioHidden} />
+                        🇬🇧
+                    </label>
+                  </div>
+                  <div className={styles.languageButton}>
+                    <label className={styles.languageFlag}>
+                      <input type="radio" value="ukr" name="language" className={styles.radioHidden} />
+                        🇺🇦
+                    </label>
+                  </div>
+                </div>
+
+                <div className={styles.accountButtonMenu}>
+                  <Link to={CART_PAGE} className={`${styles.cartButton} ${styles.accountButtonMenuContent}`}>
+                    <img src={cart} alt="cart" className={styles.icon} />
+                    Cart
+                  </Link>
+                  <Link to={LOGIN_PAGE} className={`${styles.accountButton} ${styles.accountButtonMenuContent}`}>
+                    <img src={account} alt="account" className={styles.icon} />
+                    Account
+                  </Link>
+                </div>
+              </div>
             </div>
           </button>  
           <button className={styles.closeButton}>

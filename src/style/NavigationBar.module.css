@@ -12,8 +12,18 @@
     }
 }
 
+@keyframes menuAppearAnimation {
+    0% {
+        left: 100%;
+    }
+
+    100% {
+        left: 0%;
+    }
+}
+
 body {
-    font-family: sans-serif;
+    font-family: Ubuntu, sans-serif;
     background-color: #E6F4F1;
     height: 10000px;
 }
@@ -38,11 +48,11 @@ body {
 }
 
 .logoContainer:hover {
-    background-color: rgba(0, 31, 145, 0.5);
+    background-color: rgba(0, 31, 145, 0.3);
 }
 
 .logoContainer:active {
-    background-color: rgba(0, 31, 145, 1);
+    background-color: rgba(0, 31, 145, 0.5);
 }
 
 .logoLink {
@@ -100,6 +110,7 @@ body {
     justify-content: right;
 }
 
+
 .accountButton {
     width: 5em;
     display: flex;
@@ -111,11 +122,11 @@ body {
 }
 
 .accountButton:hover {
-    background-color: rgba(0, 31, 145, 0.5);
+    background-color: rgba(0, 31, 145, 0.3);
 }
 
 .accountButton:active {
-    background-color: rgba(0, 31, 145, 1);
+    background-color: rgba(0, 31, 145, 0.5);
 }
 
 .icon {
@@ -134,11 +145,11 @@ body {
 }
 
 .cartButton:hover {
-    background-color: rgba(0, 31, 145, 0.5);
+    background-color: rgba(0, 31, 145, 0.3);
 }
 
 .cartButton:active {
-    background-color: rgba(0, 31, 145, 1);
+    background-color: rgba(0, 31, 145, 0.5);
 }
 
 .languageSwitch {
@@ -207,6 +218,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    animation: 0.2s linear 0s 1 running menuAppearAnimation;
 }
 
 .menu:focus-within .menuButton {
@@ -241,9 +254,10 @@ body {
 
 .menuLinksBackgroundContainer {
     display: none;
+    flex-direction: column;
     width: 100%;
     height: fit-content;
-    background-color: rgba(0, 31, 145, 0.5);
+    background-color: #2473FF;
     position: fixed;
     top: 4em;
     left: 0em;
@@ -256,18 +270,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding: 0em;
-    margin: 0em;
+    margin-top: 1em;
 }
 
 .menuLinkContainer {
     display: flex;
-    width: inherit;
-    height: 3em;
+    width: 85%;
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    border-radius: 10px;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 .menuLink {
@@ -277,7 +293,8 @@ body {
 }
 
 .menuLinkContainer:hover {
-    background-color: rgba(230, 244, 241, 0.5);
+    background-color: #E6F4F1;
+    color: #001F91;
 }
 
 .menuLinkContainer:hover .menuLink {
@@ -285,6 +302,38 @@ body {
 }
 
 .menuLinkContainer:active {
-    background-color: rgba(230, 244, 241, 0.8);
+    background-color: powderblue;
+}
+
+.horisontalRulerMenu {
+    color: #001F91;
+    width: 90%;
+    border-width: 1px;
+    border-style:ridge;
+    box-shadow: 0px 2px 5px black;
+}
+
+.menuAdditionalButtonsContainer {
+    width: inherit;
+    display: flex;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.languageSwitchMenu {
+    flex-basis: 30%;
+    margin-left: 0.5em;
+    justify-content: left;
+}
+
+.accountButtonMenu {
+    flex-basis: 70%;
+    display: flex;
+    margin-right: 0.5em;
+    justify-content: right;
+}
+
+.accountButtonMenuContent {
+    border-radius: 10px;
 }
 
