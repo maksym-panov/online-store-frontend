@@ -1,4 +1,4 @@
-@media (max-width: 950px) {
+@media (max-width: 1000px) {
     .headerPrimary .linksContainer {
         display: none;
     }
@@ -8,26 +8,14 @@
     }
 
     .headerPrimary .menuContainer {
-        display: flex;
+        display: flex
     }
-    
-    .headerPrimary .menuContainer .innerMenu {
-        display: flex;
-    }
-
-    .headerPrimary .menuContainer .innerMenu .menuLinksContainer {
-        display: none
-    }
-
-    .headerPrimary .menuContainer .innerMenu .menuIcon {
-        display: block
-    }
-   
 }
 
 body {
     font-family: sans-serif;
     background-color: #E6F4F1;
+    height: 10000px;
 }
 
 .headerPrimary {
@@ -45,6 +33,12 @@ body {
     align-items: center;
     justify-content: center;
     height: inherit;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.logoContainer:hover {
+    background-color: #E6F4F1;
 }
 
 .logoLink {
@@ -56,14 +50,13 @@ body {
 
 .logoIcon {
     height: 4em;
-
 }
 
 .logoPrimary {
     font-size: 1.6em;
     font-weight: bold;
     color: #E6F4F1;
-    text-shadow: 2px 2px #001F91;
+    text-shadow: 0px 0px 5px #001F91;
 }
 
 .linksContainer {
@@ -71,23 +64,24 @@ body {
     height: inherit;
     display: flex;
     justify-content: left;
+    align-items: center;
     margin-left: 10px
 }
 
 .linkContainer {
     width: 6em;
+    height: 2em;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-left: 1em;
     padding-right: 1em;
+    border-radius: 20px;
 }
 
 .linkContainer:hover {
     background-color: #E6F4F1;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    color: #001F91
+    color: #001F91;
 }
 
 
@@ -110,8 +104,6 @@ body {
     color: #E6F4F1;
     text-decoration: none;
     padding: 10px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
 }
 
 .accountButton:hover {
@@ -131,8 +123,6 @@ body {
     color: #E6F4F1;
     text-decoration: none;
     padding: 10px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
 }
 
 .cartButton:hover {
@@ -140,51 +130,32 @@ body {
 }
 
 .languageSwitch {
-    font-size: 2em;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 5%;
+    flex-basis: 20%;
 }
 
 .languageButton {
+    width: 1em;
+    font-size: 2em;
     text-decoration: none;
+    text-align: center;
     margin: 0.2em;
 }
 
-.menuContainer {
-    flex-basis: 80%;
-    justify-content: flex-end;
-    height: inherit;
+.languageFlag:hover {
+    cursor: pointer;
+}
+
+.languageButton:active .languageFlag {
+    font-size: 0.7em;
+}
+
+.radioHidden {
     display: none;
-    align-items: center;
 }
-
-.innerMenu {
-    display: none;
-}
-
-.menuIcon {
-    height: 3em;
-
-}
-
-.menuCheckbox {
-  display: none;
-}
-
-.menuContentBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 4em;
-    width: 4em;
-}
-
-.menuContentBox:hover {
-    background-color: #001F91;
-}
-
 
 .headerLink {
     text-decoration: none;
@@ -192,4 +163,82 @@ body {
     color: #E6F4F1;
 }
 
+.menuContainer {
+    display: none;
+    flex-basis: 80%;
+    height: inherit;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.menuCheckbox {
+    display: none;
+}
+
+.menu {
+    cursor: pointer;
+    height: 4em;
+    width: 4em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu:hover {
+    background-color: rgba(0, 31, 145, 0.5);
+}
+
+.menu:active {
+    background-color: rgba(0, 31, 145, 1);
+}
+
+.menuButtonContainer {
+
+}
+
+.menuIcon {
+    height: 3em;
+    width: 3em;
+}
+
+.menuCheckbox:checked + .menuLinksBackgroundContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuLinksBackgroundContainer {
+    display: none;
+    width: 70%;
+    height: 30em;
+    background-color: rgba(0, 31, 145, 0.5);
+    position: fixed;
+    top: 4em;
+    left: 0em;
+}
+
+.menuLinksContainer {
+    height: inherit;
+    width: inherit;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0em;
+    margin: 0em;
+    border: 1px solid black
+}
+
+.menuLinkContainer {
+    width: inherit;
+    border: 1px black solid;
+}
+
+.menuLink {
+    width: inherit;
+    border: 1px solid black;
+    text-decoration: none;
+    color: #E6F4F1;
+}
 

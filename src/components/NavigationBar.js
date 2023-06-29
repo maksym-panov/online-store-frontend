@@ -28,8 +28,14 @@ function NavigationBar() {
 
         <div className={styles.accountContainer}>
           <div className={styles.languageSwitch}>
-            <a href="#" className={styles.languageButton}>🇬🇧</a>
-            <a href="#" className={styles.languageButton}>🇺🇦</a>
+            <div className={styles.languageButton}>
+              <input id="lang-eng" type="radio" value="eng" name="language" className={styles.radioHidden} />
+              <label for="lang-eng" className={styles.languageFlag}>🇬🇧</label>
+            </div>
+            <div className={styles.languageButton}>
+              <input id="lang-ukr" type="radio" value="ukr" name="language" className={styles.radioHidden} />
+              <label for="lang-ukr" className={styles.languageFlag}>🇺🇦</label>
+            </div>
           </div>
           <Link to={CART_PAGE} className={styles.cartButton}>
             <img src={cart} alt="cart" className={styles.icon} />
@@ -42,30 +48,25 @@ function NavigationBar() {
         </div>
 
         <div className={styles.menuContainer}>
-            <div className={styles.menuContentBox}>
-              <input type="checkbox" id="menuCheckBoxId" className={styles.menuCheckbox} />
-              <label htmlFor="menuCheckBoxId" className={styles.innerMenu}>
-                <img src={menu} alt="menu" className={styles.menuIcon} />
-                <ul className={styles.menuLinksContainer}>
-                  <li><Link className={styles.menuLinkContainer} to={CATEGORIES_PAGE}>Categories</Link></li>
-                  <li><Link className={styles.menuLinkContainer} to={PRODUCTS_PAGE}>Products</Link></li>
-                  <li><Link className={styles.menuLinkContainer} to={DELIVERY_PAGE}>Delivery</Link></li>
-                  <li><Link className={styles.menuLinkContainer} to={CONTACTS_PAGE}>Contacts</Link></li>
-                  <li><Link className={styles.menuLinkContainer} to={ABOUT_PAGE}>About</Link></li>
-                </ul>
-              </label>
+          <label for="menuCheckBoxId" className={styles.menu}>
+            <div className={styles.menuButtonContainer}>
+              <img src={menu} alt="menu" className={styles.menuIcon} />
             </div>
+          </label>  
+          <input type="checkbox" id="menuCheckBoxId" className={styles.menuCheckbox} />
+          
+          <div className={styles.menuLinksBackgroundContainer}>
+            <ul className={styles.menuLinksContainer}>
+              <Link className={styles.menuLinkContainer} to={CATEGORIES_PAGE}><li className={styles.menuLink}>Categories</li></Link>
+              <Link className={styles.menuLinkContainer} to={PRODUCTS_PAGE}><li className={styles.menuLink}>Products</li></Link>
+              <Link className={styles.menuLinkContainer} to={DELIVERY_PAGE}><li className={styles.menuLink}>Delivery</li></Link>
+              <Link className={styles.menuLinkContainer} to={CONTACTS_PAGE}><li className={styles.menuLink}>Contacts</li></Link>
+              <Link className={styles.menuLinkContainer} to={ABOUT_PAGE}><li className={styles.menuLink}>About</li></Link>
+            </ul>
           </div>
+        </div>
       </header>
     );
-}
-
-const visibleStyle = {
-  display: "flex"
-};
-
-const hiddenStyle = {
-  display: "none"
 }
 
 export default NavigationBar;
