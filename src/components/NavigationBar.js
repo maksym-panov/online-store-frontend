@@ -31,21 +31,31 @@ function NavigationBar() {
             <a href="#" className={styles.languageButton}>🇬🇧</a>
             <a href="#" className={styles.languageButton}>🇺🇦</a>
           </div>
-          <a href={CART_PAGE} className={styles.cartButton}>
+          <Link to={CART_PAGE} className={styles.cartButton}>
             <img src={cart} alt="cart" className={styles.icon} />
             <p>Cart</p>
-          </a>
-          <a href={LOGIN_PAGE} className={styles.accountButton}>
+          </Link>
+          <Link to={LOGIN_PAGE} className={styles.accountButton}>
             <img src={account} alt="account" className={styles.icon} />
             <p>Account</p>
-          </a>
-          <div className={styles.menuContainer}>
-            <input type="checkbox" id="menuCheckBoxId" className={styles.menuCheckbox} />
-            <label for="menuCheckBoxId">
-              <img src={menu} alt="menu" className={styles.menuIcon} />
-            </label>
-          </div>
+          </Link>
         </div>
+
+        <div className={styles.menuContainer}>
+            <div className={styles.menuContentBox}>
+              <input type="checkbox" id="menuCheckBoxId" className={styles.menuCheckbox} />
+              <label htmlFor="menuCheckBoxId" className={styles.innerMenu}>
+                <img src={menu} alt="menu" className={styles.menuIcon} />
+                <ul className={styles.menuLinksContainer}>
+                  <li><Link className={styles.menuLinkContainer} to={CATEGORIES_PAGE}>Categories</Link></li>
+                  <li><Link className={styles.menuLinkContainer} to={PRODUCTS_PAGE}>Products</Link></li>
+                  <li><Link className={styles.menuLinkContainer} to={DELIVERY_PAGE}>Delivery</Link></li>
+                  <li><Link className={styles.menuLinkContainer} to={CONTACTS_PAGE}>Contacts</Link></li>
+                  <li><Link className={styles.menuLinkContainer} to={ABOUT_PAGE}>About</Link></li>
+                </ul>
+              </label>
+            </div>
+          </div>
       </header>
     );
 }

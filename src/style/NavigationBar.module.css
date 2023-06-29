@@ -1,27 +1,28 @@
-@media (max-width: 900px) {
-    .linksContainer .linkContainer {
+@media (max-width: 950px) {
+    .headerPrimary .linksContainer {
         display: none;
     }
 
-    .accountContainer .accountButton {
-        display: none;
+    .headerPrimary .accountContainer {
+        display: none
     }
 
-    .accountContainer .cartButton {
-        display: none;
+    .headerPrimary .menuContainer {
+        display: flex;
     }
-
-    .accountContainer .languageButton {
-        display: none;
-    }
-
-    .accountContainer .menuContainer {
+    
+    .headerPrimary .menuContainer .innerMenu {
         display: flex;
     }
 
-    .accountContainer .menuIcon {
-        display: block;
+    .headerPrimary .menuContainer .innerMenu .menuLinksContainer {
+        display: none
     }
+
+    .headerPrimary .menuContainer .innerMenu .menuIcon {
+        display: block
+    }
+   
 }
 
 body {
@@ -74,27 +75,21 @@ body {
 }
 
 .linkContainer {
-    text-align: center;
+    width: 6em;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding-left: 1em;
     padding-right: 1em;
-
 }
 
 .linkContainer:hover {
     background-color: #E6F4F1;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     color: #001F91
 }
 
-.linkContainer:active {
-    background-color: powderblue;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    color: #001F91
-}
 
 .linkContainer:active {
     background-color: powderblue;
@@ -108,13 +103,19 @@ body {
 }
 
 .accountButton {
+    width: 5em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 0.3em;
     color: #E6F4F1;
     text-decoration: none;
-    margin-right: 5%;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.accountButton:hover {
+    background-color: #E6F4F1;
 }
 
 .icon {
@@ -123,13 +124,19 @@ body {
 }
 
 .cartButton {
+    width: 5em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 0.3em;
     color: #E6F4F1;
     text-decoration: none;
-    margin-right: 5%;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.cartButton:hover {
+    background-color: #E6F4F1;
 }
 
 .languageSwitch {
@@ -146,31 +153,38 @@ body {
 }
 
 .menuContainer {
+    flex-basis: 80%;
+    justify-content: flex-end;
     height: inherit;
-    display: flex;
+    display: none;
     align-items: center;
-    padding-right: 1em;
-    padding-left: 1em;
-    cursor: pointer
+}
+
+.innerMenu {
+    display: none;
 }
 
 .menuIcon {
     height: 3em;
-    display: none;
-    cursor: pointer
+
 }
 
 .menuCheckbox {
-    display: none;
+  display: none;
 }
 
-.menuContainer:hover {
+.menuContentBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4em;
+    width: 4em;
+}
+
+.menuContentBox:hover {
     background-color: #001F91;
 }
 
-.menuCheckbox:checked {
-    border: 2px solid black
-}
 
 .headerLink {
     text-decoration: none;
