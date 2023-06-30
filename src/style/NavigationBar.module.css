@@ -142,6 +142,7 @@ body {
     color: #E6F4F1;
     text-decoration: none;
     padding: 10px;
+    position: relative;
 }
 
 .cartButton:hover {
@@ -335,5 +336,18 @@ body {
 
 .accountButtonMenuContent {
     border-radius: 10px;
+}
+
+.counterStyle {
+    display: none;
+    position: absolute;
+    border: 1px solid white;
+    width: 1.2rem;
+    height: 1.2rem;
+    top: 0.4rem;
+    right: 0.4rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
 }
 
