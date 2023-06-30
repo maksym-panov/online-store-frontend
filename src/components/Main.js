@@ -1,4 +1,4 @@
-import { PRODUCTS_PAGE, ABOUT_PAGE, CATEGORIES_PAGE, CONTACTS_PAGE, DELIVERY_PAGE, LOGIN_PAGE } from "../utils/constants.js";
+import { PRODUCTS_PAGE, ABOUT_PAGE, CATEGORIES_PAGE, CONTACTS_PAGE, DELIVERY_PAGE, LOGIN_PAGE, EMPTY_PAGE } from "../utils/constants.js";
 import { Categories } from "../pages/Categories";
 import { Deliveries } from "../pages/Deliveries";
 import { Products } from "../pages/Products";
@@ -12,6 +12,7 @@ export function Main() {
     return (
         <main className={styles.mainBody}>
           <Routes>
+            <Route path={ EMPTY_PAGE } element={<Products />} />
             <Route path={ PRODUCTS_PAGE } element={<Products />} />
             <Route path={ CATEGORIES_PAGE } element={<Categories />} />
             <Route path={ DELIVERY_PAGE } element={<Deliveries />} />

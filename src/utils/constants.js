@@ -1,4 +1,5 @@
-export const PRODUCTS_PAGE = "/";
+export const EMPTY_PAGE = "/";
+export const PRODUCTS_PAGE = "/products";
 export const CATEGORIES_PAGE = "/categories";
 export const DELIVERY_PAGE = "/delivery";
 export const ABOUT_PAGE = "/about";
