@@ -1,0 +1,66 @@
+@media (max-width: 700px) {
+    .productPageMainContainer .searchBarContainer .searchBar .searchBarPrompt {
+        width: 50vw;
+    }
+}
+
+.productPageMainContainer {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.searchBarContainer {
+    height: 5em;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchBar {
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.2em
+}
+
+.searchBarIcon {
+    height: 4em;
+    margin-right: 0.5em;
+    align-self: flex-start;
+}
+
+.searchBarPrompt {
+    height: 2.5em;
+    width: 50vw;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-style: none;
+    box-shadow: 0px 0px 2px #2473FF;
+}
+
+.searchBarEnterButton {
+    height: 2.5em;
+    width: 6em;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.informationPanelContainer {
+    border: 1px solid black;
+    height: 20em;
+}
+
+.productsListContainer {
+    border: 1px solid black;
+    height: 6em;
+}
+
+.productsList {
+    border: 1px solid black;
+    height: 4em;
+    margin: 1em;
+}

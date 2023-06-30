@@ -10,6 +10,15 @@
     .headerPrimary .menuContainer {
         display: flex
     }
+
+
+    /* .headerPrimary .logoContainer .logoPrimary {
+        font-size: 1em;
+    }
+
+    .headerPrimary .logoContainer .logoIcon {
+        height: 2em;
+    } */
 }
 
 @keyframes menuAppearAnimation {
