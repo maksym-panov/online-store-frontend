@@ -1,22 +1,35 @@
 import Axios from "axios";
 import { useState, useEffect } from "react";
-import { API_BASE_URL, PRODUCT_CATEGORIES } from "../utils/constants";
+import { API_BASE_URL, PRODUCTS } from "../utils/constants";
 import { useSearchParams } from "react-router-dom";
 
 export function Categories() {
     const [params, setParams] = useSearchParams();
-    const [categories, setCategories] = useState([]);
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetchCategories(params.get("id"), setCategories);
+        fetchProducts(params.get("id"), setProducts);
     }, []);
 
     return (
-        <div>{categories?.map(el => <h1 key={el.productTypeId}>{el.name}</h1>)}</div>
+        <div>
+            {(products == null || products.length == 0) && <h1>There is nothing here</h1>}
+            {products?.map(prod => {
+                return (
+                    <div key={prod.productId}>
+                        <h1>{prod.name}</h1>
+                        <p>{prod.description}</p>
+                        <p>Price - ${prod.price}</p>
+                        {prod.stock ? <p>In stock</p> : <p>Not in stock</p>}
+                    </div>
+                );
+            })}
+        </div>
     );
 }
 
-async function fetchCategories(id, setCategories) {
-    let result = await Axios.get(API_BASE_URL + PRODUCT_CATEGORIES + (id == null ? "" : "/" + id));
-    setCategories(id == null ? result.data : [result.data]);
+async function fetchProducts(id, setProducts) {
+    let result = await Axios.get(API_BASE_URL + PRODUCTS + "?category=" + id)
+                            .then(res => res.data); 
+    setProducts(result);
 }

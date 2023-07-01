@@ -24,7 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 0.2em
+    padding-top: 0.2em;
 }
 
 .searchBarIcon {
@@ -36,10 +36,11 @@
 .searchBarPrompt {
     height: 2.5em;
     width: 50vw;
+    border-radius: 0px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    border: none;
     box-shadow: 0px 0px 2px #2473FF;
+    border: 0.5px solid #2473FF;
 }
 
 .searchBarEnterButton {
@@ -58,29 +59,18 @@
 }
 
 .informationPanelContainer {
-    border: 1px solid black;
     height: 20em;
 }
 
-.productsListContainer {
-    border: 1px solid black;
-    height: 6em;
-}
-
-.productsList {
-    border: 1px solid black;
-    height: 4em;
-    margin: 1em;
-}
-
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
     .informationPanelContainer .categoriesContainer {
         display: none;
     }
 
-}
+    .informationPanelContainer .informationBanner {
+        margin-left: 0em;
+    }
 
-@media (max-width: 1000px) {
     .informationPanelContainer .informationBanner .descriptionPanel {
         display: none;
     }
@@ -89,14 +79,10 @@
         margin-left: 0;
     }
 
-    .informationPanelContainer .informationBanner {
-        margin-left: 1em
-    }
-
     .informationPanelContainer .informationBanner .informationBannerImage {
         min-width: none;
         max-width: none;
-        width: 100%;
+        width: 85vw;
     }
 }
 
@@ -108,18 +94,57 @@
 }
 
 .categoriesContainer {
-    border: 1px black solid;
-    min-width: 20vw;
-    max-width: 200vw;
-    border-radius: 20px;
+    width: fit-content;
+    border-radius: 7px;
+    margin-right: 1em;
+}
+
+.categoriesContainer:empty {
+    margin-right: 0em;
+}
+
+.categoryLink {
+    text-decoration: none;
+    margin: 0;
+}
+
+.categoryContainer {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.5em;
+    padding-left: 0.5em;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.categoryContainer:hover {
     background-color: #2473FF;
 }
 
+.categoryContainer:hover .category {
+    color: white
+}
+
+.category {
+    margin: 0;
+    color: black;
+    display: inline;
+    white-space: nowrap
+}
+
+.arrow {
+    height: 1.2em;
+    margin-left: 0.9em;
+}
+
 .informationBanner {
-    border: 1px blue solid;
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    border-radius: 7px;
+    box-shadow: 0px 0px 2px #2473FF;
 }
 
 .informationBannerLink {
@@ -129,34 +154,47 @@
 .informationBannerImage {
     min-width: 20vw;
     max-width: 50vw;
-    border-radius: 20px;
-    border: 1px black solid;
+    border-radius: 7px;
 }
 
 .descriptionPanel {
-    max-width: 600px;
-    border: 1px black solid;
-    border-radius: 20px;
-    padding: 20px;
-    background-color: white;
+    width: 100%;
+    border-radius: 7px;
     margin-left: 1em;
-    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 .descriptionPanelHeader {
-    font-size: 2em;
+    font-size: 2.5em;
     font-weight: bold;
     text-align: center;
 }
 
 .descriptionSeparator {
-    box-shadow: 0px 0px 3px #001F91;
+    width: 100%;
+    border: 0.1px #2473FF solid;
+    border-radius: 1px;
+    box-shadow: 0px 0px 3px #2473FF;
     margin-top: 0;
+    margin-bottom: 1em;
 }
 
-.descriptionPanelText {
-    font-size: 0.9em;
-    text-align: left;
+.priceContainer {
+    margin-bottom: 1.5em;
+}
+
+.price {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.priceBefore {
+    text-decoration: line-through;
+    font-weight: normal;
 }
 
 .descriptionPanelButtonContainer {
@@ -177,4 +215,18 @@
 
 .descriptionPanelButton:active {
     background-color: darkorange;
+}
+
+
+.productsListContainer {
+    border: 1px solid black;
+    background-color: #e6f4f1;
+}
+
+.productsList {
+    border: 1px solid black;
+}
+
+.productList {
+    background-color: blue;
 }
