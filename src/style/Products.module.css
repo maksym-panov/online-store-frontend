@@ -74,13 +74,13 @@
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
     .productsListContainer .productsList .productCardBodyContainer {
         width: 33.3%;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
     .productsListContainer .productsList .productCardBodyContainer {
         width: 50%;
     }
@@ -175,12 +175,13 @@
 
 .informationBannerLink {
     margin-left: 1em;
+    align-self: center;
 }
 
 .informationBannerImage {
     min-width: 20vw;
-    max-width: 50vw;
-    border-radius: 7px;
+    max-width: 40vw;
+    padding: 15px
 }
 
 .descriptionPanel {
@@ -196,7 +197,7 @@
 
 .descriptionPanelHeader {
     font-size: 2.5em;
-    font-weight: bold;
+    font-weight: normal;
     text-align: center;
 }
 
@@ -214,7 +215,7 @@
 }
 
 .price {
-    font-size: 1.4em;
+    font-size: 2em;
     font-weight: bold;
 }
 
@@ -243,14 +244,6 @@
     background-color: darkorange;
 }
 
-
-
-
-
-
-
-
-
 .productsListContainer {
     background-color: #e6f4f1;
     padding-top: 2em;
@@ -265,8 +258,8 @@
 
 .productCardBodyContainer {
     width: 20%;
-    min-height: 400px;
-    max-height: 700px;
+    min-height: 300px;
+    max-height: 600px;
     display: flex;
     padding: 7px;
     padding-bottom: 13px;
@@ -285,7 +278,7 @@
 }
 
 .productCardImageLink {
-    flex-basis: 50%;
+    flex-basis: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -293,17 +286,14 @@
 }
 
 .productCardImage {
-    width: 98%;
+    width: 95%;
     border-radius: 3px;
 }
 
 .productCardContent {
-    flex-basis: 30%;
+    flex-basis: 50%;
     padding: 10px;
     padding-bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .productCardLink {
@@ -323,9 +313,11 @@
 }
 
 .productCardButtonSection {
-    flex-basis: 20%;
+    flex-basis: 70px;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
     padding-left: 10px;
     padding-bottom: 10px;
 }

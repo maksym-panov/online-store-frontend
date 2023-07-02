@@ -3,7 +3,7 @@ import styles from "../../style/Products.module.css";
 import Axios from "axios";
 import { API_BASE_URL, PRODUCTS, PRODUCTS_PAGE } from "../../utils/constants";
 import { Link } from "react-router-dom";
-import productImage from "../../img/product.png";
+import productImage from "../../img/search.png";
 
 export function ProductsList() {
     const [products, setProducts] = useState([]);
@@ -29,11 +29,11 @@ export function ProductsList() {
                                                 {prod.name}
                                             </h1>
                                         </Link>
+                                    </div>
+                                    <Link className={`${styles.productCardLink} ${styles.productCardButtonSection}`} to={PRODUCTS_PAGE + "?id=" + prod.productId}>
                                         <p className={styles.productCardPrice}>
                                             ${prod.price}
                                         </p>
-                                    </div>
-                                    <Link className={`${styles.productCardLink} ${styles.productCardButtonSection}`} to={PRODUCTS_PAGE + "?id=" + prod.productId}>
                                         <button className={styles.productCardButton}>To cart</button>
                                     </Link>
                                 </div>
