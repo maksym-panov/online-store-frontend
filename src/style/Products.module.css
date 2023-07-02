@@ -5,7 +5,6 @@
 }
 
 .productPageMainContainer {
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,7 +12,6 @@
 
 .searchBarContainer {
     height: 5em;
-    border: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -249,6 +247,7 @@
     padding-top: 2em;
     padding-left: 6%;
     padding-right: 6%;
+    padding-bottom: 4em;
 }
 
 .productsList {
