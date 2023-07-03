@@ -334,3 +334,24 @@
 .productCardButton:active {
     background-color: darkorange;
 }
+
+.moreButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.moreButton {
+    min-width: 10em;
+    /* width: 12%; */
+    height: 3em;
+    border-radius: 10px;
+    background-color: orange;
+    color: black;
+    border: 1px black solid;
+    text-shadow: 0px 0px 1px #001F91;
+}
+
+.moreButton:active {
+    background-color: darkorange;
+}

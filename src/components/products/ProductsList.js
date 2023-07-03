@@ -1,22 +1,47 @@
 import { useEffect, useState } from "react";
 import styles from "../../style/Products.module.css";
-import Axios from "axios";
-import { API_BASE_URL, PRODUCTS, PRODUCTS_PAGE } from "../../utils/constants";
-import { Link } from "react-router-dom";
+import { API_BASE_URL, API_ENTITIES_PER_PAGE_PARAM, API_OFFSET_PARAM, PRODUCTS, PRODUCTS_PAGE, PRODUCTS_PER_PAGE } from "../../utils/constants";
+import { Link, useSearchParams } from "react-router-dom";
 import productImage from "../../img/search.png";
+import { Pagination } from "../../common/Pagination";
+import Axios from "axios";
 
 export function ProductsList() {
     const [products, setProducts] = useState([]);
+    const [params, setParams] = useSearchParams();
+    
+    let page = params.get("page");
 
     useEffect(() => {
-        fetchProducts(setProducts);
-    }, []);
+        if (page == null) {
+            page = 1;
+        }
+        if (page <= 0) {
+            page = 1
+            setParams({ page: 1 });
+        }
+        fetchProducts();        
+    }, [page]);
+
+    const fetchProducts = async () => {
+        const offset = (page - 1) * PRODUCTS_PER_PAGE;
+        const number = 3 * PRODUCTS_PER_PAGE;
+        const query = API_BASE_URL + PRODUCTS + "?" + API_OFFSET_PARAM + offset + "&" + API_ENTITIES_PER_PAGE_PARAM + number;
+        const result = await Axios.get(query).then(resp => resp.data);
+    
+        if (result.length == 0 && page != 1) {
+            setParams({ page: 1 });
+            page = 1;
+        }
+
+        setProducts(result)
+    }
 
     return (
         <div className={styles.productsListContainer}>
             <div className={styles.productsList}>
                 {
-                    products?.map(prod => {
+                    products?.slice(0, PRODUCTS_PER_PAGE).map(prod => {
                         return (
                             <div key={prod.productId} className={styles.productCardBodyContainer}>
                                 <div className={styles.productCardBody}>
@@ -42,11 +67,7 @@ export function ProductsList() {
                     })
                 }
             </div>
+            <Pagination baseUrl={PRODUCTS_PAGE} current={page} perPage={PRODUCTS_PER_PAGE} entities={products} />
         </div>
     );
-}
-
-async function fetchProducts(setProducts) {
-    const result = await Axios.get(API_BASE_URL + PRODUCTS).then(res => res.data);
-    setProducts([...result, ...result, ...result, ...result]);
 }

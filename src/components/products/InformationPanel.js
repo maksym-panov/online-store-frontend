@@ -50,7 +50,6 @@ export function InformationPanel() {
 
 async function fetchCategories(setCategories) {
     const data = await Axios.get(API_BASE_URL + PRODUCT_CATEGORIES).then(resp => resp.data);
-    console.log(data.slice(0, 16));
     setCategories(data.slice(0, 16));
 }
 

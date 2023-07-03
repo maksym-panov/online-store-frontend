@@ -1,3 +1,4 @@
+// WEBSITE PAGES
 export const EMPTY_PAGE = "/";
 export const PRODUCTS_PAGE = "/products";
 export const CATEGORIES_PAGE = "/categories";
@@ -18,3 +19,9 @@ export const UNREGISTERED = "/unregistered_customers";
 export const ORDERS = "/orders";
 export const SIGN_IN_USER = "/users/login";
 export const SIGN_UP_USER = "/users/register";
+
+export const API_OFFSET_PARAM = "offset=";
+export const API_ENTITIES_PER_PAGE_PARAM = "quantity=";
+
+// LITERAL CONSTANTS
+export const PRODUCTS_PER_PAGE = 2;
