@@ -17,8 +17,8 @@ export function ProductsList() {
             page = 1;
         }
         if (page <= 0) {
+            setParams({ page: 1});
             page = 1
-            setParams({ page: 1 });
         }
         fetchProducts();        
     }, [page]);
@@ -30,7 +30,7 @@ export function ProductsList() {
         const result = await Axios.get(query).then(resp => resp.data);
     
         if (result.length == 0 && page != 1) {
-            setParams({ page: 1 });
+            setParams({ page: 1});
             page = 1;
         }
 
@@ -46,7 +46,7 @@ export function ProductsList() {
                             <div key={prod.productId} className={styles.productCardBodyContainer}>
                                 <div className={styles.productCardBody}>
                                     <Link className={styles.productCardImageLink} to={PRODUCTS_PAGE + "?id=" + prod.productId}>
-                                        <img src={productImage} alt={prod.name} className={styles.productCardImage} />
+                                        <img src={`data:image/png;base64,${prod.image}`} alt={prod.name} className={styles.productCardImage} />
                                     </Link>
                                     <div className={styles.productCardContent}>
                                         <Link className={styles.productCardLink} to={PRODUCTS_PAGE + "?id=" + prod.productId}>
@@ -55,13 +55,20 @@ export function ProductsList() {
                                             </h1>
                                         </Link>
                                     </div>
-                                    <Link className={`${styles.productCardLink} ${styles.productCardButtonSection}`} to={PRODUCTS_PAGE + "?id=" + prod.productId}>
-                                        <p className={styles.productCardPrice}>
-                                            ${prod.price}
-                                        </p>
-                                        <button className={styles.productCardButton}>To cart</button>
-                                    </Link>
-                                </div>
+                                    <div className={styles.productCardBottomSection}>
+                                        <div className={styles.buyAndPrice}>
+                                            <p className={styles.productCardPrice}>
+                                                ${prod.price}
+                                            </p>
+                                            <Link className={styles.productCardLink} to={PRODUCTS_PAGE + "?id=" + prod.productId}>
+                                                <button className={styles.productCardButton}>To cart</button>
+                                            </Link>
+                                        </div>
+                                        <div className={styles.stockAndRating}>
+                                            <p className={styles.productStatus} style={outOfStockColor(prod.stock)}>{stockStatus(prod.stock)}</p>
+                                        </div>
+                                    </div>                                
+                                </div>    
                             </div>
                         );
                     })
@@ -71,3 +78,6 @@ export function ProductsList() {
         </div>
     );
 }
+
+const stockStatus = (stock) => stock > 0 ? "In stock" : "Out of stock";
+const outOfStockColor = (stock) => stock <= 0 ? { color: "black" } : { color: "#2473FF" }

@@ -24,4 +24,4 @@ export const API_OFFSET_PARAM = "offset=";
 export const API_ENTITIES_PER_PAGE_PARAM = "quantity=";
 
 // LITERAL CONSTANTS
-export const PRODUCTS_PER_PAGE = 2;
+export const PRODUCTS_PER_PAGE = 15;

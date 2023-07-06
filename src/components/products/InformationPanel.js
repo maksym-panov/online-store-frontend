@@ -30,8 +30,8 @@ export function InformationPanel() {
                 })}        
             </div>
             <div className={styles.informationBanner}>
-                <Link to={ PRODUCTS_PAGE + "?id=1" } className={styles.informationBannerLink}>
-                    <img src={empty} className={styles.informationBannerImage}/>
+                <Link to={ PRODUCTS_PAGE + "?id=" + bannerProduct?.productId } className={styles.informationBannerLink}>
+                    <img src={`data:image/png;base64,${bannerProduct?.image}`} className={styles.informationBannerImage}/>
                 </Link>
                 <div className={styles.descriptionPanel}>
                     <h1 className={styles.descriptionPanelHeader}>{bannerProduct?.name}</h1>
@@ -54,7 +54,7 @@ async function fetchCategories(setCategories) {
 }
 
 async function fetchBannerProduct(setBannerProduct) {
-    const product = await Axios.get(API_BASE_URL + PRODUCTS + "/" + Math.ceil(Math.random() * 6))
+    const product = await Axios.get(API_BASE_URL + PRODUCTS + "/" + Math.ceil(Math.random() * 80))
                             .then(res => res.data);
     setBannerProduct(product)
 }
