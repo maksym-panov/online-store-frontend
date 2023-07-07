@@ -1,35 +1,45 @@
-import Axios from "axios";
 import { useState, useEffect } from "react";
-import { API_BASE_URL, PRODUCTS } from "../utils/constants";
+import { API_PROD_CATEGORY_PARAM, PRODUCTS, PRODUCT_CATEGORIES } from "../utils/constants";
 import { useSearchParams } from "react-router-dom";
+import { api } from "../utils/axiosHelper";
 
 export function Categories() {
     const [params, setParams] = useSearchParams();
     const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const id = params.get("id");
 
     useEffect(() => {
-        fetchProducts(params.get("id"), setProducts);
+        if (id) {
+            fetchProducts(id, setProducts);
+        } else {
+            fetchCategories(setCategories);
+        }
     }, []);
+
+    if (id) {
+        return (
+            <div>
+                {products?.map(p => <h1>{p.name}</h1>)}
+            </div>
+        );
+    }
 
     return (
         <div>
-            {(products == null || products.length == 0) && <h1>There is nothing here</h1>}
-            {products?.map(prod => {
-                return (
-                    <div key={prod.productId}>
-                        <h1>{prod.name}</h1>
-                        <p>{prod.description}</p>
-                        <p>Price - ${prod.price}</p>
-                        {prod.stock ? <p>In stock</p> : <p>Not in stock</p>}
-                    </div>
-                );
-            })}
+            {categories?.map(c => <h1>{c.name}</h1>)}
         </div>
-    );
+    )
 }
 
 async function fetchProducts(id, setProducts) {
-    let result = await Axios.get(API_BASE_URL + PRODUCTS + "?category=" + id)
-                            .then(res => res.data); 
-    setProducts(result);
+    const products = await api.get(PRODUCTS + "?" + API_PROD_CATEGORY_PARAM + id)
+                                .then(resp => resp.data);
+    setProducts(products);
+}
+
+async function fetchCategories(setCategories) {
+    const categories = await api.get(PRODUCT_CATEGORIES)
+                                .then(resp => resp.data);
+    setCategories(categories);
 }

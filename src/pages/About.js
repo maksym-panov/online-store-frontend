@@ -1,9 +1,6 @@
-import { useSearchParams } from "react-router-dom";
-
-export function About(props) {
-    const [searchParams, setSearchParams] = useSearchParams();
-
+export function About() {
     return (
-        <div></div>
+        <div>
+        </div>
     );
 }

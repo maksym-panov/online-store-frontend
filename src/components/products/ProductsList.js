@@ -1,8 +1,15 @@
+import { 
+    API_BASE_URL, 
+    API_ENTITIES_PER_PAGE_PARAM, 
+    API_OFFSET_PARAM, 
+    PRODUCTS, 
+    PRODUCTS_PAGE, 
+    PRODUCTS_PER_PAGE 
+} from "../../utils/constants";
 import { useEffect, useState } from "react";
 import styles from "../../style/Products.module.css";
-import { API_BASE_URL, API_ENTITIES_PER_PAGE_PARAM, API_OFFSET_PARAM, PRODUCTS, PRODUCTS_PAGE, PRODUCTS_PER_PAGE } from "../../utils/constants";
 import { Link, useSearchParams } from "react-router-dom";
-import productImage from "../../img/search.png";
+import productImageNotFound from "../../img/search.png";
 import { Pagination } from "../../common/Pagination";
 import Axios from "axios";
 
@@ -46,10 +53,21 @@ export function ProductsList() {
                             <div key={prod.productId} className={styles.productCardBodyContainer}>
                                 <div className={styles.productCardBody}>
                                     <Link className={styles.productCardImageLink} to={PRODUCTS_PAGE + "?id=" + prod.productId}>
-                                        <img src={`data:image/png;base64,${prod.image}`} alt={prod.name} className={styles.productCardImage} />
+                                        <img 
+                                            src={
+                                                prod.image == null ? 
+                                                productImageNotFound : 
+                                                `data:image/png;base64,${prod.image}`
+                                            } 
+                                            alt={prod.name} 
+                                            className={styles.productCardImage} 
+                                        />
                                     </Link>
                                     <div className={styles.productCardContent}>
-                                        <Link className={styles.productCardLink} to={PRODUCTS_PAGE + "?id=" + prod.productId}>
+                                        <Link 
+                                            className={styles.productCardLink} 
+                                            to={PRODUCTS_PAGE + "?id=" + prod.productId}
+                                        >
                                             <h1 className={styles.productCardTitle}>
                                                 {prod.name}
                                             </h1>
@@ -60,12 +78,20 @@ export function ProductsList() {
                                             <p className={styles.productCardPrice}>
                                                 ${prod.price}
                                             </p>
-                                            <Link className={styles.productCardLink} to={PRODUCTS_PAGE + "?id=" + prod.productId}>
+                                            <Link 
+                                                className={styles.productCardLink} 
+                                                to={PRODUCTS_PAGE + "?id=" + prod.productId}
+                                            >
                                                 <button className={styles.productCardButton}>To cart</button>
                                             </Link>
                                         </div>
                                         <div className={styles.stockAndRating}>
-                                            <p className={styles.productStatus} style={outOfStockColor(prod.stock)}>{stockStatus(prod.stock)}</p>
+                                            <p 
+                                                className={styles.productStatus} 
+                                                style={outOfStockColor(prod.stock)}
+                                            >
+                                                {stockStatus(prod.stock)}
+                                            </p>
                                         </div>
                                     </div>                                
                                 </div>    

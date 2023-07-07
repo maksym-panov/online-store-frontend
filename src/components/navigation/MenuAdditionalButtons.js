@@ -3,8 +3,10 @@ import styles from "../../style/NavigationBar.module.css";
 import { Link } from "react-router-dom";
 import account from "../../img/account.png";
 import cart from "../../img/cart.png";
+import { useSelector } from "react-redux";
 
 export function MenuAdditionalButtons() {
+    const user = useSelector(state => state.user);
     let productsInCart = 14;
     let font = 0.8;
 
@@ -31,19 +33,54 @@ export function MenuAdditionalButtons() {
             </div>
 
             <div className={styles.accountButtonMenu}>
-                <Link to={CART_PAGE} className={`${styles.cartButton} ${styles.accountButtonMenuContent}`}>
-                    <img src={cart} alt="cart" className={styles.icon} />
+                <a 
+                    href={CART_PAGE} 
+                    className={
+                        `${styles.cartButton} 
+                        ${styles.accountButton} 
+                        ${styles.accountButtonMenuContent}`
+                    }
+                >
+                    <div 
+                        style={{
+                            backgroundImage: `url(${cart})`
+                        }}
+                        className={`${styles.icon} ${styles.cartIcon}`} 
+                    >
+                    </div>
                     <div className={styles.counterStyle} style={productsInCart ? showStyle : {}}>
                         <div>
-                            {productsInCart}
+                        {productsInCart}
                         </div>
                     </div>
-                    Cart
-                </Link>
-                <Link to={LOGIN_PAGE} className={`${styles.accountButton} ${styles.accountButtonMenuContent}`}>
-                    <img src={account} alt="account" className={styles.icon} />
-                    Account
-                </Link>
+                    <p className={styles.accountText}>Cart</p>
+                </a>
+                
+                <a 
+                    href={LOGIN_PAGE} 
+                    className={
+                        `${styles.accountButton} 
+                        ${styles.accountButtonMenuContent}`}
+                >
+                    <div 
+                        style=
+                        {
+                            user && user.image ?
+                            { backgroundImage: `url("data:image/jpg;base64,${user.image}")` }
+                            :
+                            { backgroundImage: `url(${account})` }
+                        }
+                        className={styles.icon} 
+                    >
+                    </div>
+                    <p className={styles.accountText}>
+                        {
+                            user && user.personalInfo && user.personalInfo.firstname ? 
+                            user.personalInfo.firstname : 
+                            "Account"
+                        }
+                    </p>
+                </a>
             </div>
         </div>
     );

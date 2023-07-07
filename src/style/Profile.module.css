@@ -1,0 +1,175 @@
+.profileContainer {
+    background-color: #e6f4f1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.profileImage {
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image {
+    height: 12em;
+    width: 12em;
+    border: 4px white solid;
+    border-radius: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+@media (max-width: 700px) {
+    .profileContainer .profile {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .profileContainer .profile .column {
+        width: 100%;
+    }
+
+    .profileContainer .buttonContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profileContainer .buttonContainer .button {
+        margin: 0;
+        margin-top: 15px
+    }
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    height: fit-content;
+    width: 90%;
+    margin-top: 15px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 7px;
+}
+
+.column {
+    width: 50%;
+    padding: 15px
+}
+
+.dataPiece {
+    margin: 10px
+}
+
+.dataHead {
+    font-weight: bold;
+}
+
+.dataBody {
+    font-size: large;
+}
+
+.buttonContainer {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.button {
+    color: black;
+    margin-right: 30px;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+
+    margin-top: 40px;
+    margin-bottom: 40px
+}
+
+.changeButton {
+    background-color: #2473FF;
+    color: white;
+    border: none;
+}
+
+.changeButton:hover {
+    background-color: rgba(0, 31, 145, 0.7)
+}
+
+.changeButton:active {
+    background-color: rgba(0, 31, 145, 0.9);
+
+}
+
+.logOutButton {
+    border: 1px black solid;
+    font-weight: bold;
+    background-color: orange;
+}
+
+.logOutButton:active {
+    background-color: darkorange;
+}
+
+
+@media (max-width: 1500px) {
+    .profileContainer .changeProfile .changePageColumn {
+        width: 60%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .profileContainer .changeProfile .changePageColumn {
+        width: 70%;
+    }
+}
+
+@media (max-width: 900px) {
+    .profileContainer .changeProfile {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .profileContainer .changeProfile .changePageColumn {
+        width: 100%;
+    }
+}
+
+.changeProfile {
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.changePageColumn {
+    width: 50%;
+}
+
+.changeDataPiece {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.prompt {
+    border: none;
+    border-radius: 0;
+    outline: none;
+    border-bottom: 1px lightgrey solid;
+    box-shadow: none;
+}
+
+.ruler {
+    margin-top: 40px;
+    border: none;
+}
+

@@ -29,7 +29,6 @@ body {
 }
 
 .headerPrimary {
-    position: fixed;
     width: 100%;
     height: 4em;
     background-color: #2473FF;
@@ -113,12 +112,19 @@ body {
 
 .accountButton {
     width: 5em;
+    height: 4em;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     color: #E6F4F1;
     text-decoration: none;
-    padding: 10px;
+}
+
+.accountText {
+    padding: 0;
+    margin: 0;
+    font-size: small;;
 }
 
 .accountButton:hover {
@@ -130,18 +136,22 @@ body {
 }
 
 .icon {
-    height: 2em;
-    width: 2em;
+    height: 2.5em;
+    width: 2.5em;
+    background-size: cover;
+    background-position-y: 50%;
+    border-radius: 100%;
+    border: 1px white solid
+}
+
+.cartIcon {
+    border: none;
+    background-size: 1.9em;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .cartButton {
-    width: 5em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #E6F4F1;
-    text-decoration: none;
-    padding: 10px;
     position: relative;
 }
 

@@ -40,7 +40,7 @@ export function InformationPanel() {
                         <h1 className={styles.price}><span className={styles.priceBefore}></span>{bannerProduct && ("$" + bannerProduct.price)}</h1>
                     </div>
                     <div className={styles.descriptionPanelButtonContainer}>
-                        <Link to={PRODUCTS_PAGE + "?id=" + bannerProduct?.productId}><button className={styles.descriptionPanelButton}>Go to product page</button></Link>
+                        <Link to={PRODUCTS_PAGE + "?id=" + bannerProduct?.productId}><button className={styles.descriptionPanelButton}>Go to page</button></Link>
                     </div>
                 </div>
             </div>

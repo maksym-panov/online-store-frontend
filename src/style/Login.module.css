@@ -1,0 +1,99 @@
+.loginPage {
+    background-color: #e6f4f1;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1300px) {
+    .loginPage .loginFormContainer {
+        width: 40%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .loginPage .loginFormContainer {
+        width: 55%;
+    }
+}
+
+@media (max-width: 700px) {
+    .loginPage .loginFormContainer {
+        width: 70%;
+    }
+}
+
+@media (max-width: 500px) {
+    .loginPage .loginFormContainer {
+        width: 90%;
+    }
+}
+
+.loginFormContainer {
+    margin: 30px;
+    background-color: white;
+    border-radius: 5px;
+    width: 30%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.logo {
+    width: 40%;
+    align-self: center;
+}
+
+.title {
+    font-size: xx-large;
+    text-align: center;
+    margin: 0;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.inputLabel {
+    padding: 10px;
+    font-size: large;
+    height: 7vh;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.prompt {
+    border: none;
+    border-radius: 0;
+    outline: none;
+    border-bottom: 1px lightgrey solid;
+    box-shadow: none;
+}
+
+.signUpLink {
+    align-self: flex-end;
+    margin: 10px
+}
+
+.submitButton {
+    width: 8em;
+    height: 2.5em;
+    background-color: orange;
+    border-radius: 7px;
+    border: 1px black solid;
+    text-shadow: 0px 0px 1px #001F91;
+    margin: 10px;
+}
+
+.submitButton:active {
+    background-color: darkorange;
+}
+
+.note {
+    margin: 0;
+    margin-top: 1em;
+    text-align: center;
+}
