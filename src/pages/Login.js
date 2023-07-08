@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../utils/axiosHelper";
 
 export function Login() {
+    const [err, setErr] = useState({});
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
@@ -39,7 +40,9 @@ export function Login() {
             user.jwt = "Bearer " + authResp.jwt;
             dispatch(setUser(user));
             navigate(PROFILE_PAGE);
-        } catch(error) {}
+        } catch(error) {
+            setErr(error.response.data);
+        }
     }
 
     return (
@@ -48,6 +51,7 @@ export function Login() {
                 <img className={styles.logo} src={raccoon} alt="logo" />
                 <h1 className={styles.title}>Welcome back!</h1>
                 <div className={styles.inputs}>
+                    {err.message && <p className={styles.validationError}>{err.message}</p>}
                     <label className={styles.inputLabel}>
                         Phone number
                         <input 

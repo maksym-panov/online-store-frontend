@@ -172,4 +172,12 @@
     margin-top: 40px;
     border: none;
 }
-
+/* 
+   
+ */
+.validationError {
+    color: red;
+    border: 1px red solid;
+    border-radius: 7px;
+    padding: 4px;
+}

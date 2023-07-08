@@ -57,7 +57,7 @@
 .inputLabel {
     padding: 10px;
     font-size: large;
-    height: 7vh;
+    height: fit-content;
     margin-top: 2em;
     margin-bottom: 2em;
     display: flex;
@@ -96,4 +96,13 @@
     margin: 0;
     margin-top: 1em;
     text-align: center;
+}
+
+.validationError {
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    border: 1px red solid;
+    border-radius: 10px;
+    margin-top: 10px
 }

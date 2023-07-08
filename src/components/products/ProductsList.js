@@ -11,10 +11,10 @@ import styles from "../../style/Products.module.css";
 import { Link, useSearchParams } from "react-router-dom";
 import productImageNotFound from "../../img/search.png";
 import { Pagination } from "../../common/Pagination";
-import Axios from "axios";
+import { api } from "../../utils/axiosHelper";
 
 export function ProductsList() {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts, productsLoading] = useState([]);
     const [params, setParams] = useSearchParams();
     
     let page = params.get("page");
@@ -34,7 +34,7 @@ export function ProductsList() {
         const offset = (page - 1) * PRODUCTS_PER_PAGE;
         const number = 3 * PRODUCTS_PER_PAGE;
         const query = API_BASE_URL + PRODUCTS + "?" + API_OFFSET_PARAM + offset + "&" + API_ENTITIES_PER_PAGE_PARAM + number;
-        const result = await Axios.get(query).then(resp => resp.data);
+        const result = await api.get(query).then(resp => resp.data);
     
         if (result.length == 0 && page != 1) {
             setParams({ page: 1});
@@ -100,7 +100,7 @@ export function ProductsList() {
                     })
                 }
             </div>
-            <Pagination baseUrl={PRODUCTS_PAGE} current={page} perPage={PRODUCTS_PER_PAGE} entities={products} />
+            {!productsLoading && <Pagination baseUrl={PRODUCTS_PAGE} current={page} perPage={PRODUCTS_PER_PAGE} entities={products} />}
         </div>
     );
 }

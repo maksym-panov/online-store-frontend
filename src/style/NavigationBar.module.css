@@ -268,8 +268,8 @@ body {
     flex-direction: column;
     width: 100%;
     height: fit-content;
+    position: absolute;
     background-color: #2473FF;
-    position: fixed;
     top: 4em;
     left: 0em;
 }

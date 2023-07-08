@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/userSlice";
 
 export function Register() {
+    const [err, setErr] = useState({});
     const [firstname, setFirstname] = useState(null);
     const [lastname, setLastname] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState(null);
@@ -18,16 +19,24 @@ export function Register() {
     const navigate = useNavigate();
 
     const registerAndRedirect = async () => {
-        const authResp = await api.post(
-            SIGN_UP_USER,
-            {
-                firstname: firstname,
-                lastname: lastname,
-                phoneNumber: phoneNumber,
-                email: email,
-                password: password
-            } 
-        ).then(resp => resp.data);
+        let authResp;
+
+        try {
+            authResp = await api.post(
+                SIGN_UP_USER,
+                {
+                    firstname: firstname,
+                    lastname: lastname,
+                    phoneNumber: phoneNumber,
+                    email: email,
+                    password: password
+                } 
+            ).then(resp => resp.data);
+        } catch(error) {
+            setErr(error.response.data);
+            return;
+        }
+        
 
         const user = await api.get(
             USERS + "/" + authResp.userId,
@@ -51,6 +60,7 @@ export function Register() {
                 <div className={loginStyles.inputs}>
                     <label className={loginStyles.inputLabel}>
                         First name*
+                        { err.firstname && <p className={loginStyles.validationError}>{err.firstname}</p>}
                         <input 
                             onChange={e => setFirstname(e.target.value)}
                             className={loginStyles.prompt} 
@@ -60,6 +70,7 @@ export function Register() {
                     </label>
                     <label className={loginStyles.inputLabel}>
                         Last name
+                        { err.lastname && <p className={loginStyles.validationError}>{err.lastname}</p>}
                         <input 
                             onChange={e => setLastname(e.target.value)}
                             className={loginStyles.prompt} 
@@ -69,6 +80,7 @@ export function Register() {
                     </label>
                     <label className={loginStyles.inputLabel}>
                         Phone number*
+                        { err.phoneNumber && <p className={loginStyles.validationError}>{err.phoneNumber}</p>}
                         <input 
                             onChange={e => setPhoneNumber(e.target.value)}
                             className={loginStyles.prompt} 
@@ -78,6 +90,7 @@ export function Register() {
                     </label>
                     <label className={loginStyles.inputLabel}>
                         Email
+                        { err.email && <p className={loginStyles.validationError}>{err.email}</p>}
                         <input 
                             onChange={e => setEmail(e.target.value)}
                             className={loginStyles.prompt} 
@@ -87,6 +100,7 @@ export function Register() {
                     </label>
                     <label className={loginStyles.inputLabel}>
                         Password
+                        { err.password && <p className={loginStyles.validationError}>{err.password}</p>}
                         <input 
                             onChange={e => setPassword(e.target.value)} 
                             className={loginStyles.prompt} 
