@@ -1,0 +1,89 @@
+import { useEffect, useState } from "react";
+import { api } from "../../utils/axiosHelper";
+import { PRODUCTS } from "../../utils/constants";
+import { decrementQuantity, incrementQuantity, removeProduct, setPrice } from "../../features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "../../style/Cart.module.css";
+
+export const CartItem = (props) => {
+    const id = props.id;
+    const products = useSelector(store => store.cart.products);
+    
+    const [product, setProduct] = useState({});
+    const dispatch = useDispatch();
+
+    const fetchProduct = async () => {
+        let result;
+        try {
+            result = await api.get(PRODUCTS + "/" + id)
+                            .then(resp => resp.data);
+            setProduct(result);
+            dispatch(
+                setPrice(
+                    { 
+                        id: id, 
+                        price: result.price 
+                    }
+                )
+            );
+        } catch(error) {
+            console.log(error.response.data);
+        }
+    }
+
+    useEffect(() => {
+        fetchProduct();
+    }, []);
+
+    const incr = () => {
+        dispatch(
+            incrementQuantity(
+                {
+                    id: id, 
+                    stock: product.stock
+                }
+            )
+        )
+    };
+
+    const decr = () => {
+        dispatch(
+            decrementQuantity(id)
+        )
+    };
+
+    const remove = () => {
+        dispatch(
+            removeProduct(id)
+        )
+    };
+
+    let quantity = products.find(p => p.id === id).quantity;
+    let sum = Math.round(product.price * quantity * 100) / 100;
+
+    return (
+        <div className={styles.item}>
+            <div className={styles.imageContainer}>
+                <img 
+                    className={styles.itemImage}
+                    src={ `data:image/png;base64,${product.image}` }
+                />
+            </div>
+            <div className={styles.itemDescription}>
+                <h1 className={styles.name}>{product.name}</h1>
+                <div>
+                    <p className={styles.text}>In stock - {product.stock}</p>
+                    <p className={styles.text}>Price (x{quantity}) - ${sum}</p>
+                </div>
+            </div>
+            <div className={styles.counterContainer}>
+                <button onClick={ decr } className={styles.countButton}>-</button>
+                <p className={styles.count}>{quantity}</p>
+                <button onClick={ incr } className={styles.countButton}>+</button>
+            </div>
+            <div className={styles.removeContainer}>
+                <button onClick={ remove } className={styles.countButton}>X</button>
+            </div>
+        </div>
+    );
+}

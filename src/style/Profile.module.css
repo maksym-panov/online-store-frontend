@@ -176,6 +176,7 @@
    
  */
 .validationError {
+    font-weight: bold;
     color: red;
     border: 1px red solid;
     border-radius: 7px;

@@ -1,0 +1,246 @@
+.cartContainer {
+    background-color: #e6f4f1;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 50px;
+    min-height: 80vh;
+}
+
+@media (max-width: 850px) {
+    .cartContainer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px;
+        padding-top: 20px;
+    }
+    
+    .cartContainer .itemsContainer {
+        width: 95%;
+        margin-bottom: 15px;
+    }
+
+    .cartContainer .itemsContainer .item .itemDescription .name {
+        font-size: medium;
+        overflow: scroll;
+    }
+
+    .cartContainer .itemsContainer .item .imageContainer {
+        width: 25%;
+    }
+
+    .cartContainer .itemsContainer .item .counterContainer {
+        flex-direction: column-reverse;
+        width: 50px;
+    }
+
+    .cartContainer .checkout {
+        width: 95%;
+    }
+}
+
+.itemsContainer {
+    width: 70%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.emptyImage {
+    height: 150px;
+}
+
+.emptyText {
+    font-size: 25px;
+    padding: 10px;
+}
+
+.item {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px
+}
+
+.item:hover {
+    background-color: lightgrey;
+}
+
+.imageContainer {
+    width: 15%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.itemImage {
+    max-width: 95%;
+    max-height: 95%;
+}
+
+.itemDescription {
+    width: 60%;
+}
+
+.name {
+    font-size: larger;
+    margin: 0;
+    margin-bottom: 15px;
+    padding: 0;
+}
+
+.text {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.counterContainer {
+    width: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.count {
+    font-size: 20px;
+    margin: 0;
+}
+
+.countButton {
+    background: none;
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    border-radius: 30px;
+    border: none;
+}
+
+.countButton:hover {
+    background-color: #2473FF;
+    color: white
+}
+
+.checkout {
+    width: 25%;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.checkoutButton {
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #2473FF;
+    color: white;
+    border: none;
+    align-self: center;
+}
+
+.checkoutButton:hover {
+    background-color: rgba(0, 31, 145, 0.7)
+}
+
+.checkoutButton:active {
+    background-color: rgba(0, 31, 145, 0.9);
+
+}
+
+.removeContainer {
+    width: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.error {
+    font-weight: bold;
+    color: red;
+    border: 1px red solid;
+    border-radius: 7px;
+    padding: 4px;
+    margin: 0;
+}
+
+.checkoutContainer {
+    background-color: #e6f4f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    min-height: 80vh;
+}
+
+@media (max-width: 1200px) {
+    .checkoutContainer .checkoutSummary {
+        width: 80%;
+    }
+
+    .checkoutContainer .unregisteredForm {
+        width: 80%;
+    }
+}
+
+@media (max-width: 700px) {
+    .checkoutContainer .checkoutSummary {
+        width: 100%;
+    }
+
+    .checkoutContainer .unregisteredForm {
+        width: 100%;
+    }
+}
+
+.checkoutSummary {
+    border-radius: 10px;
+    width: 40%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px
+}
+
+.total {
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 10px;
+    align-self: flex-end;
+}
+
+.ruler {
+    border: 1px black solid;
+    border-radius: 2px;
+}
+
+.title {
+    margin-bottom: 30px;
+}
+
+.unregisteredForm {
+    width: 40%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.incorrectData { 
+    font-size: 1.5em;
+    align-self: center
+}

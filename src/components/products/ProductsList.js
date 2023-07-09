@@ -12,8 +12,11 @@ import { Link, useSearchParams } from "react-router-dom";
 import productImageNotFound from "../../img/search.png";
 import { Pagination } from "../../common/Pagination";
 import { api } from "../../utils/axiosHelper";
+import { useDispatch } from "react-redux";
+import { addProductToCart } from "../../features/cartSlice";
 
 export function ProductsList() {
+    const dispatch = useDispatch();
     const [products, setProducts, productsLoading] = useState([]);
     const [params, setParams] = useSearchParams();
     
@@ -32,7 +35,7 @@ export function ProductsList() {
 
     const fetchProducts = async () => {
         const offset = (page - 1) * PRODUCTS_PER_PAGE;
-        const number = 3 * PRODUCTS_PER_PAGE;
+        const number = 2 * PRODUCTS_PER_PAGE + 1;
         const query = API_BASE_URL + PRODUCTS + "?" + API_OFFSET_PARAM + offset + "&" + API_ENTITIES_PER_PAGE_PARAM + number;
         const result = await api.get(query).then(resp => resp.data);
     
@@ -41,8 +44,18 @@ export function ProductsList() {
             page = 1;
         }
 
-        setProducts(result)
+        setProducts(result);
     }
+
+    const addToCart = (id, stock) => () => { 
+        dispatch(addProductToCart(
+            {
+                id: id,
+                stock: stock
+            }
+        )) 
+    };
+
 
     return (
         <div className={styles.productsListContainer}>
@@ -78,12 +91,12 @@ export function ProductsList() {
                                             <p className={styles.productCardPrice}>
                                                 ${prod.price}
                                             </p>
-                                            <Link 
-                                                className={styles.productCardLink} 
-                                                to={PRODUCTS_PAGE + "?id=" + prod.productId}
+                                            <button 
+                                                onClick={ addToCart(prod.productId, prod.stock) } 
+                                                className={styles.productCardButton}
                                             >
-                                                <button className={styles.productCardButton}>To cart</button>
-                                            </Link>
+                                            To cart
+                                            </button>
                                         </div>
                                         <div className={styles.stockAndRating}>
                                             <p 

@@ -7,12 +7,22 @@ import { useSelector } from "react-redux";
 
 export function MenuAdditionalButtons() {
     const user = useSelector(state => state.user);
-    let productsInCart = 14;
+    const products = useSelector(state => state.cart.products);
+
+    const evalProductsInCart = () => {
+        let count = 0;
+        products.forEach(p => {
+            count += p.quantity;
+        });
+        return count;
+    }
+
+    let productsInCart = evalProductsInCart();
     let font = 0.8;
 
     const showStyle = {
-      display: "flex",
-      fontSize: `${font}rem`
+        display: "flex",
+        fontSize: `${font}rem`
     }
     
     return (

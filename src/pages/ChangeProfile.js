@@ -20,17 +20,17 @@ export function ChangeProfile() {
     const [image, setImage] = useState(cusr.image);
 
     const [phoneNumber, setPhoneNumber] = useState(cpi.phoneNumber);
-    const [email, setEmail] = useState(cpi.email);
+    const [email, setEmail] = useState(cpi.email ? cpi.email : "");
     const [firstname, setFirstname] = useState(cpi.firstname);
-    const [lastname, setLastname] = useState(cpi.lastname);
+    const [lastname, setLastname] = useState(cpi.lastname ? cpi.lastname : "");
 
-    const [region, setRegion] = useState(ca.region);
-    const [district, setDistrict] = useState(ca.district);
-    const [city, setCity] = useState(ca.city);
-    const [street, setStreet] = useState(ca.street);
-    const [building, setBuilding] = useState(ca.building);
-    const [apartment, setApartment] = useState(ca.apartment);
-    const [postalCode, setPostalCode] = useState(ca.postalCode);
+    const [region, setRegion] = useState(ca.region ? ca.region : "");
+    const [district, setDistrict] = useState(ca.district ? ca.district : "");
+    const [city, setCity] = useState(ca.city ? ca.city : "");
+    const [street, setStreet] = useState(ca.street ? ca.street : "");
+    const [building, setBuilding] = useState(ca.building ? ca.building : "");
+    const [apartment, setApartment] = useState(ca.apartment ? ca.apartment : "");
+    const [postalCode, setPostalCode] = useState(ca.postalCode ? ca.postalCode : "");
 
     const applyChanges = async () => {
         let toSend = {

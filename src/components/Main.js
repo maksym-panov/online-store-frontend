@@ -8,7 +8,9 @@ import {
   EMPTY_PAGE ,
   PROFILE_PAGE,
   REGISTRATION_PAGE,
-  CHANGE_PROFILE_PAGE
+  CHANGE_PROFILE_PAGE,
+  CART_PAGE,
+  CHECKOUT_PAGE
 } from "../utils/constants.js";
 import { Categories } from "../pages/Categories";
 import { Deliveries } from "../pages/Deliveries";
@@ -22,6 +24,8 @@ import styles from "../style/Main.module.css";
 import { Profile } from "../pages/Profile.js";
 import { useSelector } from "react-redux";
 import { ChangeProfile } from "../pages/ChangeProfile.js";
+import { Cart } from "../pages/Cart.js";
+import { Checkout } from "../pages/Checkout.js";
 
 export function Main() {
   const user = useSelector(state => state.user);
@@ -36,6 +40,8 @@ export function Main() {
         <Route path={ DELIVERY_PAGE } element={<Deliveries />} />
         <Route path={ ABOUT_PAGE } element={<About />} />
         <Route path={ CONTACTS_PAGE } element={<Contacts />} />
+        <Route path={ CART_PAGE } element={<Cart />} />
+        <Route path={ CHECKOUT_PAGE } element={<Checkout /> } />
         <Route 
           path={ REGISTRATION_PAGE } 
           element={ !id ? <Register /> : <Navigate replace to={ PROFILE_PAGE } /> } 

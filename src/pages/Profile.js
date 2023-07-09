@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { EMPTY_PAGE, PROFILE_PAGE } from "../utils/constants";
 import { setUser } from "../features/auth/userSlice";
+import { clearCart } from "../features/cartSlice";
 import styles from "../style/Profile.module.css";
 import accountWhite from "../img/accountWhite.png";
 
@@ -11,6 +12,7 @@ export function Profile() {
     const dispatch = useDispatch();
 
     const logout = () => {
+        dispatch(clearCart());
         dispatch(setUser({}));
         navigate(EMPTY_PAGE);
     }
