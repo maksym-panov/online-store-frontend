@@ -4,6 +4,7 @@ import {
     useLocation, 
     useSearchParams 
 } from "react-router-dom";
+import { useEffect } from "react";
 import s from "../style/Pagination.module.css";
 
 export function Pagination(props) {
@@ -35,8 +36,6 @@ export function Pagination(props) {
 
     PREV_URL += "page=" + Math.max(current - 1, 1)
     NEXT_URL += "page=" + (Number(current) + 1);
-
-    console.log(entities.length)
 
     const showPagination = {
         display: entities.length <= PER_PAGE && current === 1 ? "none" : "flex"

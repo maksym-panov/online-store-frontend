@@ -1,5 +1,5 @@
 import s from "../../style/Products.module.css";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { 
     API_BASE_URL, 
     BASE64_RESOLVER, 
@@ -18,14 +18,23 @@ import arrow from "../../img/arrow.png";
 export function InformationPanel() {
     const [categories, setCategories] = useState([]);
     const [bannerProduct, setBannerProduct] = useState(null);
+    const [params, setParams] = useSearchParams();
 
     useEffect(() => {
-        fetchCategories(setCategories);
-        fetchBannerProduct(setBannerProduct);
-    }, []);
+        if (!params.get("name")) {
+            fetchCategories(setCategories);
+            fetchBannerProduct(setBannerProduct);
+        }
+    }, [params]);
 
     return (
-        <div className={s.informationPanelContainer}>
+        <div 
+            style={ 
+                { 
+                    display: params.get("name") ? "none" : "flex" 
+                } 
+            } 
+            className={s.informationPanelContainer}>
             <div className={s.categoriesContainer}>
                 {categories?.map(c => {
                     return (

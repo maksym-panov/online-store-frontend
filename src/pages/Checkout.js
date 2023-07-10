@@ -18,8 +18,6 @@ export const Checkout = () => {
     const [customer, setCustomer] = useState({});
     const [err, setErr] = useState({});
 
-    console.log(customer)
-
     return (
         <div className={s.checkoutContainer}>
             <h1 className={s.title}>Checkout</h1>

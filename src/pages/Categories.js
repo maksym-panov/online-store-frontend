@@ -41,9 +41,6 @@ export function Categories() {
     const firstCol = categArr.slice(0, Math.ceil(size / 2));
     const secondCol = categArr.slice(Math.ceil(size / 2));
 
-    console.log(firstCol);
-    console.log(secondCol);
-
     return (
         <div className={s.ptContainer}>
             <div className={s.ptList}>
@@ -51,6 +48,7 @@ export function Categories() {
                     {
                         firstCol.map(pt => (
                             <a 
+                                key={pt.productTypeId}
                                 className={s.link}
                                 href={CATEGORIES_PAGE + "?id=" + pt.productTypeId}
                             >
@@ -63,6 +61,7 @@ export function Categories() {
                     {
                         secondCol.map(pt => (
                             <a 
+                                key={pt.productTypeId}
                                 className={s.link}
                                 href={CATEGORIES_PAGE + "?id=" + pt.productTypeId}
                             >

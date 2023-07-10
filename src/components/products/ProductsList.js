@@ -1,6 +1,7 @@
 import { 
     API_BASE_URL, 
     API_ENTITIES_PER_PAGE_PARAM, 
+    API_NAME_PARAM, 
     API_OFFSET_PARAM, 
     API_PROD_CATEGORY_PARAM, 
     BASE64_RESOLVER, 
@@ -36,7 +37,7 @@ export function ProductsList(props) {
             page = 1
         }
         fetchProducts();        
-    }, [page]);
+    }, [page, params]);
 
     const fetchProducts = async () => {
         const offset = (page - 1) * PRODUCTS_PER_PAGE;
@@ -47,6 +48,9 @@ export function ProductsList(props) {
                     API_ENTITIES_PER_PAGE_PARAM + number;
         if (catId) {
             query += "&" + API_PROD_CATEGORY_PARAM + catId;
+        }
+        if (params.get("name")) {
+            query += "&" + API_NAME_PARAM + params.get("name");
         }
         
         const result = await api.get(query).then(resp => resp.data);
@@ -68,9 +72,18 @@ export function ProductsList(props) {
         )) 
     };
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, []);
+
+    const title = {
+        margin: "20px",
+        textAlign: "center"
+    }
 
     return (
-        <div className={s.productsListContainer}>
+        <div id="productList" className={s.productsListContainer}>
+            { params.get("name") && <h1 style={title}>Search result for "{params.get("name")}"</h1>}
             <div className={s.productsList}>
                 {
                     products?.slice(0, PRODUCTS_PER_PAGE).map(prod => {

@@ -11,8 +11,6 @@ export const Cart = () => {
     const products = useSelector(state => state.cart.products);
     const navigate = useNavigate();
 
-    console.log(products.length === 0);
-
     const evalTotal = () => {
         if (products.length === 0) {
             return 0;

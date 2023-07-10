@@ -26,6 +26,7 @@ export const SIGN_UP_USER = "/users/register";
 export const API_OFFSET_PARAM = "offset=";
 export const API_ENTITIES_PER_PAGE_PARAM = "quantity=";
 export const API_PROD_CATEGORY_PARAM = "category=";
+export const API_NAME_PARAM = "name=";
 
 // LITERAL CONSTANTS
 export const PRODUCTS_PER_PAGE = 15;

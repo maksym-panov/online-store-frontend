@@ -35,8 +35,6 @@ export function Login() {
                 }
             ).then(resp => resp.data);
             
-            console.log("login - " + authResp.jwt);
-
             user.jwt = "Bearer " + authResp.jwt;
             dispatch(setUser(user));
             navigate(PROFILE_PAGE);

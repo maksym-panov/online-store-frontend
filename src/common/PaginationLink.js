@@ -17,8 +17,6 @@ export function PaginationLink(props) {
 
     URL += "page=" + PAGE;
 
-    console.log(URL);
-
     if (TYPE == "primary") {
         return (
             <Link className={`${s.link} ${s.primaryPageNumber}`} to={ URL }>

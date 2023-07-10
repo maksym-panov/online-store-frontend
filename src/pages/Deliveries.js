@@ -34,13 +34,13 @@ export function Deliveries() {
                 <h1 style={title}>Delivery Policy</h1>
                 <hr />
                 {
-                    paragraphs.map(p => {
+                    paragraphs.map((p, idx) => {
                         if (p !== "") {
                             return (
-                                <>
+                                <div key={idx}>
                                     <p style={textS}>{p}</p>
                                     <br />
-                                </>
+                                </div>
                             );
                         }
                     })
