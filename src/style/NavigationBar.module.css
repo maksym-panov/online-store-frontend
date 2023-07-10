@@ -163,30 +163,6 @@ body {
     background-color: rgba(0, 31, 145, 0.5);
 }
 
-.languageSwitch {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 5%;
-    flex-basis: 20%;
-}
-
-.languageButton {
-    width: 1em;
-    font-size: 2em;
-    text-decoration: none;
-    text-align: center;
-    margin: 0.2em;
-}
-
-.languageFlag:hover {
-    cursor: pointer;
-}
-
-.languageButton:active .languageFlag {
-    font-size: 0.9em;
-}
-
 .radioHidden {
     display: none;
 }
@@ -331,17 +307,11 @@ body {
     padding-right: 4%;
 }
 
-.languageSwitchMenu {
-    flex-basis: 30%;
-    margin-left: 0.5em;
-    justify-content: left;
-}
-
 .accountButtonMenu {
-    flex-basis: 70%;
+    flex-basis: 100%;
     display: flex;
     margin-right: 0.5em;
-    justify-content: right;
+    justify-content: space-between;
 }
 
 .accountButtonMenuContent {

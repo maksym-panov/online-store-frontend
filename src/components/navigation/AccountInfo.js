@@ -27,30 +27,6 @@ export function AccountInfo() {
 
   return (
       <div className={s.accountContainer}>
-        <div className={s.languageSwitch}>
-          <div className={s.languageButton}>
-            <label className={s.languageFlag}>
-              <input 
-                type="radio" 
-                value="eng" 
-                name="language" 
-                className={s.radioHidden} 
-              />
-              🇬🇧
-            </label>
-          </div>
-          <div className={s.languageButton}>
-            <label className={s.languageFlag}>
-              <input 
-                type="radio" 
-                value="ukr" 
-                name="language" 
-                className={s.radioHidden} 
-              />
-                🇺🇦
-            </label>
-          </div>
-        </div>
         <Link to={CART_PAGE} className={`${s.cartButton} ${s.accountButton}`}>
             <div 
               style={{

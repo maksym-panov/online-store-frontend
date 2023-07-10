@@ -27,20 +27,7 @@ export function MenuAdditionalButtons() {
     
     return (
         <div className={s.menuAdditionalButtonsContainer}>
-            <div className={`${s.languageSwitch} ${s.languageSwitchMenu}`}>
-                <div className={s.languageButton}>
-                    <label className={s.languageFlag}>
-                        <input type="radio" value="eng" name="language" className={s.radioHidden} />
-                        🇬🇧
-                    </label>
-                </div>
-                <div className={s.languageButton}>
-                    <label className={s.languageFlag}>
-                        <input type="radio" value="ukr" name="language" className={s.radioHidden} />
-                        🇺🇦
-                    </label>
-                </div>
-            </div>
+            
 
             <div className={s.accountButtonMenu}>
                 <a 
