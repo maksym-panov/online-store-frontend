@@ -251,6 +251,7 @@
 
 .productsListContainer {
     background-color: #e6f4f1;
+    min-height: 70vh;
     padding-top: 2em;
     padding-left: 6%;
     padding-right: 6%;
@@ -369,7 +370,12 @@
 .prodInfoSect {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+}
+
+@media (max-height: 600px) {
+    .prodPageBack .prodInfoSect .prodImgCont {
+        max-height: unset;
+    } 
 }
 
 @media (max-width: 800px) {
@@ -378,6 +384,7 @@
     }
     .prodPageBack .prodInfoSect .prodImgCont {
         width: 100%;
+        height: 60vh;
         margin-bottom: 20px;
     }
     .prodPageBack .prodInfoSect .priceCont {
@@ -395,7 +402,9 @@
 .prodImgCont {
     border-radius: 10px;
     background-color: white;
-    height: 50vh;
+    padding: 10px;
+    max-height: 70vh;
+    height: inherit;
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -412,7 +421,7 @@
     border-radius: 10px;
     background-color: white;
     width: 38%;
-    height: 50vh;
+    height: inherit;
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -439,4 +448,78 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+}
+
+.categCont {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.categLink {
+    text-decoration: none;
+    margin-right: 8px;
+    color: black;
+    border: 1px black solid;
+    border-radius: 20px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-bottom: 7px
+}
+
+.categLink:hover {
+    background-color: #2473FF;
+    border-color: white;
+    color: white
+}
+
+.categ {
+    font-size: large;
+    margin: 2px;
+}
+
+.ptContainer {
+    min-height: 80vh;
+    background-color: #e6f4f1;
+    display: flex;
+    justify-content: center;
+    padding: 40px
+}
+
+.ptList {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+@media (max-width: 768px) {
+    .ptContainer {
+        padding: 20px
+    }
+
+    .ptContainer .ptList {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .ptContainer .ptList .col {
+        width: 100%;
+    }
+}
+
+.col {
+    background-color: white;
+    border-radius: 10px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    margin-bottom: 20px
+}
+
+.link {
+    color: black;
+    font-size: 1.5em;
+    text-align: center
 }

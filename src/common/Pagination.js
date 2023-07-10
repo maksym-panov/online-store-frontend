@@ -1,9 +1,12 @@
 import { PaginationLink } from "./PaginationLink";
-import { Link } from "react-router-dom";
+import { 
+    Link, 
+    useLocation, 
+    useSearchParams 
+} from "react-router-dom";
 import s from "../style/Pagination.module.css";
 
 export function Pagination(props) {
-    const URL = props.baseUrl;
     const current = props.current == null ? 1 : props.current;
     const PER_PAGE = props.perPage;
     const entities = props.entities;
@@ -17,27 +20,49 @@ export function Pagination(props) {
         nextAvailable = 2;
     }
 
+    const l = useLocation();
+    const [p, setP] = useSearchParams();
+
+    let PREV_URL = l.pathname + "?";
+    let NEXT_URL = l.pathname + "?";
+
+    for (let e of p.entries()) {
+        if (e[0] !== "page") {
+            PREV_URL += e[0] + "=" + e[1] + "&";
+            NEXT_URL += e[0] + "=" + e[1] + "&";
+        }    
+    }
+
+    PREV_URL += "page=" + Math.max(current - 1, 1)
+    NEXT_URL += "page=" + (Number(current) + 1);
+
+    console.log(entities.length)
+
+    const showPagination = {
+        display: entities.length <= PER_PAGE && current === 1 ? "none" : "flex"
+    }
+
     return (
-        <div className={s.paginationContainer}>
+        <div style={ showPagination } className={s.paginationContainer}>
             <div className={s.pagination}>
                 {
                     current > 1 && (
-                        <Link to={URL + "?page=" + (Math.max(current - 1, 1))}>
+                        <Link to={ PREV_URL }>
                             <div className={s.leftArrow}></div>
                         </Link>
                     )
                 }
 
-                {current > 2 && <PaginationLink baseUrl={URL} page={1} />}
+                {current > 2 && <PaginationLink page={1} />}
                 {current > 3 && <div className={s.dots}>...</div>}
-                {current > 1 && <PaginationLink baseUrl={URL} page={current - 1} />}
-                <PaginationLink type="primary" baseUrl={URL} page={current} />
-                {nextAvailable > 0 && <PaginationLink baseUrl={URL} page={Number(current) + 1} />}
+                {current > 1 && <PaginationLink page={current - 1} />}
+                <PaginationLink type="primary" page={current} />
+                {nextAvailable > 0 && <PaginationLink page={Number(current) + 1} />}
                 {nextAvailable > 1 && <div className={s.dots}>...</div>}
                 
                 {
                     nextAvailable > 0 && (
-                        <Link to={URL + "?page=" + (Number(current) + 1)}>
+                        <Link to={ NEXT_URL }>
                             <div className={s.rightArrow} ></div>
                         </Link>
                     )

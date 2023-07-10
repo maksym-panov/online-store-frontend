@@ -2,11 +2,12 @@ import {
     useEffect,
     useState
 } from "react";
-import { BASE64_RESOLVER, PRODUCTS } from "../../utils/constants";
+import { BASE64_RESOLVER, CATEGORIES_PAGE, PRODUCTS } from "../../utils/constants";
 import { api } from "../../utils/axiosHelper";
 import s from "../../style/Products.module.css";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../features/cartSlice";
+import { Link } from "react-router-dom";
 
 export const ProductPage = (props) => {
     const id = props.id;
@@ -46,6 +47,17 @@ export const ProductPage = (props) => {
                     <div className={s.info}>
                         <h3 className={s.title}>{p.name}</h3>
                         <p style={stockStyle}>{stock}</p>
+                        <div className={s.categCont}>
+                            {
+                                p.productTypes?.map(pt => (
+                                    <Link 
+                                        className={s.categLink}
+                                        to={CATEGORIES_PAGE + "?id=" + pt.productTypeId}>
+                                        <p className={s.categ}>{pt.name}</p>
+                                    </Link>
+                                ))
+                            }
+                        </div>
                     </div>
                     <div className={s.toCartButton}>
                         <p className={s.price}>${p.price?.toFixed(2)}</p>

@@ -2,7 +2,9 @@ import {
     API_BASE_URL, 
     API_ENTITIES_PER_PAGE_PARAM, 
     API_OFFSET_PARAM, 
+    API_PROD_CATEGORY_PARAM, 
     BASE64_RESOLVER, 
+    CATEGORIES_PAGE, 
     PRODUCTS, 
     PRODUCTS_PAGE, 
     PRODUCTS_PER_PAGE 
@@ -16,10 +18,12 @@ import { api } from "../../utils/axiosHelper";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../features/cartSlice";
 
-export function ProductsList() {
+export function ProductsList(props) {
     const dispatch = useDispatch();
-    const [products, setProducts, productsLoading] = useState([]);
+    const [products, setProducts] = useState([]);
     const [params, setParams] = useSearchParams();
+
+    const catId = props.categoryId;
     
     let page = params.get("page");
 
@@ -37,10 +41,17 @@ export function ProductsList() {
     const fetchProducts = async () => {
         const offset = (page - 1) * PRODUCTS_PER_PAGE;
         const number = 2 * PRODUCTS_PER_PAGE + 1;
-        const query = API_BASE_URL + PRODUCTS + "?" + API_OFFSET_PARAM + offset + "&" + API_ENTITIES_PER_PAGE_PARAM + number;
+        
+        let query = API_BASE_URL + PRODUCTS + "?" + 
+                    API_OFFSET_PARAM + offset + "&" + 
+                    API_ENTITIES_PER_PAGE_PARAM + number;
+        if (catId) {
+            query += "&" + API_PROD_CATEGORY_PARAM + catId;
+        }
+        
         const result = await api.get(query).then(resp => resp.data);
     
-        if (result.length == 0 && page != 1) {
+        if (result.length === 0 && page != 1) {
             setParams({ page: 1});
             page = 1;
         }
@@ -117,7 +128,11 @@ export function ProductsList() {
                     })
                 }
             </div>
-            {!productsLoading && <Pagination baseUrl={PRODUCTS_PAGE} current={page} perPage={PRODUCTS_PER_PAGE} entities={products} />}
+            <Pagination 
+                current={page} 
+                perPage={PRODUCTS_PER_PAGE} 
+                entities={products}
+            />
         </div>
     );
 }

@@ -1,45 +1,89 @@
 import { useState, useEffect } from "react";
-import { API_PROD_CATEGORY_PARAM, PRODUCTS, PRODUCT_CATEGORIES } from "../utils/constants";
+import { CATEGORIES_PAGE, PRODUCT_CATEGORIES } from "../utils/constants";
 import { useSearchParams } from "react-router-dom";
 import { api } from "../utils/axiosHelper";
+import { ProductsList } from "../components/products/ProductsList";
+import s from "../style/Products.module.css";
+import { Link } from "react-router-dom";
 
 export function Categories() {
     const [params, setParams] = useSearchParams();
-    const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState([]);
+    const [categArr, setCategArr] = useState([]);
+    const [categ, setCateg] = useState({});
+
     const id = params.get("id");
+
+    const titleStyle = {
+        backgroundColor: "#e6f4f1",
+        margin: 0,
+        textAlign: "center",
+        paddingTop: "30px"
+    }
 
     useEffect(() => {
         if (id) {
-            fetchProducts(id, setProducts);
+            fetchCateg(id, setCateg)
         } else {
-            fetchCategories(setCategories);
+            fetchCategArr(setCategArr);
         }
     }, []);
 
     if (id) {
         return (
-            <div>
-                {products?.map(p => <h1>{p.name}</h1>)}
-            </div>
+            <>
+                <h2 style={titleStyle}>Products in category "{categ?.name}"</h2>
+                <ProductsList categoryId={id} />
+            </>
         );
     }
 
+    const size = categArr.length;
+    const firstCol = categArr.slice(0, Math.ceil(size / 2));
+    const secondCol = categArr.slice(Math.ceil(size / 2));
+
+    console.log(firstCol);
+    console.log(secondCol);
+
     return (
-        <div>
-            {categories?.map(c => <h1>{c.name}</h1>)}
+        <div className={s.ptContainer}>
+            <div className={s.ptList}>
+                <div className={s.col}>
+                    {
+                        firstCol.map(pt => (
+                            <a 
+                                className={s.link}
+                                href={CATEGORIES_PAGE + "?id=" + pt.productTypeId}
+                            >
+                            {pt.name}
+                            </a>
+                        ))
+                    }
+                </div>
+                <div className={s.col}>
+                    {
+                        secondCol.map(pt => (
+                            <a 
+                                className={s.link}
+                                href={CATEGORIES_PAGE + "?id=" + pt.productTypeId}
+                            >
+                            {pt.name}
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
         </div>
     )
 }
 
-async function fetchProducts(id, setProducts) {
-    const products = await api.get(PRODUCTS + "?" + API_PROD_CATEGORY_PARAM + id)
+async function fetchCategArr(setCategArr) {
+    const categArr = await api.get(PRODUCT_CATEGORIES)
                                 .then(resp => resp.data);
-    setProducts(products);
+    setCategArr(categArr);
 }
 
-async function fetchCategories(setCategories) {
-    const categories = await api.get(PRODUCT_CATEGORIES)
-                                .then(resp => resp.data);
-    setCategories(categories);
+async function fetchCateg(id, setCateg) {
+    const categ = await api.get(PRODUCT_CATEGORIES + "/" + id)
+                            .then(resp => resp.data);
+    setCateg(categ);
 }
