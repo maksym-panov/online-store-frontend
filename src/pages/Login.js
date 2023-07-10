@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "../style/Login.module.css";
+import s from "../style/Login.module.css";
 import { PROFILE_PAGE, REGISTRATION_PAGE, SIGN_IN_USER, USERS } from "../utils/constants";
 import raccoon from "../img/raccoon.png";
 import { useDispatch } from "react-redux";
@@ -46,38 +46,38 @@ export function Login() {
     }
 
     return (
-        <div className={styles.loginPage}>
-            <div className={styles.loginFormContainer}>
-                <img className={styles.logo} src={raccoon} alt="logo" />
-                <h1 className={styles.title}>Welcome back!</h1>
-                <div className={styles.inputs}>
-                    {err.message && <p className={styles.validationError}>{err.message}</p>}
-                    <label className={styles.inputLabel}>
+        <div className={s.loginPage}>
+            <div className={s.loginFormContainer}>
+                <img className={s.logo} src={raccoon} alt="logo" />
+                <h1 className={s.title}>Welcome back!</h1>
+                <div className={s.inputs}>
+                    {err.message && <p className={s.validationError}>{err.message}</p>}
+                    <label className={s.inputLabel}>
                         Phone number
                         <input 
                             onChange={e => setPhoneNumber(e.target.value)}
-                            className={styles.prompt} 
+                            className={s.prompt} 
                             type="text" 
                             placeholder="0991234567" 
                         />
                     </label>
-                    <label className={styles.inputLabel}>
+                    <label className={s.inputLabel}>
                         Password
                         <input 
                             onChange={e => setPassword(e.target.value)} 
-                            className={styles.prompt} 
+                            className={s.prompt} 
                             type="password" 
                             placeholder="********" 
                         />
                     </label>
                 </div>
                 <Link 
-                    className={styles.signUpLink} 
+                    className={s.signUpLink} 
                     to={REGISTRATION_PAGE}>
                     Sign Up
                 </Link>  
                 <button 
-                    className={styles.submitButton}
+                    className={s.submitButton}
                     onClick={() => authoriseAndRedirect()}>Sign In</button>
             </div>
         </div>

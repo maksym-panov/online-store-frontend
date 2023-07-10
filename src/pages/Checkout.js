@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CART_PAGE } from "../utils/constants";
 import { CheckoutForm } from "../components/cart/CheckoutForm";
-import styles from "../style/Cart.module.css";
+import s from "../style/Cart.module.css";
 import { CheckoutSummary } from "../components/cart/CheckoutSummary";
 import { useState } from "react";
 
@@ -21,8 +21,8 @@ export const Checkout = () => {
     console.log(customer)
 
     return (
-        <div className={styles.checkoutContainer}>
-            <h1 className={styles.title}>Checkout</h1>
+        <div className={s.checkoutContainer}>
+            <h1 className={s.title}>Checkout</h1>
             {
                 (!user.userId || !user.jwt) && 
                 <CheckoutForm 

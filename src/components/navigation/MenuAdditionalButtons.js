@@ -1,5 +1,5 @@
 import { LOGIN_PAGE, CART_PAGE } from "../../utils/constants";
-import styles from "../../style/NavigationBar.module.css";
+import s from "../../style/NavigationBar.module.css";
 import { Link } from "react-router-dom";
 import account from "../../img/account.png";
 import cart from "../../img/cart.png";
@@ -26,51 +26,51 @@ export function MenuAdditionalButtons() {
     }
     
     return (
-        <div className={styles.menuAdditionalButtonsContainer}>
-            <div className={`${styles.languageSwitch} ${styles.languageSwitchMenu}`}>
-                <div className={styles.languageButton}>
-                    <label className={styles.languageFlag}>
-                        <input type="radio" value="eng" name="language" className={styles.radioHidden} />
+        <div className={s.menuAdditionalButtonsContainer}>
+            <div className={`${s.languageSwitch} ${s.languageSwitchMenu}`}>
+                <div className={s.languageButton}>
+                    <label className={s.languageFlag}>
+                        <input type="radio" value="eng" name="language" className={s.radioHidden} />
                         🇬🇧
                     </label>
                 </div>
-                <div className={styles.languageButton}>
-                    <label className={styles.languageFlag}>
-                        <input type="radio" value="ukr" name="language" className={styles.radioHidden} />
+                <div className={s.languageButton}>
+                    <label className={s.languageFlag}>
+                        <input type="radio" value="ukr" name="language" className={s.radioHidden} />
                         🇺🇦
                     </label>
                 </div>
             </div>
 
-            <div className={styles.accountButtonMenu}>
+            <div className={s.accountButtonMenu}>
                 <a 
                     href={CART_PAGE} 
                     className={
-                        `${styles.cartButton} 
-                        ${styles.accountButton} 
-                        ${styles.accountButtonMenuContent}`
+                        `${s.cartButton} 
+                        ${s.accountButton} 
+                        ${s.accountButtonMenuContent}`
                     }
                 >
                     <div 
                         style={{
                             backgroundImage: `url(${cart})`
                         }}
-                        className={`${styles.icon} ${styles.cartIcon}`} 
+                        className={`${s.icon} ${s.cartIcon}`} 
                     >
                     </div>
-                    <div className={styles.counterStyle} style={productsInCart ? showStyle : {}}>
+                    <div className={s.counterStyle} style={productsInCart ? showStyle : {}}>
                         <div>
                         {productsInCart}
                         </div>
                     </div>
-                    <p className={styles.accountText}>Cart</p>
+                    <p className={s.accountText}>Cart</p>
                 </a>
                 
                 <a 
                     href={LOGIN_PAGE} 
                     className={
-                        `${styles.accountButton} 
-                        ${styles.accountButtonMenuContent}`}
+                        `${s.accountButton} 
+                        ${s.accountButtonMenuContent}`}
                 >
                     <div 
                         style=
@@ -80,10 +80,10 @@ export function MenuAdditionalButtons() {
                             :
                             { backgroundImage: `url(${account})` }
                         }
-                        className={styles.icon} 
+                        className={s.icon} 
                     >
                     </div>
-                    <p className={styles.accountText}>
+                    <p className={s.accountText}>
                         {
                             user && user.personalInfo && user.personalInfo.firstname ? 
                             user.personalInfo.firstname : 

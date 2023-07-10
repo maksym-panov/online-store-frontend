@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { CartItem } from "../components/cart/CartItem";
-import styles from "../style/Cart.module.css";
+import s from "../style/Cart.module.css";
 import empty from "../img/empty_cart.png";
 import { CHECKOUT_PAGE } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
@@ -26,14 +26,14 @@ export const Cart = () => {
     }
 
     return (
-        <div className={styles.cartContainer}>
-            <div className={styles.itemsContainer}>
+        <div className={s.cartContainer}>
+            <div className={s.itemsContainer}>
                 {
                     !products.length &&
                     (
-                        <div className={styles.empty}>
-                            <img className={styles.emptyImage} src={empty} />
-                            <h1 className={styles.emptyText}>Your cart is empty</h1>
+                        <div className={s.empty}>
+                            <img className={s.emptyImage} src={empty} />
+                            <h1 className={s.emptyText}>Your cart is empty</h1>
                         </div>
                     )
                 }
@@ -46,15 +46,15 @@ export const Cart = () => {
                     )
                 }
             </div>
-            <div className={styles.checkout}>
+            <div className={s.checkout}>
                 <div>
                     <h1>
-                        { "Total $" + evalTotal() }
+                        { "Total $" + evalTotal().toFixed(2) }
                     </h1>
                 </div>
                 <div>
                     <button 
-                        className={styles.checkoutButton}
+                        className={s.checkoutButton}
                         onClick={ () => {
                             if (!(products.length === 0)) {
                                 navigate(CHECKOUT_PAGE);
@@ -65,7 +65,7 @@ export const Cart = () => {
                         Checkout
                     </button>
                 </div>
-                { err && <p className={styles.error}>Your cart is empty!</p> }
+                { err && <p className={s.error}>Your cart is empty!</p> }
             </div>
         </div>
     );

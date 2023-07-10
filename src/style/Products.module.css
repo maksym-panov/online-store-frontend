@@ -111,6 +111,12 @@
     }
 }
 
+@media (max-width: 500px) {
+    .productsListContainer .productsList .productCardBodyContainer {
+        width: 100%;
+    }
+}
+
 .informationPanelContainer {
     display: flex;
     margin: 1%;
@@ -264,7 +270,6 @@
 }
 
 .productCardBody {
-    background-repeat: no-repeat;
     width: 100%;
     background-color: white;
     border-radius: 10px;
@@ -279,15 +284,15 @@
 
 .productCardImageLink {
     height: 55%;
-    padding: 7px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .productCardImage {
-    height: 100%;
-    max-width: 100%;
+    max-width: 95%;
+    max-height: 95%;
 }
 
 .productCardContent {
@@ -351,4 +356,87 @@
     text-align: right;
 }
 
+.prodPageBack {
+    min-height: 80vh;
+    background-color: #e6f4f1;
+    padding: 70px;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
 
+.prodInfoSect {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 800px) {
+    .prodPageBack .prodInfoSect {
+        flex-direction: column;
+    }
+    .prodPageBack .prodInfoSect .prodImgCont {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .prodPageBack .prodInfoSect .priceCont {
+        height: fit-content;
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .prodPageBack {
+        padding: 20px;
+    }
+}
+
+.prodImgCont {
+    border-radius: 10px;
+    background-color: white;
+    height: 50vh;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.prodImg {
+    max-height: 95%;
+    max-width: 90%;
+}
+
+.priceCont {
+    border-radius: 10px;
+    background-color: white;
+    width: 38%;
+    height: 50vh;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.descCont {
+    background-color: white;
+    margin-top: 20px;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.parag {
+    font-size: large;
+    text-align:justify;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.toCartButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}

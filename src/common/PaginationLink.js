@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "../style/Pagination.module.css";
+import s from "../style/Pagination.module.css";
 
 export function PaginationLink(props) {
     const URL = props.baseUrl;
@@ -8,7 +8,7 @@ export function PaginationLink(props) {
 
     if (TYPE == "primary") {
         return (
-            <Link className={`${styles.link} ${styles.primaryPageNumber}`} to={URL + "?page=" + PAGE}>
+            <Link className={`${s.link} ${s.primaryPageNumber}`} to={URL + "?page=" + PAGE}>
                 <div>
                     {PAGE}
                 </div>
@@ -17,7 +17,7 @@ export function PaginationLink(props) {
     }
 
     return (
-        <Link className={`${styles.link} ${styles.secondaryPageNumber}`} to={URL + "?page=" + PAGE}>
+        <Link className={`${s.link} ${s.secondaryPageNumber}`} to={URL + "?page=" + PAGE}>
             <div>
                 {PAGE}
             </div>

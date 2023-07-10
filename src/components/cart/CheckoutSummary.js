@@ -1,5 +1,5 @@
-import styles from "../../style/Cart.module.css";
-import profileStyles from "../../style/Profile.module.css";
+import s from "../../style/Cart.module.css";
+import profiles from "../../style/Profile.module.css";
 import { api } from "../../utils/axiosHelper";
 import { DELIVERIES, ORDERS, PRODUCTS_PAGE } from "../../utils/constants";
 import { useEffect, useState } from "react";
@@ -78,14 +78,16 @@ export const CheckoutSummary = (props) => {
         return;
     }
 
-    const total = products
+    let total = products
         .map(p => p.quantity * p.price)
-        .reduce((a, c) => a + c, 0)
+        .reduce((a, c) => a + c, 0);
+    
+    total = Math.round(total * 100) / 100;
 
     return (
-        <div className={styles.checkoutSummary}>
-            <label className={profileStyles.changeDataPiece}>
-                <h4 className={profileStyles.dataHead}>Delivery</h4>
+        <div className={s.checkoutSummary}>
+            <label className={profiles.changeDataPiece}>
+                <h4 className={profiles.dataHead}>Delivery</h4>
                 <select>
                     {
                         deliveries.map(d => 
@@ -100,15 +102,15 @@ export const CheckoutSummary = (props) => {
                     }
                 </select>
             </label>
-            <hr className={styles.ruler} />
-            <h2 className={styles.total}>Total - ${total}</h2>
+            <hr className={s.ruler} />
+            <h2 className={s.total}>Total - ${total.toFixed(2)}</h2>
             <button 
                 onClick={() => doCheckout()}
-                className={styles.checkoutButton}
+                className={s.checkoutButton}
             >
             Checkout
             </button>
-            {errorState && <p className={`${profileStyles.validationError} ${styles.incorrectData}`}>Incorrect data!</p>}
+            {errorState && <p className={`${profiles.validationError} ${s.incorrectData}`}>Incorrect data!</p>}
         </div>
     );
 }

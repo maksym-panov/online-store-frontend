@@ -1,10 +1,19 @@
-import styles from "../../style/Products.module.css";
+import s from "../../style/Products.module.css";
 import { Link } from "react-router-dom";
-import { API_BASE_URL, CATEGORIES_PAGE, PRODUCTS, PRODUCTS_PAGE, PRODUCT_CATEGORIES } from "../../utils/constants";
-import { useEffect, useState } from "react";
+import { 
+    API_BASE_URL, 
+    BASE64_RESOLVER, 
+    CATEGORIES_PAGE, 
+    PRODUCTS, 
+    PRODUCTS_PAGE, 
+    PRODUCT_CATEGORIES 
+} from "../../utils/constants";
+import { 
+    useEffect, 
+    useState 
+} from "react";
 import Axios from "axios";
 import arrow from "../../img/arrow.png";
-import empty from "../../img/search.png";
 
 export function InformationPanel() {
     const [categories, setCategories] = useState([]);
@@ -16,31 +25,58 @@ export function InformationPanel() {
     }, []);
 
     return (
-        <div className={styles.informationPanelContainer}>
-            <div className={styles.categoriesContainer}>
+        <div className={s.informationPanelContainer}>
+            <div className={s.categoriesContainer}>
                 {categories?.map(c => {
                     return (
-                        <Link key={c.productTypeId} className={styles.categoryLink} to={CATEGORIES_PAGE + "?id=" + c.productTypeId}>
-                            <div className={styles.categoryContainer}>
-                                <p className={styles.category}>{c.name}</p>
-                                <img className={styles.arrow} src={arrow} />
+                        <Link 
+                            key={c.productTypeId} 
+                            className={s.categoryLink} 
+                            to={CATEGORIES_PAGE + "?id=" + c.productTypeId}
+                        >
+                            <div className={s.categoryContainer}>
+                                <p className={s.category}>{c.name}</p>
+                                <img className={s.arrow} src={arrow} />
                             </div>
                         </Link>
                     );
                 })}        
             </div>
-            <div className={styles.informationBanner}>
-                <Link to={ PRODUCTS_PAGE + "?id=" + bannerProduct?.productId } className={styles.informationBannerLink}>
-                    <img src={`data:image/png;base64,${bannerProduct?.image}`} className={styles.informationBannerImage}/>
+            <div className={s.informationBanner}>
+                <Link 
+                    to={ PRODUCTS_PAGE + "?id=" + bannerProduct?.productId } 
+                    className={s.informationBannerLink}>
+                    <img 
+                        src={BASE64_RESOLVER + bannerProduct?.image} 
+                        className={s.informationBannerImage}
+                    />
                 </Link>
-                <div className={styles.descriptionPanel}>
-                    <h1 className={styles.descriptionPanelHeader}>{bannerProduct?.name}</h1>
-                    <div className={styles.descriptionSeparator}></div>
-                    <div className={styles.priceContainer}>
-                        <h1 className={styles.price}><span className={styles.priceBefore}></span>{bannerProduct && ("$" + bannerProduct.price)}</h1>
+                <div className={s.descriptionPanel}>
+                    <h1 className={s.descriptionPanelHeader}>
+                        {bannerProduct?.name}
+                    </h1>
+                    <div className={s.descriptionSeparator}></div>
+                    <div className={s.priceContainer}>
+                        <h1 className={s.price}>
+                            <span className={s.priceBefore}>
+
+                            </span>
+                            {
+                                bannerProduct && 
+                                "$" + bannerProduct.price.toFixed(2)
+                            }
+                        </h1>
                     </div>
-                    <div className={styles.descriptionPanelButtonContainer}>
-                        <Link to={PRODUCTS_PAGE + "?id=" + bannerProduct?.productId}><button className={styles.descriptionPanelButton}>Go to page</button></Link>
+                    <div className={s.descriptionPanelButtonContainer}>
+                        <Link 
+                            to={
+                                PRODUCTS_PAGE + "?id=" + bannerProduct?.productId
+                            }
+                        >
+                            <button className={s.descriptionPanelButton}>
+                                Go to page
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

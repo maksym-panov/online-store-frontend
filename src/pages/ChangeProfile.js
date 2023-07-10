@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "../style/Profile.module.css";
+import s from "../style/Profile.module.css";
 import { getBase64 } from "../utils/webHelpers";
 import accountWhite from "../img/accountWhite.png";
 import { useNavigate } from "react-router-dom";
 import { PROFILE_PAGE, USERS } from "../utils/constants";
 import { api } from "../utils/axiosHelper";
 import { setUser } from "../features/auth/userSlice";
+import { BASE64_RESOLVER } from "../utils/constants";
 
 export function ChangeProfile() {
     const [err, setErr] = useState({});
@@ -100,13 +101,13 @@ export function ChangeProfile() {
     };
 
     return (
-        <div className={styles.profileContainer}>
-            <div className={styles.profileImage}>
+        <div className={s.profileContainer}>
+            <div className={s.profileImage}>
                 <div 
-                    className={styles.image}
+                    className={s.image}
                     style={
                         image ? 
-                        { backgroundImage: `url("data:image/png;base64,${image}")` } :
+                        { backgroundImage: "url(" + BASE64_RESOLVER + cusr.image + ")" } :
                         { 
                             backgroundImage: `url(${accountWhite})`, 
                             backgroundColor: "#d4d4d4" 
@@ -114,9 +115,9 @@ export function ChangeProfile() {
                     }
                 >
                 </div>
-                <label className={styles.changeDataPiece}>
+                <label className={s.changeDataPiece}>
                     <input 
-                        className={styles.inputImage}
+                        className={s.inputImage}
                         type="file"  
                         onChange={ 
                             e => getBase64(
@@ -127,125 +128,125 @@ export function ChangeProfile() {
                     />
             </label>
             </div>
-            <div className={`${styles.profile} ${styles.changeProfile}`}>
-                <div className={`${styles.column} ${styles.changePageColumn}`}>
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>Phone number</h4>
-                        {err.phoneNumber && <p className={styles.validationError}>{err.phoneNumber}</p>}
+            <div className={`${s.profile} ${s.changeProfile}`}>
+                <div className={`${s.column} ${s.changePageColumn}`}>
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>Phone number</h4>
+                        {err.phoneNumber && <p className={s.validationError}>{err.phoneNumber}</p>}
                         <input 
                             onChange={e => setPhoneNumber(e.target.value)}
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="text"
                             value={phoneNumber} />
                     </label>
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>Email</h4>
-                        {err.email && <p className={styles.validationError}>{err.email}</p>}
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>Email</h4>
+                        {err.email && <p className={s.validationError}>{err.email}</p>}
                         <input 
                             onChange={e => setEmail(e.target.value)}
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="email"
                             value={email} />
                     </label>
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>First name</h4>
-                        {err.firstname && <p className={styles.validationError}>{err.firstname}</p>}
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>First name</h4>
+                        {err.firstname && <p className={s.validationError}>{err.firstname}</p>}
                         <input 
                             onChange={e => setFirstname(e.target.value)}
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="text"
                             value={firstname} />
                     </label>
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>Last name</h4>
-                        {err.lastname && <p className={styles.validationError}>{err.lastname}</p>}
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>Last name</h4>
+                        {err.lastname && <p className={s.validationError}>{err.lastname}</p>}
                         <input 
                             onChange={e => setLastname(e.target.value)}
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="text"
                             value={lastname} />
                     </label>
 
-                    <hr className={styles.ruler} />
+                    <hr className={s.ruler} />
 
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>Region</h4>
-                        {err.region && <p className={styles.validationError}>{err.region}</p>}
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>Region</h4>
+                        {err.region && <p className={s.validationError}>{err.region}</p>}
                         <input 
                             onChange={e => setRegion(e.target.value)}
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="text"
                             value={region} />
                     </label>
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>District</h4>
-                        {err.district && <p className={styles.validationError}>{err.district}</p>}
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>District</h4>
+                        {err.district && <p className={s.validationError}>{err.district}</p>}
                         <input 
                             onChange={e => setDistrict(e.target.value)}
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="text"
                             value={district} />
                     </label>
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>City</h4>
-                        {err.city && <p className={styles.validationError}>{err.city}</p>}
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>City</h4>
+                        {err.city && <p className={s.validationError}>{err.city}</p>}
                         <input 
                             onChange={e => setCity(e.target.value)}
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="text"
                             value={city} />
                     </label>
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>Street</h4>
-                        {err.street && <p className={styles.validationError}>{err.street}</p>}
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>Street</h4>
+                        {err.street && <p className={s.validationError}>{err.street}</p>}
                         <input
                             onChange={e => setStreet(e.target.value)} 
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="text"
                             value={street} />
                     </label>
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>Building</h4>
-                        {err.building && <p className={styles.validationError}>{err.building}</p>}
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>Building</h4>
+                        {err.building && <p className={s.validationError}>{err.building}</p>}
                         <input 
                             onChange={e => setBuilding(e.target.value)}
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="number"
                             value={building} />
                     </label>
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>Apartment</h4>
-                        {err.apartment && <p className={styles.validationError}>{err.apartment}</p>}
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>Apartment</h4>
+                        {err.apartment && <p className={s.validationError}>{err.apartment}</p>}
                         <input
                             onChange={e => setApartment(e.target.value)} 
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="number"
                             value={apartment} />
                     </label>
-                    <label className={styles.changeDataPiece}>
-                        <h4 className={styles.dataHead}>Postal code</h4>
-                        {err.postalCode && <p className={styles.validationError}>{err.postalCode}</p>}
+                    <label className={s.changeDataPiece}>
+                        <h4 className={s.dataHead}>Postal code</h4>
+                        {err.postalCode && <p className={s.validationError}>{err.postalCode}</p>}
                         <input 
                             onChange={e => setPostalCode(e.target.value)}
-                            className={`${styles.dataBody} ${styles.prompt}`} 
+                            className={`${s.dataBody} ${s.prompt}`} 
                             type="number"
                             value={postalCode} />
                     </label>
                 </div>
             </div>
-            <div className={styles.buttonContainer}>
+            <div className={s.buttonContainer}>
                 <button 
                     onClick={applyChanges}
-                    className={`${styles.button} ${styles.changeButton}`}>
+                    className={`${s.button} ${s.changeButton}`}>
                     Apply
                 </button>
                 <button 
                     onClick={() => navigate(PROFILE_PAGE)}
-                    className={`${styles.button} ${styles.logOutButton}`}>
+                    className={`${s.button} ${s.logOutButton}`}>
                     Back
                 </button>
             </div>
-            {errorState && <p className={styles.validationError}>Incorrect data</p>}
+            {errorState && <p className={s.validationError}>Incorrect data</p>}
         </div>
     );
 }

@@ -20,7 +20,7 @@ import { Login } from "../pages/Login";
 import { About } from "../pages/About";
 import { Register } from "../pages/Register";
 import { Routes, Route, Navigate } from "react-router-dom";
-import styles from "../style/Main.module.css";
+import s from "../style/Main.module.css";
 import { Profile } from "../pages/Profile.js";
 import { useSelector } from "react-redux";
 import { ChangeProfile } from "../pages/ChangeProfile.js";
@@ -32,7 +32,7 @@ export function Main() {
   const id = user.userId;
 
   return (
-    <main className={styles.mainBody}>
+    <main className={s.mainBody}>
       <Routes>
         <Route path={ EMPTY_PAGE } element={<Products />} />
         <Route path={ PRODUCTS_PAGE } element={<Products />} />

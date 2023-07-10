@@ -2,12 +2,13 @@ import {
     API_BASE_URL, 
     API_ENTITIES_PER_PAGE_PARAM, 
     API_OFFSET_PARAM, 
+    BASE64_RESOLVER, 
     PRODUCTS, 
     PRODUCTS_PAGE, 
     PRODUCTS_PER_PAGE 
 } from "../../utils/constants";
 import { useEffect, useState } from "react";
-import styles from "../../style/Products.module.css";
+import s from "../../style/Products.module.css";
 import { Link, useSearchParams } from "react-router-dom";
 import productImageNotFound from "../../img/search.png";
 import { Pagination } from "../../common/Pagination";
@@ -58,49 +59,52 @@ export function ProductsList() {
 
 
     return (
-        <div className={styles.productsListContainer}>
-            <div className={styles.productsList}>
+        <div className={s.productsListContainer}>
+            <div className={s.productsList}>
                 {
                     products?.slice(0, PRODUCTS_PER_PAGE).map(prod => {
                         return (
-                            <div key={prod.productId} className={styles.productCardBodyContainer}>
-                                <div className={styles.productCardBody}>
-                                    <Link className={styles.productCardImageLink} to={PRODUCTS_PAGE + "?id=" + prod.productId}>
+                            <div key={prod.productId} className={s.productCardBodyContainer}>
+                                <div className={s.productCardBody}>
+                                    <Link 
+                                        className={s.productCardImageLink} 
+                                        to={PRODUCTS_PAGE + "?id=" + prod.productId}
+                                    >
                                         <img 
                                             src={
                                                 prod.image == null ? 
                                                 productImageNotFound : 
-                                                `data:image/png;base64,${prod.image}`
+                                                BASE64_RESOLVER + prod.image
                                             } 
                                             alt={prod.name} 
-                                            className={styles.productCardImage} 
+                                            className={s.productCardImage} 
                                         />
                                     </Link>
-                                    <div className={styles.productCardContent}>
+                                    <div className={s.productCardContent}>
                                         <Link 
-                                            className={styles.productCardLink} 
+                                            className={s.productCardLink} 
                                             to={PRODUCTS_PAGE + "?id=" + prod.productId}
                                         >
-                                            <h1 className={styles.productCardTitle}>
+                                            <h1 className={s.productCardTitle}>
                                                 {prod.name}
                                             </h1>
                                         </Link>
                                     </div>
-                                    <div className={styles.productCardBottomSection}>
-                                        <div className={styles.buyAndPrice}>
-                                            <p className={styles.productCardPrice}>
-                                                ${prod.price}
+                                    <div className={s.productCardBottomSection}>
+                                        <div className={s.buyAndPrice}>
+                                            <p className={s.productCardPrice}>
+                                                ${prod.price.toFixed(2)}
                                             </p>
                                             <button 
                                                 onClick={ addToCart(prod.productId, prod.stock) } 
-                                                className={styles.productCardButton}
+                                                className={s.productCardButton}
                                             >
                                             To cart
                                             </button>
                                         </div>
-                                        <div className={styles.stockAndRating}>
+                                        <div className={s.stockAndRating}>
                                             <p 
-                                                className={styles.productStatus} 
+                                                className={s.productStatus} 
                                                 style={outOfStockColor(prod.stock)}
                                             >
                                                 {stockStatus(prod.stock)}

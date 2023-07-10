@@ -1,6 +1,6 @@
 import { PaginationLink } from "./PaginationLink";
 import { Link } from "react-router-dom";
-import styles from "../style/Pagination.module.css";
+import s from "../style/Pagination.module.css";
 
 export function Pagination(props) {
     const URL = props.baseUrl;
@@ -18,27 +18,27 @@ export function Pagination(props) {
     }
 
     return (
-        <div className={styles.paginationContainer}>
-            <div className={styles.pagination}>
+        <div className={s.paginationContainer}>
+            <div className={s.pagination}>
                 {
                     current > 1 && (
                         <Link to={URL + "?page=" + (Math.max(current - 1, 1))}>
-                            <div className={styles.leftArrow}></div>
+                            <div className={s.leftArrow}></div>
                         </Link>
                     )
                 }
 
                 {current > 2 && <PaginationLink baseUrl={URL} page={1} />}
-                {current > 3 && <div className={styles.dots}>...</div>}
+                {current > 3 && <div className={s.dots}>...</div>}
                 {current > 1 && <PaginationLink baseUrl={URL} page={current - 1} />}
                 <PaginationLink type="primary" baseUrl={URL} page={current} />
                 {nextAvailable > 0 && <PaginationLink baseUrl={URL} page={Number(current) + 1} />}
-                {nextAvailable > 1 && <div className={styles.dots}>...</div>}
+                {nextAvailable > 1 && <div className={s.dots}>...</div>}
                 
                 {
                     nextAvailable > 0 && (
                         <Link to={URL + "?page=" + (Number(current) + 1)}>
-                            <div className={styles.rightArrow} ></div>
+                            <div className={s.rightArrow} ></div>
                         </Link>
                     )
                 }

@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { EMPTY_PAGE, PROFILE_PAGE } from "../utils/constants";
+import { BASE64_RESOLVER, EMPTY_PAGE, PROFILE_PAGE } from "../utils/constants";
 import { setUser } from "../features/auth/userSlice";
 import { clearCart } from "../features/cartSlice";
-import styles from "../style/Profile.module.css";
+import s from "../style/Profile.module.css";
 import accountWhite from "../img/accountWhite.png";
 
 export function Profile() {
@@ -18,13 +18,13 @@ export function Profile() {
     }
 
     return (
-        <div className={styles.profileContainer}>
-            <div className={styles.profileImage}>
+        <div className={s.profileContainer}>
+            <div className={s.profileImage}>
                 <div 
-                    className={styles.image}
+                    className={s.image}
                     style={
                         user.image ?
-                        { backgroundImage: `url("data:image/png;base64,${user.image}")` } :
+                        { backgroundImage: "url(" + BASE64_RESOLVER + user.image + ")" } :
                         { 
                             backgroundImage: `url(${accountWhite})`, 
                             backgroundColor: "#d4d4d4" 
@@ -33,7 +33,7 @@ export function Profile() {
                 >
 
                 </div>
-                <h1 className={styles.userName}>
+                <h1 className={s.userName}>
                     {
                         user.personalInfo.firstname + 
                         (
@@ -44,11 +44,11 @@ export function Profile() {
                     }
                 </h1>
             </div>
-            <div className={styles.profile}>
-                <div className={styles.column}>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>Phone number</h5>
-                        <p className={styles.dataBody}>
+            <div className={s.profile}>
+                <div className={s.column}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>Phone number</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.personalInfo.phoneNumber ?
                                 user.personalInfo.phoneNumber :
@@ -56,9 +56,9 @@ export function Profile() {
                             }
                         </p>
                     </div>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>Email</h5>
-                        <p className={styles.dataBody}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>Email</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.personalInfo.email ?
                                 user.personalInfo.email :
@@ -66,9 +66,9 @@ export function Profile() {
                             }
                         </p>
                     </div>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>First name</h5>
-                        <p className={styles.dataBody}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>First name</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.personalInfo.firstname ?
                                 user.personalInfo.firstname :
@@ -76,9 +76,9 @@ export function Profile() {
                             }
                         </p>
                     </div>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>Last name</h5>
-                        <p className={styles.dataBody}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>Last name</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.personalInfo.lastname ?
                                 user.personalInfo.lastname :
@@ -87,10 +87,10 @@ export function Profile() {
                         </p>
                     </div>
                 </div>
-                <div className={styles.column}>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>Region</h5>
-                        <p className={styles.dataBody}>
+                <div className={s.column}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>Region</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.address.region ?
                                 user.address.region :
@@ -98,9 +98,9 @@ export function Profile() {
                             }
                         </p>
                     </div>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>District</h5>
-                        <p className={styles.dataBody}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>District</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.address.district ?
                                 user.address.district :
@@ -108,9 +108,9 @@ export function Profile() {
                             }
                         </p>
                     </div>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>City</h5>
-                        <p className={styles.dataBody}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>City</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.address.city ?
                                 user.address.city :
@@ -118,9 +118,9 @@ export function Profile() {
                             }
                         </p>
                     </div>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>Street</h5>
-                        <p className={styles.dataBody}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>Street</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.address.street ?
                                 user.address.street :
@@ -128,9 +128,9 @@ export function Profile() {
                             }
                         </p>
                     </div>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>Building</h5>
-                        <p className={styles.dataBody}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>Building</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.address.building ?
                                 user.address.building :
@@ -138,9 +138,9 @@ export function Profile() {
                             }
                         </p>
                     </div>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>Apartment</h5>
-                        <p className={styles.dataBody}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>Apartment</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.address.apartment ?
                                 user.address.apartment :
@@ -148,9 +148,9 @@ export function Profile() {
                             }
                         </p>
                     </div>
-                    <div className={styles.dataPiece}>
-                        <h5 className={styles.dataHead}>Postal code</h5>
-                        <p className={styles.dataBody}>
+                    <div className={s.dataPiece}>
+                        <h5 className={s.dataHead}>Postal code</h5>
+                        <p className={s.dataBody}>
                             {
                                 user.address.postalCode ?
                                 user.address.postalCode :
@@ -161,19 +161,19 @@ export function Profile() {
                 </div>
             </div>
        
-            <div className={styles.buttonContainer}>
+            <div className={s.buttonContainer}>
                 <button
                     onClick={
                         () =>
                             navigate(PROFILE_PAGE + "/change")
                     }
-                    className={`${styles.button} ${styles.changeButton}`}
+                    className={`${s.button} ${s.changeButton}`}
                 >
                     Change
                 </button>
                 <button 
                     onClick={logout} 
-                    className={`${styles.button} ${styles.logOutButton}`}
+                    className={`${s.button} ${s.logOutButton}`}
                 >
                 Log Out
                 </button>

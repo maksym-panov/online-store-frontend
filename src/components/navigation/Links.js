@@ -1,15 +1,15 @@
 import { CATEGORIES_PAGE, DELIVERY_PAGE, ABOUT_PAGE, CONTACTS_PAGE, EMPTY_PAGE } from "../../utils/constants";
-import styles from "../../style/NavigationBar.module.css";
+import s from "../../style/NavigationBar.module.css";
 import { Link } from "react-router-dom";
 
 export function Links() {
     return (
-        <div className={styles.linksContainer}>
-          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={EMPTY_PAGE}>Products</Link>
-          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={CATEGORIES_PAGE}>Categories</Link>
-          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={DELIVERY_PAGE}>Delivery</Link>
-          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={CONTACTS_PAGE}>Contacts</Link>
-          <Link className={`${styles.headerLink} ${styles.linkContainer}`} to={ABOUT_PAGE}>About</Link>
+        <div className={s.linksContainer}>
+          <Link className={`${s.headerLink} ${s.linkContainer}`} to={EMPTY_PAGE}>Products</Link>
+          <Link className={`${s.headerLink} ${s.linkContainer}`} to={CATEGORIES_PAGE}>Categories</Link>
+          <Link className={`${s.headerLink} ${s.linkContainer}`} to={DELIVERY_PAGE}>Delivery</Link>
+          <Link className={`${s.headerLink} ${s.linkContainer}`} to={CONTACTS_PAGE}>Contacts</Link>
+          <Link className={`${s.headerLink} ${s.linkContainer}`} to={ABOUT_PAGE}>About</Link>
         </div>
     );
 }
