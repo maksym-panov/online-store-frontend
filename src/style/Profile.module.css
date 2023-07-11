@@ -2,17 +2,38 @@
     background-color: #e6f4f1;
     padding: 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+@media (max-width: 1080px) {
+    .profileContainer {
+        flex-direction: column;
+    }
+
+    .profileContainer .profile {
+        width: 100%;
+    }
+
+    .profileContainer .profile .column {
+        width: 100%;
+    }
+
+    .profileContainer .ordCont {
+        margin: 0;
+        margin-top: 20px
+    }
 }
 
 .profileImage {
     height: fit-content;
     width: fit-content;
+    align-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 30px;
 }
 
 .image {
@@ -51,7 +72,6 @@
     align-items: flex-start;
 
     height: fit-content;
-    width: 90%;
     margin-top: 15px;
     padding: 20px;
     background-color: white;
@@ -59,8 +79,10 @@
 }
 
 .column {
-    width: 50%;
-    padding: 15px
+    width: 350px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .dataPiece {
@@ -76,21 +98,19 @@
 }
 
 .buttonContainer {
-    width: 80%;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px
 }
 
 .button {
     color: black;
-    margin-right: 30px;
-    width: 150px;
+    width: 50%;
     height: 50px;
+    margin-top: 20px;
     border-radius: 10px;
-
-    margin-top: 40px;
-    margin-bottom: 40px
 }
 
 .changeButton {
@@ -144,7 +164,7 @@
 }
 
 .changeProfile {
-    width: 70%;
+    width: 60%;
     align-items: center;
     justify-content: center;
     align-items: center;
@@ -181,4 +201,81 @@
     border: 1px red solid;
     border-radius: 7px;
     padding: 4px;
+}
+
+.ordCont {
+    min-height: 10vh;
+    width: 100%;
+    background-color: white;
+    margin-top: 15px;
+    padding: 20px;
+    margin-left: 30px;
+    border-radius: 10px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px
+
+}
+
+.ordBod {
+    min-height: 150px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 4px black;
+}
+
+@media (max-width: 768px) {
+    .ordBod {
+        flex-direction: column;
+        margin-bottom: 20px
+    }
+}
+
+.ordMeta {
+    width: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ordProdSect {
+    width: 100%;
+    padding: 20px;
+}
+
+.ordProdTitle {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 15px
+}
+
+.prodLst {
+    display: flex;
+    flex-direction: column;
+}
+
+.prod {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text {
+    margin: 0;
+}
+
+.ruler {
+    border: 1px black solid;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.total {
+    text-align: right;
+    margin-top: 20px
 }

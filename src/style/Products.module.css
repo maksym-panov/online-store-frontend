@@ -85,7 +85,7 @@
 }
 
 .searchBar:focus-within {
-    box-shadow: 0 0 0 max(100vh, 100vw) rgba(0, 0, 0, .3);
+    box-shadow: 0 0 0 max(10000vh) rgba(0, 0, 0, .3);
 }
 
 .searchBar:focus-within > .foundPrd {

@@ -102,34 +102,36 @@ export function ChangeProfile() {
 
     return (
         <div className={s.profileContainer}>
-            <div className={s.profileImage}>
-                <div 
-                    className={s.image}
-                    style={
-                        image ? 
-                        { backgroundImage: "url(" + BASE64_RESOLVER + cusr.image + ")" } :
-                        { 
-                            backgroundImage: `url(${accountWhite})`, 
-                            backgroundColor: "#d4d4d4" 
-                        }
-                    }
-                >
-                </div>
-                <label className={s.changeDataPiece}>
-                    <input 
-                        className={s.inputImage}
-                        type="file"  
-                        onChange={ 
-                            e => getBase64(
-                                e.target.files[0], 
-                                setImage
-                            ) 
-                        }
-                    />
-            </label>
-            </div>
             <div className={`${s.profile} ${s.changeProfile}`}>
                 <div className={`${s.column} ${s.changePageColumn}`}>
+                    <div className={s.profileImage}>
+                        <div 
+                            className={s.image}
+                            style={
+                                image ? 
+                                { backgroundImage: "url(" + BASE64_RESOLVER + cusr.image + ")" } :
+                                { 
+                                    backgroundImage: `url(${accountWhite})`, 
+                                    border: "2px black solid",
+                                    backgroundColor: "black"   
+                                }
+                            }
+                        >
+                        </div>
+                        <label className={s.changeDataPiece}>
+                            <input 
+                                className={s.inputImage}
+                                type="file"  
+                                onChange={ 
+                                    e => getBase64(
+                                        e.target.files[0], 
+                                        setImage
+                                    ) 
+                                }
+                            />
+                        </label>
+                    </div>
+
                     <label className={s.changeDataPiece}>
                         <h4 className={s.dataHead}>Phone number</h4>
                         {err.phoneNumber && <p className={s.validationError}>{err.phoneNumber}</p>}
@@ -232,21 +234,21 @@ export function ChangeProfile() {
                             type="number"
                             value={postalCode} />
                     </label>
+                    <div className={s.buttonContainer}>
+                        <button 
+                            onClick={applyChanges}
+                            className={`${s.button} ${s.changeButton}`}>
+                            Apply
+                        </button>
+                        <button 
+                            onClick={() => navigate(PROFILE_PAGE)}
+                            className={`${s.button} ${s.logOutButton}`}>
+                            Back
+                        </button>
+                    </div>
+                    {errorState && <p className={s.validationError}>Incorrect data</p>}
                 </div>
             </div>
-            <div className={s.buttonContainer}>
-                <button 
-                    onClick={applyChanges}
-                    className={`${s.button} ${s.changeButton}`}>
-                    Apply
-                </button>
-                <button 
-                    onClick={() => navigate(PROFILE_PAGE)}
-                    className={`${s.button} ${s.logOutButton}`}>
-                    Back
-                </button>
-            </div>
-            {errorState && <p className={s.validationError}>Incorrect data</p>}
         </div>
     );
 }
