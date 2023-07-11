@@ -147,8 +147,13 @@
 }
 
 @media (max-width: 800px) {
+    .informationPanelContainer .informationBanner  {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .informationPanelContainer .informationBanner .descriptionPanel {
-        display: none;
+        font-size: .7em;
     }
 }
 
@@ -331,7 +336,9 @@
 }
 
 .descriptionPanelButton {
-    height: 2.5em;
+    height: 45px;
+    width: 160px;
+    font-size: 20px;
     border-radius: 10px;
     background-color: orange;
     color: black;
