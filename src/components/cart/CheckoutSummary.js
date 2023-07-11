@@ -1,7 +1,7 @@
 import s from "../../style/Cart.module.css";
 import profiles from "../../style/Profile.module.css";
 import { api } from "../../utils/axiosHelper";
-import { DELIVERIES, ORDERS, PRODUCTS_PAGE } from "../../utils/constants";
+import { DELIVERIES, ERROR_PAGE, ORDERS, PRODUCTS_PAGE } from "../../utils/constants";
 import { useEffect, useState } from "react";
 import { clearCart } from "../../features/cartSlice";
 import { useNavigate } from "react-router-dom";
@@ -20,9 +20,13 @@ export const CheckoutSummary = (props) => {
     const [errorState, setErrorState] = useState(false);
 
     const fetchDeliveries = async () => {
-        const d = await api.get(DELIVERIES).then(resp => resp.data);
-        setDeliv(d[0]);
-        setDeliveries(d);
+        try {
+            const d = await api.get(DELIVERIES).then(resp => resp.data);
+            setDeliv(d[0]);
+            setDeliveries(d);
+        } catch(error) {
+            navigate(ERROR_PAGE);
+        }
     }
 
     useEffect(() => {

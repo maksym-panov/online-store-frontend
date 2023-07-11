@@ -4,7 +4,6 @@ import x from "../../img/x.png";
 import { MenuLinks } from "./MenuLinks";
 import { MenuAdditionalButtons } from "./MenuAdditionalButtons";
 import { isIOS, isSafari } from "react-device-detect";
-import { useRef } from "react";
 
 export function Menu() {
   const TI = isSafari || isIOS ? 0 : null;
@@ -20,7 +19,7 @@ export function Menu() {
           <MenuLinks />
           <hr className={s.horisontalRulerMenu} />
           <MenuAdditionalButtons />
-        </div> 
+        </div>
       </button>  
       <button className={s.closeButton}>
         <img src={x} alt="close" className={s.closeIcon}  />

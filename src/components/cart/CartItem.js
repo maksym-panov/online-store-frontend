@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react";
 import { api } from "../../utils/axiosHelper";
-import { BASE64_RESOLVER, PRODUCTS } from "../../utils/constants";
-import { decrementQuantity, incrementQuantity, removeProduct, setPrice } from "../../features/cartSlice";
+import { 
+    BASE64_RESOLVER, 
+    PRODUCTS, 
+    ERROR_PAGE 
+} from "../../utils/constants";
+import { 
+    decrementQuantity, 
+    incrementQuantity, 
+    removeProduct, 
+    setPrice 
+} from "../../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import s from "../../style/Cart.module.css";
+import { useNavigate } from "react-router-dom";
 
 export const CartItem = (props) => {
     const id = props.id;
@@ -11,11 +21,11 @@ export const CartItem = (props) => {
     
     const [product, setProduct] = useState({});
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const fetchProduct = async () => {
-        let result;
         try {
-            result = await api.get(PRODUCTS + "/" + id)
+            const result = await api.get(PRODUCTS + "/" + id)
                             .then(resp => resp.data);
             setProduct(result);
             dispatch(
@@ -27,7 +37,7 @@ export const CartItem = (props) => {
                 )
             );
         } catch(error) {
-            console.log(error.response.data);
+            navigate(ERROR_PAGE);
         }
     }
 

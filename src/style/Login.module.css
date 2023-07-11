@@ -79,6 +79,7 @@
 }
 
 .submitButton {
+    color: black;
     width: 8em;
     height: 2.5em;
     background-color: orange;

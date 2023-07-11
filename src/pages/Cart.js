@@ -1,10 +1,18 @@
-import { useSelector } from "react-redux";
+import { 
+    useSelector,
+    useDispatch
+} from "react-redux";
 import { CartItem } from "../components/cart/CartItem";
 import s from "../style/Cart.module.css";
 import empty from "../img/empty_cart.png";
 import { CHECKOUT_PAGE } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { 
+    useState,
+    useEffect
+} from "react";
+import { api } from "../utils/axiosHelper";
+import { setUser } from "../features/auth/userSlice";
 
 export const Cart = () => {
     const [err, setErr] = useState(false);
@@ -22,6 +30,36 @@ export const Cart = () => {
         
         return Math.round(total * 100) / 100;
     }
+
+    const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const ping = async () => {
+        if (!user.userId) {
+            return;
+        }
+        
+        try {
+            const valid = await api.post(
+                "/ping/" + user.userId,
+                user.jwt.substring(7),
+                {
+                    headers: {
+                        "Authorization": user.jwt
+                    }
+                }
+            );
+
+            if (!valid) {
+                dispatch(setUser({}));
+            }
+        } catch(error) {
+            dispatch(setUser({}));
+        }
+    }
+
+    useEffect(() => {
+        ping();
+    }, []);
 
     return (
         <div className={s.cartContainer}>

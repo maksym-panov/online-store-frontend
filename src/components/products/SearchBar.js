@@ -7,6 +7,7 @@ import {
     API_ENTITIES_PER_PAGE_PARAM, 
     API_NAME_PARAM, 
     BASE64_RESOLVER, 
+    ERROR_PAGE, 
     PRODUCTS, 
     PRODUCTS_PAGE 
 } from "../../utils/constants";
@@ -19,13 +20,14 @@ export function SearchBar(props) {
     const navigate = useNavigate();
 
     const fetchProducts = async (value) => {
-        setQuery(value);
+        try {
+            setQuery(value);
 
-        if (value === "") {
-            return;
-        }
+            if (value === "") {
+                return;
+            }
 
-        const res = await 
+            const res = await 
                 api.get(
                     PRODUCTS + "?" + API_ENTITIES_PER_PAGE_PARAM + 9 + "&" + API_NAME_PARAM + value,
                     {
@@ -35,7 +37,10 @@ export function SearchBar(props) {
                     },
                 )
                 .then(resp => resp.data);
-        setPs(res);
+            setPs(res);
+        } catch(error) {
+            navigate(ERROR_PAGE);
+        }
     }
 
     return (

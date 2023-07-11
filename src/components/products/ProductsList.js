@@ -5,7 +5,7 @@ import {
     API_OFFSET_PARAM, 
     API_PROD_CATEGORY_PARAM, 
     BASE64_RESOLVER, 
-    CATEGORIES_PAGE, 
+    ERROR_PAGE, 
     PRODUCTS, 
     PRODUCTS_PAGE, 
     PRODUCTS_PER_PAGE 
@@ -18,9 +18,11 @@ import { Pagination } from "../../common/Pagination";
 import { api } from "../../utils/axiosHelper";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../features/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 export function ProductsList(props) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [params, setParams] = useSearchParams();
 
@@ -36,31 +38,35 @@ export function ProductsList(props) {
             setParams({ page: 1});
             page = 1
         }
-        fetchProducts();        
+        fetchProducts(); 
     }, [page, params]);
 
     const fetchProducts = async () => {
-        const offset = (page - 1) * PRODUCTS_PER_PAGE;
-        const number = 2 * PRODUCTS_PER_PAGE + 1;
+        try {
+            const offset = (page - 1) * PRODUCTS_PER_PAGE;
+            const number = 2 * PRODUCTS_PER_PAGE + 1;
+            
+            let query = API_BASE_URL + PRODUCTS + "?" + 
+                        API_OFFSET_PARAM + offset + "&" + 
+                        API_ENTITIES_PER_PAGE_PARAM + number;
+            if (catId) {
+                query += "&" + API_PROD_CATEGORY_PARAM + catId;
+            }
+            if (params.get("name")) {
+                query += "&" + API_NAME_PARAM + params.get("name");
+            }
+            
+            const result = await api.get(query).then(resp => resp.data);
         
-        let query = API_BASE_URL + PRODUCTS + "?" + 
-                    API_OFFSET_PARAM + offset + "&" + 
-                    API_ENTITIES_PER_PAGE_PARAM + number;
-        if (catId) {
-            query += "&" + API_PROD_CATEGORY_PARAM + catId;
-        }
-        if (params.get("name")) {
-            query += "&" + API_NAME_PARAM + params.get("name");
-        }
-        
-        const result = await api.get(query).then(resp => resp.data);
-    
-        if (result.length === 0 && page != 1) {
-            setParams({ page: 1});
-            page = 1;
-        }
+            if (result.length === 0 && page != 1) {
+                setParams({ page: 1});
+                page = 1;
+            }
 
-        setProducts(result);
+            setProducts(result);
+        } catch(error) {
+            navigate(ERROR_PAGE);
+        }
     }
 
     const addToCart = (id, stock) => () => { 
@@ -82,7 +88,7 @@ export function ProductsList(props) {
     }
 
     return (
-        <div id="productList" className={s.productsListContainer}>
+        <div id="list" className={s.productsListContainer}>
             { params.get("name") && <h1 style={title}>Search result for "{params.get("name")}"</h1>}
             <div className={s.productsList}>
                 {

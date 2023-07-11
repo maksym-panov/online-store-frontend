@@ -2,19 +2,25 @@ import {
     useEffect,
     useState
 } from "react";
-import { BASE64_RESOLVER, CATEGORIES_PAGE, PRODUCTS } from "../../utils/constants";
+import { 
+    BASE64_RESOLVER, 
+    CATEGORIES_PAGE, 
+    ERROR_PAGE, 
+    PRODUCTS 
+} from "../../utils/constants";
 import { api } from "../../utils/axiosHelper";
 import s from "../../style/Products.module.css";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../features/cartSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const ProductPage = (props) => {
     const id = props.id;
     const [p, setP] = useState({})
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetchProduct(id, setP);
+        fetchProduct(id, setP, navigate);
     }, [])
 
     const paragraphs = p.description?.split("\n");
@@ -51,6 +57,7 @@ export const ProductPage = (props) => {
                             {
                                 p.productTypes?.map(pt => (
                                     <Link 
+                                        key={pt.productTypeId}
                                         className={s.categLink}
                                         to={CATEGORIES_PAGE + "?id=" + pt.productTypeId}>
                                         <p className={s.categ}>{pt.name}</p>
@@ -86,8 +93,12 @@ export const ProductPage = (props) => {
     );
 }
 
-const fetchProduct = async (id, setP) => {
-    const p = await api.get(PRODUCTS + "/" + id)
+const fetchProduct = async (id, setP, navigate) => {
+    try {
+        const p = await api.get(PRODUCTS + "/" + id)
                         .then(resp => resp.data);
-    setP(p);
+        setP(p);
+    } catch(error) {
+        navigate(ERROR_PAGE);
+    }
 } 

@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { 
+    useState,
+    useEffect 
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "../style/Profile.module.css";
 import { getBase64 } from "../utils/webHelpers";
 import accountWhite from "../img/accountWhite.png";
 import { useNavigate } from "react-router-dom";
-import { PROFILE_PAGE, USERS } from "../utils/constants";
+import { PROFILE_PAGE, USERS, LOGIN_PAGE } from "../utils/constants";
 import { api } from "../utils/axiosHelper";
 import { setUser } from "../features/auth/userSlice";
 import { BASE64_RESOLVER } from "../utils/constants";
@@ -99,6 +102,37 @@ export function ChangeProfile() {
         dispatch(setUser(newUser));
         navigate(PROFILE_PAGE);
     };
+
+    const ping = async () => {
+        if (!cusr.userId) {
+            navigate(LOGIN_PAGE);
+            return;
+        }
+        
+        try {
+            const valid = await api.post(
+                "/ping/" + cusr.userId,
+                cusr.jwt.substring(7),
+                {
+                    headers: {
+                        "Authorization": cusr.jwt
+                    }
+                }
+            );
+
+            if (!valid) {
+                dispatch(setUser({}));
+                navigate(LOGIN_PAGE);
+            }
+        } catch(error) {
+            dispatch(setUser({}));
+            navigate(LOGIN_PAGE);
+        }
+    }
+
+    useEffect(() => {
+        ping();
+    }, []);
 
     return (
         <div className={s.profileContainer}>

@@ -1,10 +1,25 @@
-import { LOGIN_PAGE, PROFILE_PAGE, SIGN_UP_USER, USERS } from "../utils/constants";
+import { 
+    ERROR_PAGE, 
+    LOGIN_PAGE, 
+    PROFILE_PAGE, 
+    SIGN_UP_USER, 
+    USERS 
+} from "../utils/constants";
 import loginStyles from "../style/Login.module.css";
 import greeting from "../img/greeting.png";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { 
+    Link, 
+    useNavigate 
+} from "react-router-dom";
+import { 
+    useState,
+    useEffect 
+} from "react";
 import { api } from "../utils/axiosHelper";
-import { useDispatch } from "react-redux";
+import { 
+    useDispatch, 
+    useSelector 
+} from "react-redux";
 import { setUser } from "../features/auth/userSlice";
 
 export function Register() {
@@ -17,6 +32,11 @@ export function Register() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector(state => state.user);
+
+    if (user.userId && user.jwt) {
+        navigate(PROFILE_PAGE);
+    }
 
     const registerAndRedirect = async () => {
         let authResp;
@@ -33,24 +53,64 @@ export function Register() {
                 } 
             ).then(resp => resp.data);
         } catch(error) {
+            if (!error.response) {
+                navigate(ERROR_PAGE);
+                return;
+            }
+
             setErr(error.response.data);
             return;
         }
         
-
-        const user = await api.get(
-            USERS + "/" + authResp.userId,
-            {
-                headers: {
-                    "Authorization": "Bearer " + authResp.jwt
+        try {
+            const user = await api.get(
+                USERS + "/" + authResp.userId,
+                {
+                    headers: {
+                        "Authorization": "Bearer " + authResp.jwt
+                    }
                 }
-            }
-        ).then(resp => resp.data);
-
-        user.jwt = "Bearer " + authResp.jwt;
-        dispatch(setUser(user));
-        navigate(PROFILE_PAGE);
+            ).then(resp => resp.data);
+    
+            user.jwt = "Bearer " + authResp.jwt;
+            dispatch(setUser(user));
+            navigate(PROFILE_PAGE);
+        } catch(error) {
+            navigate(ERROR_PAGE);
+            return;
+        }
     }
+
+    const ping = async () => {
+        if (!user.userId) {
+            return;
+        }
+        
+        try {
+            const valid = await api.post(
+                "/ping/" + user.userId,
+                user.jwt.substring(7),
+                {
+                    headers: {
+                        "Authorization": user.jwt
+                    }
+                }
+            );
+
+            if (!valid) {
+                dispatch(setUser({}));
+            }
+        } catch(error) {
+            dispatch(setUser({}));
+        }
+    }
+
+    useEffect(() => {
+        ping();
+        if (user.userId && user.jwt) {
+            navigate(PROFILE_PAGE);
+        }
+    }, []);
     
     return (
         <div className={loginStyles.loginPage}>

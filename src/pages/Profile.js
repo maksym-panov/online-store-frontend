@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { 
     BASE64_RESOLVER, 
     EMPTY_PAGE, 
+    ERROR_PAGE, 
+    LOGIN_PAGE, 
     ORDERS,  
     PROFILE_PAGE, 
     USERS
@@ -33,21 +35,56 @@ export function Profile() {
     };
 
     const fetchOrders = async () => {
-        const res = await api
-                .get(
-                    USERS + "/" + user.userId + ORDERS,
-                    {
-                        headers: {
-                            "Authorization": user.jwt
-                        }
+        if (!user.userId) {
+            return;
+        }
+        
+        try {
+            const res = await api
+            .get(
+                USERS + "/" + user.userId + ORDERS,
+                {
+                    headers: {
+                        "Authorization": user.jwt
                     }
-                )
-                .then(res => res.data);
-        console.log(res);
+                }
+            )
+            .then(res => res.data);
         setOrders(res);
+        } catch(error) {
+            navigate(ERROR_PAGE);
+        }
     };
 
+    const ping = async () => {
+        if (!user.userId) {
+            navigate(LOGIN_PAGE)
+            return;
+        }
+        
+        try {
+            const valid = await api.post(
+                "/ping/" + user.userId,
+                user.jwt.substring(7),
+                {
+                    headers: {
+                        "Authorization": user.jwt
+                    }
+                }
+            );
+
+            if (!valid) {
+                dispatch(setUser({}));
+                navigate(LOGIN_PAGE);
+            }
+        } catch(error) {
+            dispatch(setUser({}));
+            navigate(LOGIN_PAGE);
+        }
+    }
+
     useEffect(() => {
+        ping();
         fetchOrders();
     }, []);
 
@@ -102,9 +139,9 @@ export function Profile() {
                         </div>
                         <h1 className={s.userName}>
                             {
-                                user.personalInfo.firstname + 
+                                user.personalInfo?.firstname + 
                                 (
-                                    user.personalInfo.lastname ? 
+                                    user.personalInfo?.lastname ? 
                                     " " + user.personalInfo.lastname : 
                                     ""
                                 )
@@ -116,7 +153,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>Phone number</h5>
                         <p className={s.dataBody}>
                             {
-                                user.personalInfo.phoneNumber ?
+                                user.personalInfo?.phoneNumber ?
                                 user.personalInfo.phoneNumber :
                                 "-"
                             }
@@ -126,7 +163,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>Email</h5>
                         <p className={s.dataBody}>
                             {
-                                user.personalInfo.email ?
+                                user.personalInfo?.email ?
                                 user.personalInfo.email :
                                 "-"
                             }
@@ -136,7 +173,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>First name</h5>
                         <p className={s.dataBody}>
                             {
-                                user.personalInfo.firstname ?
+                                user.personalInfo?.firstname ?
                                 user.personalInfo.firstname :
                                 "-"
                             }
@@ -146,7 +183,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>Last name</h5>
                         <p className={s.dataBody}>
                             {
-                                user.personalInfo.lastname ?
+                                user.personalInfo?.lastname ?
                                 user.personalInfo.lastname :
                                 "-"
                             }
@@ -157,7 +194,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>Region</h5>
                         <p className={s.dataBody}>
                             {
-                                user.address.region ?
+                                user.address?.region ?
                                 user.address.region :
                                 "-"
                             }
@@ -167,7 +204,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>District</h5>
                         <p className={s.dataBody}>
                             {
-                                user.address.district ?
+                                user.address?.district ?
                                 user.address.district :
                                 "-"
                             }
@@ -177,7 +214,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>City</h5>
                         <p className={s.dataBody}>
                             {
-                                user.address.city ?
+                                user.address?.city ?
                                 user.address.city :
                                 "-"
                             }
@@ -187,7 +224,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>Street</h5>
                         <p className={s.dataBody}>
                             {
-                                user.address.street ?
+                                user.address?.street ?
                                 user.address.street :
                                 "-"
                             }
@@ -197,7 +234,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>Building</h5>
                         <p className={s.dataBody}>
                             {
-                                user.address.building ?
+                                user.address?.building ?
                                 user.address.building :
                                 "-"
                             }
@@ -207,7 +244,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>Apartment</h5>
                         <p className={s.dataBody}>
                             {
-                                user.address.apartment ?
+                                user.address?.apartment ?
                                 user.address.apartment :
                                 "-"
                             }
@@ -217,7 +254,7 @@ export function Profile() {
                         <h5 className={s.dataHead}>Postal code</h5>
                         <p className={s.dataBody}>
                             {
-                                user.address.postalCode ?
+                                user.address?.postalCode ?
                                 user.address.postalCode :
                                 "-"
                             }

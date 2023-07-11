@@ -11,9 +11,10 @@ export const CART_PAGE = "/cart";
 export const CHECKOUT_PAGE = CART_PAGE + "/checkout"
 export const PROFILE_PAGE = "/profile";
 export const CHANGE_PROFILE_PAGE = PROFILE_PAGE + "/change";
+export const ERROR_PAGE = "/something-went-wrong";
 
 // API ENDPOINTS
-export const API_BASE_URL = "http://192.168.0.101:8080/api/v2";
+export const API_BASE_URL = "http://192.168.0.100:8080/api/v2";
 export const PRODUCT_CATEGORIES = "/product_types";
 export const DELIVERIES = "/delivery_types";
 export const PRODUCTS = "/products";

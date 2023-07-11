@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
 import s from "../style/Login.module.css";
-import { PROFILE_PAGE, REGISTRATION_PAGE, SIGN_IN_USER, USERS } from "../utils/constants";
+import { ERROR_PAGE, PROFILE_PAGE, REGISTRATION_PAGE, SIGN_IN_USER, USERS } from "../utils/constants";
 import raccoon from "../img/raccoon.png";
-import { useDispatch } from "react-redux";
+import { 
+    useSelector, 
+    useDispatch 
+} from "react-redux";
 import { setUser } from "../features/auth/userSlice";
-import { useState } from "react";
+import { 
+    useState, 
+    useEffect 
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../utils/axiosHelper";
 
@@ -12,6 +18,7 @@ export function Login() {
     const [err, setErr] = useState({});
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector(state => state.user);
     
     const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
@@ -39,9 +46,45 @@ export function Login() {
             dispatch(setUser(user));
             navigate(PROFILE_PAGE);
         } catch(error) {
+            if (!error.response) {
+                navigate(ERROR_PAGE);
+                return;
+            }
             setErr(error.response.data);
         }
     }
+
+    const ping = async () => {
+        if (!user.userId) {
+            return;
+        }
+        
+        try {
+            console.log("validation")
+            const valid = await api.post(
+                "/ping/" + user.userId,
+                user.jwt.substring(7),
+                {
+                    headers: {
+                        "Authorization": user.jwt
+                    }
+                }
+            );
+
+            if (!valid) {
+                dispatch(setUser({}));
+            }
+        } catch(error) {
+            dispatch(setUser({}));
+        }
+    }
+
+    useEffect(() => {
+        ping();
+        if (user.userId && user.jwt) {
+            navigate(PROFILE_PAGE);
+        }
+    }, []);
 
     return (
         <div className={s.loginPage}>

@@ -4,7 +4,6 @@ import {
     useLocation, 
     useSearchParams 
 } from "react-router-dom";
-import { useEffect } from "react";
 import s from "../style/Pagination.module.css";
 
 export function Pagination(props) {

@@ -1,3 +1,11 @@
+import { 
+    useSelector,
+    useDispatch
+} from "react-redux";
+import { api } from "../utils/axiosHelper";
+import { setUser } from "../features/auth/userSlice"
+import { useEffect } from "react";
+
 export function About() {
     const auBody = {
         backgroundColor: "#e6f4f1",
@@ -24,6 +32,36 @@ export function About() {
     const text = {
         textAlign: "justify"
     };
+
+    const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const ping = async () => {
+        if (!user.userId) {
+            return;
+        }
+        
+        try {
+            const valid = await api.post(
+                "/ping/" + user.userId,
+                user.jwt.substring(7),
+                {
+                    headers: {
+                        "Authorization": user.jwt
+                    }
+                }
+            );
+
+            if (!valid) {
+                dispatch(setUser({}));
+            }
+        } catch(error) {
+            dispatch(setUser({}));
+        }
+    }
+
+    useEffect(() => {
+        ping();
+    }, []);
 
     return (
         <div style={ auBody }>

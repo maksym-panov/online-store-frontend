@@ -193,9 +193,22 @@
 }
 
 .categoriesContainer {
+    position: relative;
     width: fit-content;
     border-radius: 7px;
     margin-right: 1em;
+
+    animation: 2s linear 0s 1 running categoriesAppear;
+}
+
+@keyframes categoriesAppear {
+    0% {
+        right: 200%
+    }
+
+    100% {
+        right: 0%
+    }
 }
 
 .categoriesContainer:empty {
@@ -239,11 +252,24 @@
 }
 
 .informationBanner {
+    position: relative;
     display: flex;
     justify-content: space-evenly;
     width: 100%;
     border-radius: 7px;
     box-shadow: 0px 0px 2px #2473FF;
+
+    animation: 2s linear 0s 1 running informationBannerAppear
+}
+
+@keyframes informationBannerAppear {
+    0% {
+        left: 200%
+    }
+
+    100% {
+        left: 0%
+    }
 }
 
 .informationBannerLink {
@@ -253,7 +279,7 @@
 
 .informationBannerImage {
     max-width: 100%;
-    max-height: 100%;
+    max-height: 80vh;
     padding: 15px;
 }
 

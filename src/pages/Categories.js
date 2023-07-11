@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
-import { CATEGORIES_PAGE, PRODUCT_CATEGORIES } from "../utils/constants";
-import { useSearchParams } from "react-router-dom";
+import { CATEGORIES_PAGE, ERROR_PAGE, PRODUCT_CATEGORIES } from "../utils/constants";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { api } from "../utils/axiosHelper";
 import { ProductsList } from "../components/products/ProductsList";
 import s from "../style/Products.module.css";
-import { Link } from "react-router-dom";
+import {
+    useSelector,
+    useDispatch
+} from "react-redux";
+import { setUser } from "../features/auth/userSlice";
+
 
 export function Categories() {
+    const navigate = useNavigate();
     const [params, setParams] = useSearchParams();
     const [categArr, setCategArr] = useState([]);
     const [categ, setCateg] = useState({});
@@ -20,11 +26,39 @@ export function Categories() {
         paddingTop: "30px"
     }
 
+    const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
+    const ping = async () => {
+        if (!user.userId) {
+            return;
+        }
+        
+        try {
+            const valid = await api.post(
+                "/ping/" + user.userId,
+                user.jwt.substring(7),
+                {
+                    headers: {
+                        "Authorization": user.jwt
+                    }
+                }
+            );
+
+            if (!valid) {
+                dispatch(setUser({}));
+            }
+        } catch(error) {
+            dispatch(setUser({}));
+        }
+    }
+
     useEffect(() => {
+        ping();
+
         if (id) {
-            fetchCateg(id, setCateg)
+            fetchCateg(id, setCateg, navigate)
         } else {
-            fetchCategArr(setCategArr);
+            fetchCategArr(setCategArr, navigate);
         }
     }, []);
 
@@ -75,14 +109,25 @@ export function Categories() {
     )
 }
 
-async function fetchCategArr(setCategArr) {
-    const categArr = await api.get(PRODUCT_CATEGORIES)
-                                .then(resp => resp.data);
-    setCategArr(categArr);
+async function fetchCategArr(setCategArr, navigate) {
+    try {
+        const categArr = await api
+            .get(PRODUCT_CATEGORIES)
+            .then(resp => resp.data);
+        setCategArr(categArr);
+    } catch(error) {
+        navigate(ERROR_PAGE);
+    }
 }
 
-async function fetchCateg(id, setCateg) {
-    const categ = await api.get(PRODUCT_CATEGORIES + "/" + id)
-                            .then(resp => resp.data);
-    setCateg(categ);
+async function fetchCateg(id, setCateg, navigate) {
+    try {
+        const categ = await api
+            .get(PRODUCT_CATEGORIES + "/" + id)
+            .then(resp => resp.data);
+        setCateg(categ);
+    } catch(error) {
+        navigate(ERROR_PAGE);
+    }
+   
 }

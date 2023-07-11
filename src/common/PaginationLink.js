@@ -19,7 +19,10 @@ export function PaginationLink(props) {
 
     if (TYPE == "primary") {
         return (
-            <Link className={`${s.link} ${s.primaryPageNumber}`} to={ URL }>
+            <Link 
+                className={`${s.link} ${s.primaryPageNumber}`} 
+                to={ URL }
+            >
                 <div>
                     {PAGE}
                 </div>
@@ -28,7 +31,11 @@ export function PaginationLink(props) {
     }
 
     return (
-        <Link className={`${s.link} ${s.secondaryPageNumber}`} to={ URL }>
+        <Link 
+            onClick={ () => document.getElementById("list").scrollIntoView() }
+            className={`${s.link} ${s.secondaryPageNumber}`} 
+            to={ URL }
+        >
             <div>
                 {PAGE}
             </div>

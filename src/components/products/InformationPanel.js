@@ -1,9 +1,13 @@
 import s from "../../style/Products.module.css";
-import { Link, useSearchParams } from "react-router-dom";
 import { 
-    API_BASE_URL, 
+    Link, 
+    useNavigate, 
+    useSearchParams 
+} from "react-router-dom";
+import { 
     BASE64_RESOLVER, 
     CATEGORIES_PAGE, 
+    ERROR_PAGE, 
     PRODUCTS, 
     PRODUCTS_PAGE, 
     PRODUCT_CATEGORIES 
@@ -12,18 +16,19 @@ import {
     useEffect, 
     useState 
 } from "react";
-import Axios from "axios";
 import arrow from "../../img/arrow.png";
+import { api } from "../../utils/axiosHelper";
 
 export function InformationPanel() {
     const [categories, setCategories] = useState([]);
     const [bannerProduct, setBannerProduct] = useState(null);
     const [params, setParams] = useSearchParams();
 
+    const navigate = useNavigate();
     useEffect(() => {
         if (!params.get("name")) {
-            fetchCategories(setCategories);
-            fetchBannerProduct(setBannerProduct);
+            fetchCategories(setCategories, navigate);
+            fetchBannerProduct(setBannerProduct, navigate);
         }
     }, [params]);
 
@@ -93,13 +98,25 @@ export function InformationPanel() {
     );
 }
 
-async function fetchCategories(setCategories) {
-    const data = await Axios.get(API_BASE_URL + PRODUCT_CATEGORIES).then(resp => resp.data);
-    setCategories(data.slice(0, 16));
+async function fetchCategories(setCategories, navigate) {
+    try {
+        const data = await api
+            .get(PRODUCT_CATEGORIES)
+            .then(resp => resp.data);
+        setCategories(data.slice(0, 16));
+    } catch(error) {
+        navigate(ERROR_PAGE);
+    }
+    
 }
 
-async function fetchBannerProduct(setBannerProduct) {
-    const product = await Axios.get(API_BASE_URL + PRODUCTS + "/" + Math.ceil(Math.random() * 80))
-                            .then(res => res.data);
-    setBannerProduct(product)
+async function fetchBannerProduct(setBannerProduct, navigate) {
+    try {
+        const product = await api
+            .get(PRODUCTS + "/" + Math.ceil(Math.random() * 80))
+            .then(res => res.data);
+        setBannerProduct(product);
+    } catch(error) {
+        navigate(ERROR_PAGE);
+    }
 }
