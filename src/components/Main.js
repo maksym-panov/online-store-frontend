@@ -11,7 +11,8 @@ import {
   CHANGE_PROFILE_PAGE,
   CART_PAGE,
   CHECKOUT_PAGE,
-  ERROR_PAGE
+  ERROR_PAGE,
+  ACCESS_DENIED_PAGE
 } from "../utils/constants.js";
 import { Categories } from "../pages/Categories";
 import { Deliveries } from "../pages/Deliveries";
@@ -44,9 +45,10 @@ export function Main() {
         <Route path={ LOGIN_PAGE } element={ <Login /> } />
         <Route path={ PROFILE_PAGE } element={ <Profile /> } />
         <Route path={ CHANGE_PROFILE_PAGE } element={ <ChangeProfile /> } />
-        <Route path={ ERROR_PAGE } element={ <ErrorPage /> } />
+        <Route path={ ERROR_PAGE } element={ <ErrorPage type={500} /> } />
+        <Route path={ ACCESS_DENIED_PAGE } element={ <ErrorPage type={403} /> } />
         <Route path="*" exact={true} Component={Products} />
-      </Routes>
+      </Routes> 
     </main>
   );
 }

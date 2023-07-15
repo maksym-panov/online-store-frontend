@@ -74,6 +74,7 @@ export function Register() {
     
             user.jwt = "Bearer " + authResp.jwt;
             dispatch(setUser(user));
+
             navigate(PROFILE_PAGE);
         } catch(error) {
             navigate(ERROR_PAGE);

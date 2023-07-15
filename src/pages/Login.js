@@ -19,6 +19,7 @@ export function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
+    const redirect = user.redirect;
     
     const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
@@ -44,7 +45,12 @@ export function Login() {
             
             user.jwt = "Bearer " + authResp.jwt;
             dispatch(setUser(user));
-            navigate(PROFILE_PAGE);
+
+            if (redirect) {
+                navigate(redirect);
+            } else {
+                navigate(PROFILE_PAGE);
+            }
         } catch(error) {
             if (!error.response) {
                 navigate(ERROR_PAGE);

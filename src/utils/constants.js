@@ -12,9 +12,13 @@ export const CHECKOUT_PAGE = CART_PAGE + "/checkout"
 export const PROFILE_PAGE = "/profile";
 export const CHANGE_PROFILE_PAGE = PROFILE_PAGE + "/change";
 export const ERROR_PAGE = "/something-went-wrong";
+export const ACCESS_DENIED_PAGE = "/access-denied";
+// MANAGER ENDPOINTS
+export const MANAGER_PAGE = "/manager";
+export const MANAGE_ORDERS_PAGE = "/manager/orders";
 
 // API ENDPOINTS
-export const API_BASE_URL = "http://192.168.0.100:8080/api/v2";
+export const API_BASE_URL = "http://192.168.0.103:8080/api/v2";
 export const PRODUCT_CATEGORIES = "/product_types";
 export const DELIVERIES = "/delivery_types";
 export const PRODUCTS = "/products";
@@ -31,4 +35,5 @@ export const API_NAME_PARAM = "name=";
 
 // LITERAL CONSTANTS
 export const PRODUCTS_PER_PAGE = 15;
+export const ORDERS_PER_PAGE = 10;
 export const BASE64_RESOLVER = "data:image/png;base64,"

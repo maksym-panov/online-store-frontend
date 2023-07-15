@@ -1,0 +1,280 @@
+.ordCont {
+    min-height: 10vh;
+    width: 100%;
+    background-color: white;
+    margin-top: 15px;
+    padding: 20px;
+
+    border-radius: 10px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px
+
+}
+
+.ordBod {
+    min-height: 150px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 4px black;
+}
+
+@media (max-width: 768px) {
+    .ordBod {
+        flex-direction: column;
+        margin-bottom: 20px
+    }
+}
+
+.ordMeta {
+    width: 400px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ordProdSect {
+    width: 100%;
+    padding: 20px;
+}
+
+.ordProdTitle {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 15px
+}
+
+.prodLst {
+    display: flex;
+    flex-direction: column;
+}
+
+.prdct {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text {
+    margin: 0;
+}
+
+.ruler {
+    border: 1px black solid;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.total {
+    text-align: right;
+    margin-top: 20px
+}
+
+.edOrdCont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+.edOrdCol {
+    width: 60%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 1000px) {
+    .edOrdCont .edOrdCol {
+        width: 100%;
+    }
+}
+
+.meta {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.lab {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tColr {
+    color: black;
+    border: none;
+    border-radius: 0;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 0;
+    text-align: center;
+    width: 40px; 
+    height: 40px;
+    border-radius: 30px;
+}
+
+.ordTotal {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.userDataTitle {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.userDataPiece {
+    margin: 0;
+    width: 100%;
+}
+
+.custData {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.cData {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cDataCol {
+    width: 50%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 1000px) {
+    .custData .cData {
+        flex-direction: column
+    }
+    .custData .cData .cDataCol {
+        width: 100%;
+    }
+}
+
+.ordContentCont {
+    width: 100%;
+    padding: 40px;
+} 
+
+.itemAddCont {
+    width: 100%;
+}
+
+.inp {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 2.5em;
+    margin-bottom: 20px
+}
+
+.prompt {
+    width: 50%;
+}
+
+.prodCont {
+    border: 1px black solid;
+    margin-bottom: 30px;
+    max-height: 500px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.prodClick {
+    font-size: 16px;
+    padding: 0;
+    background-color: white;
+}
+
+.prod {
+    height: 130px;
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    display: flex;
+}
+
+@media (max-width: 700px) {
+   .ordContentCont {
+        padding: 10px
+   }
+   
+   .edOrdCol {
+        padding: 5px
+   }
+}
+
+.idCont {
+    width: 10%
+}
+
+.nameCont {
+    width: 70%;
+    overflow-y: scroll;
+}
+
+.infCont {
+    width: 20%;
+}
+
+.itemCont {
+    width: 100%;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.i {
+    width: 100%;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    overflow: scroll;
+    box-shadow: 0px 0px 4px black;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.itTCont {
+    width: 100%;
+}
+
+.ordItQ {
+    width: 200px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.r {
+    margin-top: 40px
+}
+
+.validationError {
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 8px;
+    width: 100%;
+    color: red;
+    padding: 4px;
+    text-align: center
+}
