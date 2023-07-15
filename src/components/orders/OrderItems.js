@@ -18,6 +18,12 @@ export default (props) => {
 
     return (
         <div className={s.ordContentCont}>
+           <h3 
+                style={ {fontWeight: "bold"} } 
+                className={s.ordProdTitle}
+            >
+            Order content
+            </h3> 
             {
                 !disabled &&
                 <div className={s.itemAddCont}>
@@ -59,7 +65,7 @@ export default (props) => {
                     </div>
                 </div>
             } 
-            { err && <p className={s.validationError}>Order cannot be empty</p> }
+            { err && <p className={s.validationError}>{ err }</p> }
             <div className={s.itemCont}>
                 {
                     items?.map(i => 
@@ -123,6 +129,7 @@ const addItem = async (p, items, setItems, setErr) => {
         );
 
         if (!curItem) { 
+
             const newItem = {
                 product: p,
                 quantity: 1
@@ -132,12 +139,15 @@ const addItem = async (p, items, setItems, setErr) => {
                 setErr("Not enough products to add");
                 return;
             }
+
+            --p.stock;
             setItems([newItem, ...items]);
             return;
         }
 
         if (p.stock >= curItem.quantity + 1) {
             ++curItem.quantity; 
+            --curItem.product.stock;
             setItems([...items]);
         }
         

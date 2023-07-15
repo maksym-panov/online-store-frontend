@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 9;
 }
 
 .searchBar {
@@ -203,7 +204,7 @@
     border-radius: 7px;
     margin-right: 1em;
 
-    animation: 2s linear 0s 1 running categoriesAppear;
+    animation: 1.2s linear 0s 1 running categoriesAppear;
 }
 
 @keyframes categoriesAppear {
@@ -264,7 +265,7 @@
     border-radius: 7px;
     box-shadow: 0px 0px 2px #2473FF;
 
-    animation: 2s linear 0s 1 running informationBannerAppear
+    animation: 1.2s linear 0s 1 running informationBannerAppear
 }
 
 @keyframes informationBannerAppear {

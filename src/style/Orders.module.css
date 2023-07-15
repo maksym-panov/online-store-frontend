@@ -1,10 +1,11 @@
 .ordCont {
     min-height: 10vh;
-    width: 100%;
+    width: auto;
     background-color: white;
     margin-top: 15px;
     padding: 20px;
-
+    margin-left: 20px;
+    margin-right: 20px;
     border-radius: 10px;
 }
 
@@ -46,7 +47,7 @@
 .ordProdTitle {
     text-align: center;
     margin: 0;
-    margin-bottom: 15px
+    margin-bottom: 15px;
 }
 
 .prodLst {
@@ -230,6 +231,7 @@
 .nameCont {
     width: 70%;
     overflow-y: scroll;
+    padding-right: 10px;
 }
 
 .infCont {

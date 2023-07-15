@@ -52,7 +52,7 @@ export default (props) => {
             <div className={s.ordProdSect}>
                 <h5 className={s.ordProdTitle}>Contents</h5>
                 <div className={s.prodLst}>
-                    <div className={s.prod}>
+                    <div className={s.prdct}>
                         <p 
                             style=
                             { 

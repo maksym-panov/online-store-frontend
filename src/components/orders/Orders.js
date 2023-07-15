@@ -9,7 +9,7 @@ import {
 import { 
     API_ENTITIES_PER_PAGE_PARAM, 
     API_OFFSET_PARAM, 
-    ERROR_PAGE, MANAGER_PAGE, MANAGE_ORDERS_PAGE, ORDERS,
+    ERROR_PAGE, MANAGER_PAGE, ORDERS,
     ORDERS_PER_PAGE, 
     USERS 
 } from "../../utils/constants";
@@ -26,6 +26,7 @@ export default (props) => {
     const navigate = useNavigate();
     const userIdParam = params.get("user");
     const order = params.get("id");
+    const [searchId, setSearchId] = useState("");
 
     let page = params.get("page");
 
@@ -94,6 +95,21 @@ export default (props) => {
         <div className={s.ordCont}>
             <h1 className={s.title}>Placed orders</h1>
             <hr />
+            <div className={s.inp}>
+                <input 
+                    className={s.prompt}
+                    value={ searchId }
+                    onChange={ e => setSearchId(e.target.value) }
+                    type="text" 
+                    placeholder="Enter order ID" 
+                />
+                <button
+                    className={s.tColr}  
+                    onClick={ () => fetchById(searchId, setOrders, currentUser.jwt) }   
+                >
+                Search
+                </button>
+            </div> 
             {
                 orders?.slice(0, ORDERS_PER_PAGE).map(o => (
                     <Order key={ o.orderId } order={ o } management={ isManagement } />
@@ -146,6 +162,25 @@ const fetchByUser = async (userId, setOrders, token, navigate) => {
     }
     
     
+}
+
+const fetchById = async (id, setOrders, token) => {
+    try {
+        setOrders([]);
+        const result = await api
+            .get(
+                ORDERS + "/" + id,
+                {
+                    headers: {
+                        "Authorization": token
+                    }
+                }
+            )
+            .then(resp => resp.data);
+            
+            console.log(result)
+            setOrders([result]);
+    } catch(ignored) {}
 }
 
 const fetchAll = async (page, setOrders, token, navigate, setParams) => {
