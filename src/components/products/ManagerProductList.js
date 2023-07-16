@@ -7,6 +7,7 @@ import {
     API_ENTITIES_PER_PAGE_PARAM, 
     API_OFFSET_PARAM, 
     ERROR_PAGE, 
+    MANAGE_NEW_PRODUCT_PAGE, 
     MANAGE_PRODUCTS_PAGE, 
     PRODUCTS, 
     PRODUCTS_PER_PAGE 
@@ -41,7 +42,7 @@ export default () => {
         }
 
         fetchProducts(page, setProducts, navigate, setParams, name, prompt);
-    }, [page]);
+    }, [page, params]);
 
     if (id) {
         return <ManagerProductPage productId={ id } />;
@@ -50,9 +51,16 @@ export default () => {
     return (
         <div id="list" className={s.pCont}>
             <div className={s.inp}>
+                <button 
+                    onClick={ () => navigate(MANAGE_NEW_PRODUCT_PAGE) }
+                    style={ btn }
+                >
+                Add new Product
+                </button>
                 <input 
-                    style={{borderRadius: 0}}
-                    className={s.prompt}
+                    style={ {borderRadius: 0} }
+                    className={ s.prompt }
+                    value={ prompt }
                     onChange={ e => setPrompt(e.target.value) }
                     type="text" 
                     placeholder="Find a product" 
@@ -101,7 +109,22 @@ export default () => {
 
 const fetchProducts = async (page, setProducts, navigate, setParams, name, prompt) => {
     try {
-        let products = [];
+        console.log(name + "            " + prompt)
+        if (prompt === "") {
+            prompt = null;
+        }
+        if (!prompt && prompt != name) {
+            setParams({});
+        }
+        if (prompt && prompt != name) {
+            page = 1;
+            setParams(
+                { 
+                    name: prompt
+                }
+            );
+        }
+        
         const offset = (page - 1) * PRODUCTS_PER_PAGE;
         const number = 2 * PRODUCTS_PER_PAGE + 1;
         
@@ -110,32 +133,11 @@ const fetchProducts = async (page, setProducts, navigate, setParams, name, promp
         if (prompt) {
             const nameParam = "&name=" + prompt; 
             query += nameParam;
-            if (!name || name !== prompt) {
-                page = 1;
-                setParams(
-                    { 
-                        name: prompt
-                    }
-                );
-
-                if (!isNaN(prompt)) {
-                    try {
-                        const pById = await api
-                            .get(PRODUCTS + "/" + prompt)
-                            .then(resp => resp.data);
-                        products.push(pById);
-                    } catch(ignored) {}
-               }
-            }
         }
        
-        products.push(
-            ...(
-                    await api
-                        .get(query)
-                        .then(resp => resp.data)
-                )
-        );
+        const products = await api
+            .get(query)
+            .then(resp => resp.data)
 
         if (products.length === 0 && page !== 1) {
             setParams({ page: 1 });
@@ -146,4 +148,12 @@ const fetchProducts = async (page, setProducts, navigate, setParams, name, promp
     } catch(error) {
         navigate(ERROR_PAGE);
     }
+}
+
+const btn = {
+    backgroundColor: "#2473FF",
+    color: "white",
+    marginRight: "20px",
+    border: "none",
+    borderRadius: "10px"
 }

@@ -12,18 +12,16 @@ import {
     PRODUCTS_PAGE 
 } from "../../utils/constants";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
-export function SearchBar(props) {
+export function SearchBar() {
     const [query, setQuery] = useState("");
     const [ps, setPs] = useState([])
-    const navigate = useNavigate();
 
     const fetchProducts = async (value) => {
         try {
             setQuery(value);
-
             if (value === "") {
+                setPs([]);
                 return;
             }
 
@@ -38,9 +36,7 @@ export function SearchBar(props) {
                 )
                 .then(resp => resp.data);
             setPs(res);
-        } catch(error) {
-            navigate(ERROR_PAGE);
-        }
+        } catch(ignored) {}
     }
 
     return (
@@ -52,8 +48,6 @@ export function SearchBar(props) {
                     type="text" 
                     placeholder="What do you want to find?"
                     onChange={ (e) => fetchProducts(e.target.value) }
-                    onClick={ (e) => fetchProducts(e.target.value) }
-                
                     value={ query }
                 />
                 <a href={PRODUCTS + "?name=" + query}>

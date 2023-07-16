@@ -22,6 +22,7 @@ import {
 import { setUser } from "../../features/auth/userSlice";
 import Orders from "../../components/orders/Orders";
 import ManagerProductList from "../../components/products/ManagerProductList";
+import NewProduct from "../../components/products/NewProduct";
 
 export const Management = () => {
     const user = useSelector(state => state.user);
@@ -67,7 +68,7 @@ export const Management = () => {
             <Route path={ MANAGER_PAGE.substring(8) } element={ <Orders /> } />
             <Route path={ MANAGE_ORDERS_PAGE.substring(8) } element={ <Orders /> } />
             <Route path={ MANAGE_PRODUCTS_PAGE.substring(8) } element={ <ManagerProductList /> } />
-            <Route path={ MANAGE_NEW_PRODUCT_PAGE.substring(8) } element={ <></> } />
+            <Route path={ MANAGE_NEW_PRODUCT_PAGE.substring(8) } element={ <NewProduct /> } />
             <Route path={ "*" } element={ <Orders /> } />
         </Routes>
     );

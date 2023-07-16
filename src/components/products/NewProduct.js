@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { BASE64_RESOLVER, ERROR_PAGE, MANAGE_PRODUCTS_PAGE, PRODUCTS } from "../../utils/constants";
-import { api } from "../../utils/axiosHelper";
 import s from "../../style/ManagerProducts.module.css";
-import { getBase64 } from "../../utils/webHelpers";
+import { 
+    BASE64_RESOLVER, 
+    MANAGE_PRODUCTS_PAGE, 
+    PRODUCTS, 
+    ERROR_PAGE 
+} from "../../utils/constants";
+import { api } from "../../utils/axiosHelper";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-export default (props) => {
-    const id = props.productId;
-    const [product, setProduct] = useState({});
+import { useState } from "react";
+import { getBase64 } from "../../utils/webHelpers";
+export default () => {
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
 
@@ -20,40 +22,21 @@ export default (props) => {
 
     const [err, setErr] = useState(null);
 
-    const fetchProduct = async () => {
-        try {
-            const p = await api
-                .get(PRODUCTS + "/" + id)
-                .then(resp => resp.data);
-           
-                setName(p.name);
-                setImage(p.image);
-                setPrice(p.price);
-                setStock(p.stock);
-                setDescription(p.description);
-
-                setProduct(p);
-        } catch(error) {
-            navigate(MANAGE_PRODUCTS_PAGE);
-        }
-    }
-
-    useEffect(() => {
-        fetchProduct(id, setProduct, navigate);
-    }, [])
-
     return (
         <div className={s.pPag}>
             <div className={s.pInfCont}>
                 <div className={s.pTitleSect}>
-                    <h1 className={s.text}>Product #{product.productId} information</h1>
+                    <h1 className={s.text}>Add new product</h1>
                 </div>
-                <div 
-                    style={{
-                        backgroundImage: `url(${BASE64_RESOLVER + image})`
-                    }}
-                    className={s.imageSect}
-                ></div>
+                {
+                    image &&
+                    <div 
+                        style={{
+                            backgroundImage: `url(${BASE64_RESOLVER + image})`
+                        }}
+                        className={s.imageSect}
+                    ></div>
+                }
                 <input 
                     className={s.inpF} 
                     type="file"
@@ -109,8 +92,7 @@ export default (props) => {
                     <button 
                         onClick=
                             { () => 
-                                saveChanges(
-                                    product.productId, 
+                                createProduct(
                                     {
                                         name: name,
                                         image: image,
@@ -138,13 +120,13 @@ export default (props) => {
                 </button>
             </div>
         </div>
-    )
+    );
 }
 
-const saveChanges = async (id, newProduct, token, navigate, setErr) => {
+const createProduct = async (newProduct, token, navigate, setErr) => {
     try {
-        await api.patch(
-            PRODUCTS + "/" + id,
+        const id = await api.post(
+            PRODUCTS,
             newProduct,
             {
                 headers: {
@@ -153,7 +135,7 @@ const saveChanges = async (id, newProduct, token, navigate, setErr) => {
             }
         )
 
-        window.location.reload(false);
+        navigate(MANAGE_PRODUCTS_PAGE + "?id=" + id);
     } catch(error) {
         if (error.response?.data) {
             setErr(error.response.data);

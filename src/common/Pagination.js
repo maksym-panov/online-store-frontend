@@ -46,8 +46,8 @@ export function Pagination(props) {
                 {
                     current > 1 && (
                         <Link 
-                            onClick={
-                                document
+                            onClick={ 
+                                () => document
                                     .getElementById("list")
                                     ?.scrollIntoView()
                             } 
@@ -69,7 +69,7 @@ export function Pagination(props) {
                     nextAvailable > 0 && (
                         <Link 
                             onClick={
-                                document
+                                () => document
                                     .getElementById("list")
                                     ?.scrollIntoView()
                             } 
