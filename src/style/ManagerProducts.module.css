@@ -7,30 +7,6 @@
     align-items: center;
 }
 
-@media (max-width: 900px) {
-    .pCont {
-        padding: 10px
-    }
-
-    .pCont .pLst {
-        width: 90%;
-    }
-
-    .p .nCont {
-        font-size: 16px
-    }
-    
-    .p .metaCont {
-        font-size: 14px
-    }
-}
-
-@media (max-width: 700px) {
-    .pCont .pLst {
-        width: 100%;
-    }
-}
-
 .pLst {
     display: flex;
     flex-direction: column;
@@ -77,4 +53,124 @@
     margin: 0;
     text-decoration: none;
     color: black;
+}
+
+.pPag {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px
+}
+
+.pInfCont {
+    width: 60%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pTitleSect {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px
+}
+
+.imageSect {
+    height: 300px;
+    width: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.inpF {
+    margin: 20px;
+}
+
+.pMetaSect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.lab {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.descSect {
+    width: 100%;
+    font-size: x-large;
+    padding: 20px
+}
+
+.descLab {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-weight: bold;
+}
+
+.desc {
+    font-size: medium;
+
+}
+
+.tColr {
+    margin-top: 20px;
+    border: none;
+}
+
+.validationError {
+    font-weight: bold;
+    margin: 0;
+    margin-top: 30px;
+    
+    border: 1px red solid;
+    border-radius: 7px;
+    color: red;
+    text-align: center
+}
+
+@media (max-width: 900px) {
+    .pCont {
+        padding: 10px
+    }
+
+    .pCont .pLst {
+        width: 90%;
+    }
+
+    .p .nCont {
+        font-size: 16px
+    }
+    
+    .p .metaCont {
+        font-size: 14px
+    }
+
+    .pPag {
+        padding: 10px
+    }
+
+    .pPag .pInfCont {
+        width: 90%;
+    }
+}
+
+@media (max-width: 700px) {
+    .pCont .pLst {
+        width: 100%;
+    }
+
+    .pPag .pInfCont {
+        width: 100%;
+    }
 }

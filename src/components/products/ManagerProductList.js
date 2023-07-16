@@ -49,7 +49,7 @@ export default () => {
         <div id="list" className={s.pCont}>
             <div className={s.pLst}>
                 {
-                    products.map(p => (
+                    products?.slice(0, PRODUCTS_PER_PAGE).map(p => (
                         <div className={s.p}>
                             <div className={s.idCont}>
                                 <p className={s.text}>Id: {p.productId}</p> 
