@@ -15,9 +15,10 @@ export const ERROR_PAGE = "/something-went-wrong";
 export const ACCESS_DENIED_PAGE = "/access-denied";
 // MANAGER ENDPOINTS
 export const MANAGER_PAGE = "/manager";
-export const MANAGE_ORDERS_PAGE = "/manager/orders";
-export const MANAGE_PRODUCTS_PAGE = "/manager/products";
+export const MANAGE_ORDERS_PAGE = MANAGER_PAGE + "/orders";
+export const MANAGE_PRODUCTS_PAGE = MANAGER_PAGE + "/products";
 export const MANAGE_NEW_PRODUCT_PAGE = MANAGE_PRODUCTS_PAGE + "/new";
+export const MANAGE_DELIVERIES = MANAGER_PAGE + "/deliveries";
 // API ENDPOINTS
 export const API_BASE_URL = "http://192.168.0.103:8080/api/v2";
 export const PRODUCT_CATEGORIES = "/product_types";
