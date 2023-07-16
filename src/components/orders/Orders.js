@@ -98,7 +98,6 @@ export default (props) => {
             <div className={s.inp}>
                 <input 
                     className={s.prompt}
-                    value={ searchId }
                     onChange={ e => setSearchId(e.target.value) }
                     type="text" 
                     placeholder="Enter order ID" 
@@ -108,7 +107,7 @@ export default (props) => {
                     onClick={ () => fetchById(searchId, setOrders, currentUser.jwt, navigate, setParams) }   
                 >
                 Search
-                </button>
+                </button> 
             </div> 
             {
                 orders?.slice(0, ORDERS_PER_PAGE).map(o => (

@@ -32,7 +32,6 @@ export default (props) => {
                             style={{borderRadius: 0}}
                             className={s.prompt}
                             onChange={ e => setPrompt(e.target.value) }
-                            value={ prompt }
                             type="text" 
                             placeholder="Add a product" 
                         />

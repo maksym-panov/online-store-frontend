@@ -169,7 +169,8 @@ const btnPrim = {
     width: "150px", 
     backgroundColor: "#2473FF", 
     color: "white", 
-    borderRadius: "15px" 
+    borderRadius: "15px",
+    marginBottom: "10px"
 };
 
 const btnBack = {
