@@ -41,6 +41,7 @@ export default (props) => {
                 { 
                     m && 
                     <button 
+                        style={{width: "fit-content", marginTop: "15px"}} 
                         onClick={ 
                             () => navigate(MANAGE_ORDERS_PAGE + "?id=" + o.orderId ) 
                         }

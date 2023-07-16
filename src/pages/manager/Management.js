@@ -15,10 +15,13 @@ import {
     ERROR_PAGE, 
     LOGIN_PAGE, 
     MANAGER_PAGE,
-    MANAGE_ORDERS_PAGE
+    MANAGE_NEW_PRODUCT_PAGE,
+    MANAGE_ORDERS_PAGE,
+    MANAGE_PRODUCTS_PAGE
 } from "../../utils/constants";
 import { setUser } from "../../features/auth/userSlice";
 import Orders from "../../components/orders/Orders";
+import ManagerProductList from "../../components/products/ManagerProductList";
 
 export const Management = () => {
     const user = useSelector(state => state.user);
@@ -61,8 +64,10 @@ export const Management = () => {
 
     return (
         <Routes>
-            <Route path={ MANAGER_PAGE } exact={ true } element={ <Orders /> } />
-            <Route path={ MANAGE_ORDERS_PAGE } exact={ true } element={ <Orders /> } />
+            <Route path={ MANAGER_PAGE.substring(8) } element={ <Orders /> } />
+            <Route path={ MANAGE_ORDERS_PAGE.substring(8) } element={ <Orders /> } />
+            <Route path={ MANAGE_PRODUCTS_PAGE.substring(8) } element={ <ManagerProductList /> } />
+            <Route path={ MANAGE_NEW_PRODUCT_PAGE.substring(8) } element={ <></> } />
             <Route path={ "*" } element={ <Orders /> } />
         </Routes>
     );

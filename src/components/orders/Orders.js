@@ -105,7 +105,7 @@ export default (props) => {
                 />
                 <button
                     className={s.tColr}  
-                    onClick={ () => fetchById(searchId, setOrders, currentUser.jwt) }   
+                    onClick={ () => fetchById(searchId, setOrders, currentUser.jwt, navigate, setParams) }   
                 >
                 Search
                 </button>
@@ -164,7 +164,11 @@ const fetchByUser = async (userId, setOrders, token, navigate) => {
     
 }
 
-const fetchById = async (id, setOrders, token) => {
+const fetchById = async (id, setOrders, token, navigate, setParams) => {
+    if (!id) {
+        fetchAll(1, setOrders, token, navigate, setParams);
+        return;
+    }
     try {
         setOrders([]);
         const result = await api

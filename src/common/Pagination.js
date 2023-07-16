@@ -45,7 +45,14 @@ export function Pagination(props) {
             <div className={s.pagination}>
                 {
                     current > 1 && (
-                        <Link to={ PREV_URL }>
+                        <Link 
+                            onClick={
+                                document
+                                    .getElementById("list")
+                                    ?.scrollIntoView()
+                            } 
+                            to={ PREV_URL }
+                        >
                             <div className={s.leftArrow}></div>
                         </Link>
                     )
@@ -60,7 +67,14 @@ export function Pagination(props) {
                 
                 {
                     nextAvailable > 0 && (
-                        <Link to={ NEXT_URL }>
+                        <Link 
+                            onClick={
+                                document
+                                    .getElementById("list")
+                                    ?.scrollIntoView()
+                            } 
+                            to={ NEXT_URL }
+                        >
                             <div className={s.rightArrow} ></div>
                         </Link>
                     )

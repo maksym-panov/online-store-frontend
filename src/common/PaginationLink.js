@@ -32,7 +32,7 @@ export function PaginationLink(props) {
 
     return (
         <Link 
-            onClick={ () => document.getElementById("list").scrollIntoView() }
+            onClick={ () => document.getElementById("list")?.scrollIntoView() }
             className={`${s.link} ${s.secondaryPageNumber}`} 
             to={ URL }
         >
