@@ -15,6 +15,7 @@ import {
     ERROR_PAGE, 
     LOGIN_PAGE, 
     MANAGER_PAGE,
+    MANAGE_CATEGORIES,
     MANAGE_DELIVERIES,
     MANAGE_NEW_PRODUCT_PAGE,
     MANAGE_ORDERS_PAGE,
@@ -25,6 +26,7 @@ import Orders from "../../components/orders/Orders";
 import ManagerProductList from "../../components/products/ManagerProductList";
 import NewProduct from "../../components/products/NewProduct";
 import ManageDeliveries from "./ManageDeliveries";
+import ManageCategories from "./ManageCategories";
 
 export const Management = () => {
     const user = useSelector(state => state.user);
@@ -72,6 +74,7 @@ export const Management = () => {
             <Route path={ MANAGE_PRODUCTS_PAGE.substring(8) } element={ <ManagerProductList /> } />
             <Route path={ MANAGE_NEW_PRODUCT_PAGE.substring(8) } element={ <NewProduct /> } />
             <Route path={ MANAGE_DELIVERIES.substring(8) } element={ <ManageDeliveries /> } />
+            <Route path={ MANAGE_CATEGORIES.substring(8) } element={ <ManageCategories /> } />
             <Route path={ "*" } element={ <Orders /> } />
         </Routes>
     );
