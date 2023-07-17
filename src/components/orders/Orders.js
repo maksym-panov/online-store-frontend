@@ -9,6 +9,8 @@ import {
 import { 
     API_ENTITIES_PER_PAGE_PARAM, 
     API_OFFSET_PARAM, 
+    API_ORDER_BY_PARAM, 
+    API_STATUS_PARAM, 
     ERROR_PAGE, MANAGER_PAGE, ORDERS,
     ORDERS_PER_PAGE, 
     USERS 
@@ -27,6 +29,8 @@ export default (props) => {
     const userIdParam = params.get("user");
     const order = params.get("id");
     const [searchId, setSearchId] = useState("");
+    const [ordBy, setOrdBy] = useState("desc");
+    const [stat, setStat] = useState(null);
 
     let page = params.get("page");
 
@@ -53,9 +57,9 @@ export default (props) => {
             fetchByUser(userIdParam, setOrders, currentUser.jwt, navigate);
             fetchUser(userIdParam, setOrdersOwner, currentUser.jwt, navigate);
         } else {
-            fetchAll(page, setOrders, currentUser.jwt, navigate, setParams);
+            fetchAll(ordBy, stat, page, setOrders, currentUser.jwt, navigate, setParams);
         }
-    }, [page, params]);
+    }, [page, params, ordBy, stat]);
 
     if (userId || userIdParam) {
         let fname, lname, phone;
@@ -117,6 +121,28 @@ export default (props) => {
                 Search
                 </button> 
             </div> 
+            <div className={s.paramHold}>
+                <div className={s.param}>
+                    Status
+                    <select className={s.sel} defaultValue={ stat } onChange={ e => setStat(e.target.value) }>
+                        <option value={ null }></option> 
+                        <option value={ "POSTED" }>POSTED</option>
+                        <option value={ "ACCEPTED" }>ACCEPTED</option>
+                        <option value={ "SHIPPING" }>SHIPPING</option>
+                        <option value={ "DELIVERED" }>DELIVERED</option>
+                        <option value={ "COMPLETED" }>COMPLETED</option>
+                        <option value={ "ABOLISHED" }>ABOLISHED</option>
+                    </select>
+                </div>
+                <div className={s.param}>
+                    Post time
+                    <select className={s.sel} defaultChecked={ ordBy } onChange={ e => setOrdBy(e.target.value) }>
+                        <option value={ "desc" }>From newest to oldest</option>
+                        <option value={ "asc" }>From oldest to newest</option>
+                    </select>
+
+                </div>
+            </div>
             {
                 orders?.slice(0, ORDERS_PER_PAGE).map(o => (
                     <Order key={ o.orderId } order={ o } management={ isManagement } />
@@ -194,14 +220,18 @@ const fetchById = async (id, setOrders, token, navigate, setParams) => {
     } catch(ignored) {}
 }
 
-const fetchAll = async (page, setOrders, token, navigate, setParams) => {
+const fetchAll = async (ordBy, stat, page, setOrders, token, navigate, setParams) => {
     try {
         const offset = (page - 1) * ORDERS_PER_PAGE;
         const number = 2 * ORDERS_PER_PAGE + 1;
 
         const orders = await api
             .get(
-                ORDERS + "?" + API_OFFSET_PARAM + offset + "&" + API_ENTITIES_PER_PAGE_PARAM + number,
+                ORDERS + "?" + 
+                API_OFFSET_PARAM + offset + "&" + 
+                API_ENTITIES_PER_PAGE_PARAM + number + "&" +
+                API_ORDER_BY_PARAM + ordBy + 
+                (stat ? ("&" + API_STATUS_PARAM + stat) : ""),
                 {
                     headers: {
                         "Authorization": token

@@ -37,6 +37,8 @@ export const API_ENTITIES_PER_PAGE_PARAM = "quantity=";
 export const API_PROD_CATEGORY_PARAM = "category=";
 export const API_NAME_PARAM = "name=";
 export const API_PHONE_PARAM = "phone=";
+export const API_STATUS_PARAM = "status=";
+export const API_ORDER_BY_PARAM = "order=";
 
 // LITERAL CONSTANTS
 export const PRODUCTS_PER_PAGE = 15;

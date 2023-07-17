@@ -1,13 +1,10 @@
 .ordCont {
     min-height: 10vh;
-    width: auto;
+    width: 100%;
     background-color: white;
     margin-top: 15px;
     padding: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
     border-radius: 10px;
-    align-self: center;
     display: flex;
     flex-direction: column;
 }
@@ -282,6 +279,26 @@
 
 .r {
     margin-top: 40px
+}
+
+.paramHold {
+    display: flex;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.param {
+    display: flex;
+    flex-direction: column; 
+    margin-left: 10px;
+    margin-right: 10px; 
+}
+
+.sel {
+    border-radius: 0;
+    border: 0;
+    font-size: 16px;
 }
 
 .validationError {

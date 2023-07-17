@@ -66,13 +66,14 @@
     }
 }
 
-.profile {
+.profile { 
     display: flex;
     flex-direction: row;
     align-items: flex-start;
 
     height: fit-content;
     margin-top: 15px;
+    margin-right: 20px;
     padding: 20px;
     background-color: white;
     border-radius: 7px;
