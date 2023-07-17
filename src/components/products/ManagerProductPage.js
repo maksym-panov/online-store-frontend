@@ -5,6 +5,7 @@ import { api } from "../../utils/axiosHelper";
 import s from "../../style/ManagerProducts.module.css";
 import { getBase64 } from "../../utils/webHelpers";
 import { useSelector } from "react-redux";
+import CategoriesSelect from "./CategoriesSelect";
 
 export default (props) => {
     const id = props.productId;
@@ -17,6 +18,8 @@ export default (props) => {
     const [price, setPrice] = useState(null);
     const [stock, setStock] = useState(null);
     const [description, setDescription] = useState(null);
+
+    const [categories, setCategories] = useState([]);
 
     const [err, setErr] = useState(null);
 
@@ -31,6 +34,7 @@ export default (props) => {
                 setPrice(p.price);
                 setStock(p.stock);
                 setDescription(p.description);
+                setCategories(p.productTypes);
 
                 setProduct(p);
         } catch(error) {
@@ -93,6 +97,9 @@ export default (props) => {
                         />
                     </label>   
                 </div>
+                
+                <CategoriesSelect categories={ categories } setCategories={ setCategories } />
+                
                 <div className={s.descSect}>
                     <label className={s.descLab}>
                         Description
@@ -116,7 +123,8 @@ export default (props) => {
                                         image: image,
                                         price: price,
                                         stock: stock,
-                                        description: description
+                                        description: description,
+                                        productTypes: categories
                                     },
                                     user.jwt,
                                     navigate,
@@ -143,6 +151,7 @@ export default (props) => {
 
 const saveChanges = async (id, newProduct, token, navigate, setErr) => {
     try {
+        console.log(newProduct)
         await api.patch(
             PRODUCTS + "/" + id,
             newProduct,

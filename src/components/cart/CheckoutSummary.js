@@ -1,15 +1,12 @@
 import s from "../../style/Cart.module.css";
 import profiles from "../../style/Profile.module.css";
 import { api } from "../../utils/axiosHelper";
-import { DELIVERIES, ERROR_PAGE, ORDERS, PRODUCTS_PAGE } from "../../utils/constants";
+import { DELIVERIES, ERROR_PAGE, ORDERS, ORDER_POSTED_PAGE } from "../../utils/constants";
 import { useEffect, useState } from "react";
-import { clearCart } from "../../features/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 export const CheckoutSummary = (props) => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const user = props.user;
     const customer = props.customer;
     const products = props.products;
@@ -48,37 +45,38 @@ export const CheckoutSummary = (props) => {
 
         newOrder.deliveryType = deliv;
         newOrder.orderProducts = orderProducts;
-        
+       
+        let newOrderId;
 
         try {
             if (!user.userId || !user.jwt) {
                 newOrder.unregCust = customer;
-                await api.post(
-                    ORDERS,
-                    newOrder
-                )
+                await api
+                    .post(
+                        ORDERS,
+                        newOrder
+                    )
             } else {
                 newOrder.user = user;
-                await api.post(
-                    ORDERS,
-                    newOrder,
-                    {
-                        headers: {
-                            "Authorization": user.jwt
+                newOrderId = await api
+                    .post(
+                        ORDERS,
+                        newOrder,
+                        {
+                            headers: {
+                                "Authorization": user.jwt
+                            }
                         }
-                    }
-                )
+                    )
+                    .then(resp => resp.data);
             }
         } catch(error) {
             setErr(error.response?.data);
             setErrorState(true);
             return;
         }
-        
 
-        console.log(newOrder);
-        dispatch(clearCart());
-        navigate(PRODUCTS_PAGE);
+        navigate(ORDER_POSTED_PAGE + "?id=" + newOrderId)
         return;
     }
 

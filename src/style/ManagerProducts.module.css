@@ -150,6 +150,22 @@
     width: 40%;
 }
 
+.catCont {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap
+}
+
+.cat {
+    cursor: pointer;
+    border: 1px black solid;
+    margin: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 20px
+}
+
 @media (max-width: 900px) {
     .pCont {
         padding: 10px

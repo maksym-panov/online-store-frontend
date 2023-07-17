@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { getBase64 } from "../../utils/webHelpers";
+import CategoriesSelect from "./CategoriesSelect";
+
 export default () => {
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
@@ -19,6 +21,8 @@ export default () => {
     const [price, setPrice] = useState(null);
     const [stock, setStock] = useState(null);
     const [description, setDescription] = useState(null);
+
+    const [categories, setCategories] = useState([]);
 
     const [err, setErr] = useState(null);
 
@@ -76,6 +80,9 @@ export default () => {
                         />
                     </label>   
                 </div>
+
+                <CategoriesSelect categories={ categories } setCategories={ setCategories } />
+
                 <div className={s.descSect}>
                     <label className={s.descLab}>
                         Description
@@ -98,7 +105,8 @@ export default () => {
                                         image: image,
                                         price: price,
                                         stock: stock,
-                                        description: description
+                                        description: description,
+                                        productTypes: categories
                                     },
                                     user.jwt,
                                     navigate,

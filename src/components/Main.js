@@ -12,7 +12,8 @@ import {
   CART_PAGE,
   CHECKOUT_PAGE,
   ERROR_PAGE,
-  ACCESS_DENIED_PAGE
+  ACCESS_DENIED_PAGE,
+  ORDER_POSTED_PAGE
 } from "../utils/constants.js";
 import { Categories } from "../pages/Categories";
 import { Deliveries } from "../pages/Deliveries";
@@ -28,6 +29,7 @@ import { ChangeProfile } from "../pages/ChangeProfile.js";
 import { Cart } from "../pages/Cart.js";
 import { Checkout } from "../pages/Checkout.js";
 import { ErrorPage } from "../errors/ErrorPage.js";
+import OrderPosted from "./orders/OrderPosted.js";
 
 export function Main() {
   return (
@@ -41,6 +43,7 @@ export function Main() {
         <Route path={ CONTACTS_PAGE } element={<Contacts />} />
         <Route path={ CART_PAGE } element={<Cart />} />
         <Route path={ CHECKOUT_PAGE } element={<Checkout /> } />
+        <Route path={ ORDER_POSTED_PAGE } element={ <OrderPosted /> } />
         <Route path={ REGISTRATION_PAGE } element={ <Register /> } />
         <Route path={ LOGIN_PAGE } element={ <Login /> } />
         <Route path={ PROFILE_PAGE } element={ <Profile /> } />
