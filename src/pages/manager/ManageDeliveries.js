@@ -49,7 +49,7 @@ export default () => {
                     Back
                     </button>
                 </div>
-                <h4 className={s.title}>Existing delivery providers</h4>
+                <h4 className={s.title}>Existing delivery options</h4>
                 <div className={s.list}>
                     {
                         deliveries?.map(d => 

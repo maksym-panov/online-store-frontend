@@ -81,6 +81,14 @@ export default (props) => {
                         <Order key={ o.orderId } order={ o } management={ isManagement } />
                     ))
                 }
+                { userIdParam && 
+                    <button
+                        onClick={ () => window.history.back() }
+                        className={s.btnS} 
+                    >
+                    Back
+                    </button>
+                }
             </div>
         );
     }

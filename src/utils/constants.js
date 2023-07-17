@@ -20,6 +20,7 @@ export const MANAGE_PRODUCTS_PAGE = MANAGER_PAGE + "/products";
 export const MANAGE_NEW_PRODUCT_PAGE = MANAGE_PRODUCTS_PAGE + "/new";
 export const MANAGE_DELIVERIES = MANAGER_PAGE + "/deliveries";
 export const MANAGE_CATEGORIES = MANAGER_PAGE + "/categories";
+export const MANAGE_USERS = MANAGER_PAGE + "/users";
 // API ENDPOINTS
 export const API_BASE_URL = "http://192.168.0.103:8080/api/v2";
 export const PRODUCT_CATEGORIES = "/product_types";
@@ -35,8 +36,10 @@ export const API_OFFSET_PARAM = "offset=";
 export const API_ENTITIES_PER_PAGE_PARAM = "quantity=";
 export const API_PROD_CATEGORY_PARAM = "category=";
 export const API_NAME_PARAM = "name=";
+export const API_PHONE_PARAM = "phone=";
 
 // LITERAL CONSTANTS
 export const PRODUCTS_PER_PAGE = 15;
 export const ORDERS_PER_PAGE = 10;
+export const USERS_PER_PAGE = 5;
 export const BASE64_RESOLVER = "data:image/png;base64,"

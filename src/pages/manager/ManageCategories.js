@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import { 
+    useEffect, 
+    useState 
+} from "react";
 import { api } from "../../utils/axiosHelper";
 import { 
     PRODUCT_CATEGORIES, 
-    ERROR_PAGE 
+    ERROR_PAGE, 
+    CATEGORIES_PAGE
 } from "../../utils/constants";
-import { useNavigate } from "react-router-dom";
+import { 
+    useNavigate,
+    Link
+} from "react-router-dom";
 import s from "../../style/DeliveriesCategories.module.css";
 import { useSelector } from "react-redux";
 
@@ -53,14 +60,17 @@ export default () => {
                 <div className={s.list}>
                     {
                         categories?.map(c => 
-                            <div className={s.ent}>
+                            <Link 
+                                to={ CATEGORIES_PAGE + "?id=" + c.productTypeId }
+                                className={s.ent}
+                            >
                                 <div className={s.iCont}>
                                     <p className={s.text}>Id: { c.productTypeId }</p>
                                 </div>
                                 <div className={s.tCont}>
                                     <p className={s.text}>{ c.name }</p>
                                 </div>
-                            </div>
+                            </Link>
                         )
                     }
                 </div>

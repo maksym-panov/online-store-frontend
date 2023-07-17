@@ -7,6 +7,9 @@
     margin-left: 20px;
     margin-right: 20px;
     border-radius: 10px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .title {
@@ -124,6 +127,15 @@
     width: 40px; 
     height: 40px;
     border-radius: 30px;
+}
+
+.btnS {
+    height: 3em;
+    width: 300px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: none;
+    align-self: center;
 }
 
 .ordTotal {

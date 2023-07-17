@@ -1,0 +1,113 @@
+.cont {
+    display: flex;
+    justify-content: center;
+    padding: 40px
+}
+
+.col {
+    width: 60%;
+}
+
+.search {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px
+}
+
+.inp {
+    width: 60%;
+    height: 2.5em;
+}
+
+.btn {
+    height: 2.5em;
+    width: 100px;
+    border: none
+}
+
+.btnS {
+    height: 2em;
+    width: 150px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: none;
+    align-self: center;
+}
+
+.lst {
+    display: flex;
+    flex-direction: column;
+}
+
+.usr {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-shadow: 0px 0px 4px black;
+    text-decoration: none;
+    color: black;
+}
+
+.img {
+    flex-shrink: 0; 
+    flex-basis: 120px;
+    height: 120px;
+    background-size: cover;
+    border-radius: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 10px
+}
+
+.data {
+    height: inherit;
+    width: 40%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: scroll;
+}
+
+.ruler {
+    margin: 0;
+}
+
+.text {
+    white-space: normal;
+    margin: 0;
+}
+
+.addr {
+    height: inherit;
+    width: 50%; 
+    padding: 15px;
+    overflow: scroll;
+}
+
+@media (max-width: 1000px) {
+    .cont {
+        font-size: 16px;
+        padding: 10px
+    }
+    .cont .col {
+        width: 100%;
+    } 
+}
+
+@media (max-width: 768px) {
+    .usr .data {
+        width: fit-content;
+    }
+
+    .usr .addr {
+        display: none
+    }
+}
