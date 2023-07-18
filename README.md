@@ -2,6 +2,7 @@
 ReactJS + Redux Toolkit frontend part for maksym-panov/online-store-backend
 
 You should already have NodeJS installed on your machine ([Download from official site](https://nodejs.org/en)).
+Also should already have installed, built and deployed backend side of the application ([Backend](https://github.com/maksym-panov/online-store-backend))
 
 ### 1. Clone the repository
 ```
