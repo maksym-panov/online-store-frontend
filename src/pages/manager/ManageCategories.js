@@ -15,7 +15,9 @@ import {
 import s from "../../style/DeliveriesCategories.module.css";
 import { useSelector } from "react-redux";
 
-export default () => {
+export default (props) => {
+    const isAdmin = props.isAdmin;
+    
     const user = useSelector(state => state.user);
     const [categories, setCategories] = useState([]);
     const [name, setName] = useState("");
@@ -60,17 +62,31 @@ export default () => {
                 <div className={s.list}>
                     {
                         categories?.map(c => 
-                            <Link 
-                                to={ CATEGORIES_PAGE + "?id=" + c.productTypeId }
+                            <div  
                                 className={s.ent}
                             >
-                                <div className={s.iCont}>
+                                <Link 
+                                    to={ CATEGORIES_PAGE + "?id=" + c.productTypeId } 
+                                    className={s.iCont}
+                                >
                                     <p className={s.text}>Id: { c.productTypeId }</p>
-                                </div>
-                                <div className={s.tCont}>
+                                </Link>
+                                <Link 
+                                    to={ CATEGORIES_PAGE + "?id=" + c.productTypeId }
+                                    className={s.tCont}
+                                >
                                     <p className={s.text}>{ c.name }</p>
-                                </div>
-                            </Link>
+                                </Link>
+                                {
+                                    isAdmin &&
+                                    <div 
+                                        onClick={ () => remove(c.productTypeId, user.jwt, navigate) }
+                                        className={s.delCont}
+                                    >
+                                        <p className={s.text}>X</p>
+                                    </div>
+                                }
+                            </div>
                         )
                     }
                 </div>
@@ -114,5 +130,23 @@ const createCategory = async (name, token, setErr) => {
         } 
         
         setErr({ general: "Something went wrong" });
+    }
+}
+
+const remove = async (id, token, navigate) => {
+    try {
+        await api
+            .delete(
+                PRODUCT_CATEGORIES + "/" + id,
+                {
+                    headers: {
+                        "Authorization": token
+                    }
+                }
+            )
+
+        window.location.reload(false);
+    } catch {
+        navigate(ERROR_PAGE);
     }
 }

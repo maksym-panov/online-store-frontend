@@ -82,45 +82,35 @@ export default (props) => {
             {
                 !orderNotSent &&
                 <p className={s.text}>
-                    Delivery: { " " + order.deliveryType?.name }
+                    Delivery: { order.deliveryType?.name ? " " + order.deliveryType?.name : " - "}
                 </p>
             }
             {
                 orderNotSent &&
                 <label className={s.lab}>
                     Delivery: 
-                    <select className={s.tColr}>
-                        {
-                            deliveries.map(d => {
-                                if (d.deliveryTypeId === order.deliveryType?.deliveryTypeId) {
-                                    return (
-                                        <option
-                                            onClick={() => {
-                                                order.deliveryType = d;
-                                                setOrder(order);
-                                            }}
-                                            key={ d.deliveryTypeId }
-                                            value={ d.name }
-                                            selected
-                                        >
-                                        {d.name}
-                                        </option>
-                                    );
-                                }
+                    <select value={ order.deliveryType?.name } className={s.tColr}>
+                        <option 
+                            onClick={ () => {
+                                order.deliveryType = null;
+                                setOrder(order)
+                            }}
+                            value={null}
+                        ></option>
 
-                                return (
-                                    <option
-                                        onClick={() => {
-                                            order.deliveryType = d;
-                                            setOrder(order);
-                                        }}
-                                        key={ d.deliveryTypeId }
-                                        value={ d.name }
-                                    >
-                                    {d.name}
-                                    </option>
-                                );
-                            })
+                        {
+                            deliveries.map(d => (
+                                <option
+                                    onClick={() => {
+                                        order.deliveryType = d;
+                                        setOrder(order);
+                                    }}
+                                    key={ d.deliveryTypeId }
+                                    value={ d.name }
+                                >
+                                {d.name}
+                                </option>
+                            ))
                         }
                     </select>
                 </label>

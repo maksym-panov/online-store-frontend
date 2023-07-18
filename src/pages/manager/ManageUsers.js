@@ -6,25 +6,23 @@ import s from "../../style/ManagerUsers.module.css";
 import { useSelector } from "react-redux";
 import { 
     useNavigate, 
-    useSearchParams,
-    Link 
+    useSearchParams
 } from "react-router-dom";
 import { 
     API_ENTITIES_PER_PAGE_PARAM,
-    API_NAME_PARAM,
     API_OFFSET_PARAM,
     API_PHONE_PARAM,
-    BASE64_RESOLVER,
     ERROR_PAGE, 
-    MANAGE_ORDERS_PAGE, 
     USERS, 
     USERS_PER_PAGE
 } from "../../utils/constants";
 import { api } from "../../utils/axiosHelper";
 import { Pagination } from "../../common/Pagination";
-import account from "../../img/account.png";
+import ManageableUser from "../../components/users/ManageableUser";
 
-export default () => {
+export default (props) => {
+    const isAdmin = props.isAdmin;
+
     const [users, setUsers] = useState([]);
     const user = useSelector(state => state.user);
     const navigate = useNavigate();
@@ -62,43 +60,7 @@ export default () => {
                 <div className={s.lst}>
                     {
                         users.slice(0, USERS_PER_PAGE).map(u => 
-                            { 
-                                const pi = u.personalInfo;
-                                const a = u.address;
-                                const address = compileAddress(a);
-
-                                return (
-                                    <Link 
-                                        to={ MANAGE_ORDERS_PAGE + "?user=" + u.userId }
-                                        className={s.usr}
-                                    >
-                                        <div 
-                                            style={
-                                                u.image ?
-                                                {
-                                                    backgroundImage: `url(${BASE64_RESOLVER + u.image})`
-                                                }
-                                                :
-                                                {
-                                                    backgroundImage: `url(${account})`
-                                                }
-                                            }
-                                            className={s.img}
-                                        ></div>
-                                        <div className={s.data}>
-                                            <p className={s.text}>User ID: { u.userId }</p>
-                                            <p className={s.text}>Name: { pi.firstname + " " + (pi.lastname ? pi.lastname : "") }</p>
-                                            <p className={s.text}>Phone: +38{ pi.phoneNumber }</p>
-                                            <p className={s.text}>Email: { pi.email ? pi.email : " - "}</p>
-                                        </div>
-                                        <div className={s.addr}>
-                                            <p className={s.text}>Address:</p>
-                                            { address !== "" ? <p className={s.text}>{ address }</p> : " - " }
-                                        </div>
-                                    </Link>
-                                );
-                                
-                            }    
+                            <ManageableUser key={ u.userId } user={ u } isAdmin={ isAdmin } />   
                         )
                     }
                 </div>
@@ -161,36 +123,3 @@ const fetchByPhone = async (setUsers, phoneNumber, token, setParams) => {
     }
 }
 
-const compileAddress = (a) => {
-    let address = "";
-    if (a.region) {
-        address += a.region + " reg.";
-    }
-    if (a.district) {
-        address += ", ";
-        address += a.district + " dist.";
-    }
-    if (a.city) {
-        address += ", ";
-        address += a.city;
-    }
-    if (a.street) {
-        address += ", ";
-        address += a.street + " st.";
-    }
-    if (a.building) {
-        address += ", ";
-        address += a.building + " b.";
-    }
-    if (a.apartment) {
-        address += ", ";
-        address += a.apartment + " ap.";
-    }
-    if (a.postalCode) {
-        address += ", ";
-        address += a.postalCode;
-    }
-
-
-    return address.replace(/^[, ]*/, "");
-}

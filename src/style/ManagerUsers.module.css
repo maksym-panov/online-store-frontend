@@ -43,7 +43,7 @@
 }
 
 .usr {
-    height: 150px;
+    height: 190px;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
@@ -90,6 +90,10 @@
     width: 50%; 
     padding: 15px;
     overflow: scroll;
+}
+
+.lab {
+    margin-top: 10px;
 }
 
 @media (max-width: 1000px) {

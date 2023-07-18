@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import s from "../style/Login.module.css";
 import { ERROR_PAGE, PROFILE_PAGE, REGISTRATION_PAGE, SIGN_IN_USER, USERS } from "../utils/constants";
 import raccoon from "../img/raccoon.png";
@@ -19,8 +19,9 @@ export function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
-    const redirect = user.redirect;
-    
+    const [params, setParams] = useSearchParams();
+    const redirect = params.get("redirect");
+
     const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
 
@@ -66,7 +67,6 @@ export function Login() {
         }
         
         try {
-            console.log("validation")
             const valid = await api.post(
                 "/ping/" + user.userId,
                 user.jwt.substring(7),

@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { api } from "../../utils/axiosHelper";
 import { 
     DELIVERIES, 
-    ERROR_PAGE 
+    ERROR_PAGE
 } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 import s from "../../style/DeliveriesCategories.module.css";
 import { useSelector } from "react-redux";
 
-export default () => {
+export default (props) => {
+    const isAdmin = props.isAdmin;
+
     const user = useSelector(state => state.user);
     const [deliveries, setDeliveries] = useState([]);
     const [name, setName] = useState("");
@@ -60,6 +62,17 @@ export default () => {
                                 <div className={s.tCont}>
                                     <p className={s.text}>{ d.name }</p>
                                 </div>
+                                {
+                                    isAdmin &&
+                                    <div 
+                                        onClick={ () => 
+                                            remove(d.deliveryTypeId, user.jwt, navigate) 
+                                        } 
+                                        className={s.delCont}
+                                    >
+                                        <p className={s.text}>X</p>
+                                    </div>
+                                }
                             </div>
                         )
                     }
@@ -104,5 +117,23 @@ const createDelivery = async (name, token, setErr) => {
         } 
         
         setErr({ general: "Something went wrong" });
+    }
+}
+
+const remove = async (id, token, navigate) => {
+    try {
+        await api
+            .delete(
+                DELIVERIES + "/" + id,
+                {
+                    headers: {
+                        "Authorization": token
+                    }
+                }
+            )
+
+        window.location.reload(false);
+    } catch {
+        navigate(ERROR_PAGE);
     }
 }

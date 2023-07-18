@@ -1,9 +1,9 @@
-import { 
-    useDispatch, 
-    useSelector 
-} from "react-redux";
+import { useSelector } from "react-redux";
 import { api } from "../../utils/axiosHelper";
-import { useEffect } from "react";
+import { 
+    useEffect,
+    useState 
+} from "react";
 import { 
     Routes,
     Route,
@@ -23,7 +23,6 @@ import {
     MANAGE_PRODUCTS_PAGE,
     MANAGE_USERS
 } from "../../utils/constants";
-import { setUser } from "../../features/auth/userSlice";
 import Orders from "../../components/orders/Orders";
 import ManagerProductList from "../../components/products/ManagerProductList";
 import NewProduct from "../../components/products/NewProduct";
@@ -35,21 +34,21 @@ import s from "../../style/Management.module.css";
 export const Management = () => {
     const user = useSelector(state => state.user);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const location = useLocation();
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isManager, setIsManager] = useState(false);
 
     const ping = async () => {
-        try {
+
+        try {     
             if (!user.userId || !user.jwt) {
-                user.redirect = location.pathname;
-                dispatch(setUser(user));
-                navigate(LOGIN_PAGE);
+                navigate(LOGIN_PAGE + "?redirect=" + location.pathname);
                 return;
             }
 
-            const isManager = await api
-                .post(
-                    "/ping/manager/" + user.userId,
+            const isAdministrator = await api.
+                post(
+                    "/ping/admin/" + user.userId,
                     user.jwt.substring(7),
                     {
                         headers: {
@@ -58,10 +57,28 @@ export const Management = () => {
                     }
                 )
                 .then(resp => resp.data);
+            
+            setIsAdmin(isAdministrator);
 
-            if (!isManager) {
-                navigate(ACCESS_DENIED_PAGE);
+            if (!isAdministrator) {
+                const isManager = await api
+                    .post(
+                        "/ping/manager/" + user.userId,
+                        user.jwt.substring(7),
+                        {
+                            headers: {
+                                "Authorization": user.jwt
+                            }
+                        }
+                    )
+                    .then(resp => resp.data);
+                
+                setIsManager(isManager);
+                if (!isManager) {
+                    navigate(ACCESS_DENIED_PAGE);
+                }
             }
+            
         } catch(error) {
             navigate(ERROR_PAGE);
         }
@@ -69,7 +86,11 @@ export const Management = () => {
 
     useEffect(() => {
         ping();
-    }, []);
+    });
+
+    if (!isManager && !isAdmin) {
+        return <></>;
+    }
 
     return (
         <div className={s.mainCont}>
@@ -95,9 +116,9 @@ export const Management = () => {
                 <Route path={ MANAGE_ORDERS_PAGE.substring(8) } element={ <Orders /> } />
                 <Route path={ MANAGE_PRODUCTS_PAGE.substring(8) } element={ <ManagerProductList /> } />
                 <Route path={ MANAGE_NEW_PRODUCT_PAGE.substring(8) } element={ <NewProduct /> } />
-                <Route path={ MANAGE_DELIVERIES.substring(8) } element={ <ManageDeliveries /> } />
-                <Route path={ MANAGE_CATEGORIES.substring(8) } element={ <ManageCategories /> } />
-                <Route path={ MANAGE_USERS.substring(8) } element={ <ManageUsers /> } />
+                <Route path={ MANAGE_DELIVERIES.substring(8) } element={ <ManageDeliveries isAdmin={ isAdmin } /> } />
+                <Route path={ MANAGE_CATEGORIES.substring(8) } element={ <ManageCategories isAdmin={ isAdmin } /> } />
+                <Route path={ MANAGE_USERS.substring(8) } element={ <ManageUsers isAdmin={ isAdmin } /> } />
                 <Route path={ "*" } element={ <Orders /> } />
             </Routes>
         </div>
