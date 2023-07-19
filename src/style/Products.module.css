@@ -411,8 +411,7 @@
 .productCardTitle {
     height: 100%;
     margin: 0;
-    font-size: 1.1rem;
-    overflow: scroll;
+    font-size: 1rem;
 }
 
 .productCardBottomSection {

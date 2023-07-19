@@ -1,3 +1,22 @@
+// API ENDPOINTS
+export const API_BASE_URL = "http://192.168.0.103:8080/api/v2";
+export const PRODUCT_CATEGORIES = "/product_types";
+export const DELIVERIES = "/delivery_types";
+export const PRODUCTS = "/products";
+export const USERS = "/users";
+export const UNREGISTERED = "/unregistered_customers";
+export const ORDERS = "/orders";
+export const SIGN_IN_USER = "/users/login";
+export const SIGN_UP_USER = "/users/register";
+
+export const API_OFFSET_PARAM = "offset=";
+export const API_ENTITIES_PER_PAGE_PARAM = "quantity=";
+export const API_PROD_CATEGORY_PARAM = "category=";
+export const API_NAME_PARAM = "name=";
+export const API_PHONE_PARAM = "phone=";
+export const API_STATUS_PARAM = "status=";
+export const API_ORDER_BY_PARAM = "order=";
+
 // WEBSITE PAGES
 export const EMPTY_PAGE = "/";
 export const PRODUCTS_PAGE = "/products";
@@ -22,25 +41,6 @@ export const MANAGE_NEW_PRODUCT_PAGE = MANAGE_PRODUCTS_PAGE + "/new";
 export const MANAGE_DELIVERIES = MANAGER_PAGE + "/deliveries";
 export const MANAGE_CATEGORIES = MANAGER_PAGE + "/categories";
 export const MANAGE_USERS = MANAGER_PAGE + "/users";
-// API ENDPOINTS
-export const API_BASE_URL = "http://192.168.0.103:8080/api/v2";
-export const PRODUCT_CATEGORIES = "/product_types";
-export const DELIVERIES = "/delivery_types";
-export const PRODUCTS = "/products";
-export const USERS = "/users";
-export const UNREGISTERED = "/unregistered_customers";
-export const ORDERS = "/orders";
-export const SIGN_IN_USER = "/users/login";
-export const SIGN_UP_USER = "/users/register";
-
-export const API_OFFSET_PARAM = "offset=";
-export const API_ENTITIES_PER_PAGE_PARAM = "quantity=";
-export const API_PROD_CATEGORY_PARAM = "category=";
-export const API_NAME_PARAM = "name=";
-export const API_PHONE_PARAM = "phone=";
-export const API_STATUS_PARAM = "status=";
-export const API_ORDER_BY_PARAM = "order=";
-
 // LITERAL CONSTANTS
 export const PRODUCTS_PER_PAGE = 15;
 export const ORDERS_PER_PAGE = 10;

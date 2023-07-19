@@ -22,8 +22,7 @@
     }
 
     .cartContainer .itemsContainer .item .itemDescription .name {
-        font-size: medium;
-        overflow: scroll;
+        font-size: medium
     }
 
     .cartContainer .itemsContainer .item .imageContainer {

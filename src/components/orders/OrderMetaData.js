@@ -25,6 +25,7 @@ export default (props) => {
     useEffect(() => {
         fetchDeliveries(setDeliveries, navigate);
     }, []);
+    console.log(order.status)
 
     return (
         <div className={s.meta}>
@@ -42,40 +43,30 @@ export default (props) => {
                 !orderCompleted &&
                 <label className={s.lab}>
                     Status:
-                    <select className={s.tColr}>
-                        {
-                            STATUSES.map(s => {
-                                if (s === order.status) {
-                                    return (
+                    {
+                        order.status &&
+                        <select 
+                            onChange={ 
+                                e => {
+                                    order.status = e.target.value;
+                                    setOrder(order)
+                                }
+                            }
+                            defaultValue={ order.status } 
+                            className={`${s.tColr} ${s.sel}`}
+                        >
+                            {
+                                STATUSES.map(s => ( 
                                         <option 
-                                            onClick={() => {
-                                                order.status = s;
-                                                setOrder(order)
-                                            }}
                                             key={ s } 
                                             value={ s }
-                                            selected
                                         >
                                         { s }
                                         </option>
-                                    )
-                                }
-
-                                return (
-                                    <option 
-                                        onClick={() => {
-                                            order.status = s;
-                                            setOrder(order)
-                                        }}
-                                        key={ s } 
-                                        value={ s }
-                                    >
-                                    { s }
-                                    </option>
-                                );
-                            })
-                        }
-                    </select>
+                                ))
+                            }
+                        </select>
+                    }
                 </label>
             }
 
@@ -89,30 +80,35 @@ export default (props) => {
                 orderNotSent &&
                 <label className={s.lab}>
                     Delivery: 
-                    <select value={ order.deliveryType?.name } className={s.tColr}>
-                        <option 
-                            onClick={ () => {
-                                order.deliveryType = null;
-                                setOrder(order)
-                            }}
-                            value={null}
-                        ></option>
-
-                        {
-                            deliveries.map(d => (
-                                <option
-                                    onClick={() => {
-                                        order.deliveryType = d;
-                                        setOrder(order);
-                                    }}
-                                    key={ d.deliveryTypeId }
-                                    value={ d.name }
-                                >
-                                {d.name}
-                                </option>
-                            ))
-                        }
-                    </select>
+                    {
+                        <select 
+                            onChange={
+                                e => {
+                                    order.deliveryType = {
+                                        deliveryTypeId: e.target.value
+                                    };
+                                    setOrder(order)
+                                }
+                            }
+                            defaultValue={ order.deliveryType?.deliveryTypeId } 
+                            className={`${s.tColr} ${s.sel}`}
+                        >
+                            <option
+                                value={ null }>
+                            </option>
+                            {
+                                deliveries.map(d => (
+                                    <option
+                                        key={ d.deliveryTypeId }
+                                        value={ d.deliveryTypeId }
+                                    >
+                                    {d.name}
+                                    </option>
+                                ))
+                            }
+                        </select>
+                    }
+                    
                 </label>
             }
             <p className={s.text}>Posted: { new Date(order.postTime).toLocaleString("UK-ua") }</p>

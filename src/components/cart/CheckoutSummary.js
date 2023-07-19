@@ -51,11 +51,12 @@ export const CheckoutSummary = (props) => {
         try {
             if (!user.userId || !user.jwt) {
                 newOrder.unregCust = customer;
-                await api
+                newOrderId = await api
                     .post(
                         ORDERS,
                         newOrder
                     )
+                    .then(resp => resp.data);
             } else {
                 newOrder.user = user;
                 newOrderId = await api

@@ -61,25 +61,22 @@ export default (props) => {
                     />
                 }
                 { err?.status === 400 && <p className={s.validationError}>Number values are too big</p>}
-                { 
-                    !disabled &&
-                    <button 
-                        style=
+                <button 
+                    style=
+                    {
                         {
-                            {
-                                height: "2.5em", 
-                                width: "150px", 
-                                backgroundColor: "#2473FF", 
-                                color: "white", 
-                                borderRadius: "15px" 
-                            }
+                            height: "2.5em", 
+                            width: "150px", 
+                            backgroundColor: "#2473FF", 
+                            color: "white", 
+                            borderRadius: "15px" 
                         }
-                        className={s.tColr}
-                        onClick={ () => saveChanges(order, currentUser.jwt, navigate, setErr) }
-                    >
-                    Save changes
-                    </button>
-                }
+                    }
+                    className={s.tColr}
+                    onClick={ () => saveChanges(order, currentUser.jwt, navigate, setErr) }
+                >
+                Save changes
+                </button>
                 <button
                     onClick={ () => window.history.back() }
                     style=

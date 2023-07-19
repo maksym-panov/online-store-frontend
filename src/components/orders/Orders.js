@@ -111,6 +111,7 @@ export default (props) => {
                 <input 
                     className={s.prompt}
                     onChange={ e => setSearchId(e.target.value) }
+                    value={ searchId }
                     type="text" 
                     placeholder="Enter order ID" 
                 />
@@ -199,7 +200,7 @@ const fetchByUser = async (userId, setOrders, token, navigate) => {
 
 const fetchById = async (id, setOrders, token, navigate, setParams) => {
     if (!id) {
-        fetchAll(1, setOrders, token, navigate, setParams);
+        fetchAll(null, null, 1, setOrders, token, navigate, setParams);
         return;
     }
     try {
