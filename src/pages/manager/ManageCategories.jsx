@@ -62,7 +62,8 @@ export default (props) => {
                 <div className={s.list}>
                     {
                         categories?.map(c => 
-                            <div  
+                            <div 
+                                key={ "categ-" + c.productTypeId } 
                                 className={s.ent}
                             >
                                 <Link 

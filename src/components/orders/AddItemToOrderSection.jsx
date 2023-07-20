@@ -33,6 +33,7 @@ export default (props) => {
                 {
                     products?.map(p => (
                         <button 
+                            key={ "padd-" + p.productId }
                             className={s.prodClick}
                             onClick={ () => addItem(p, items, setItems, setErr, products, setProducts) } 
                         >
@@ -81,7 +82,6 @@ const fetchProducts = async (name, setProducts) => {
 }
 
 const addItem = async (p, items, setItems, setErr, products, setProducts) => {
-    console.log(p.stock)
     setErr(null);
     try {
         const curItem = items.find(

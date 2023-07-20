@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import s from "../../style/Orders.module.css";
 import Item from "./OrderEditPageItem";
 import AddItemToOrderSection from "./AddItemToOrderSection";
@@ -9,10 +9,12 @@ export default (props) => {
     const disabled = props.disabled;
     
     const [err, setErr] = useState(null);
-    const [products, setProducts] = useState();
-    const [items, setItems] = useState(order.orderProducts);
+    const [products, setProducts] = useState([]);
+    const [items, setItems] = useState(order?.orderProducts);
 
-    updateOrder(items, order, setOrder);
+    useEffect(() => {
+        updateOrder(items, order, setOrder);
+    }, []);
 
     return (
         <div className={s.ordContentCont}>
@@ -41,6 +43,7 @@ export default (props) => {
                 {
                     items?.map(i => 
                         <Item
+                            key={ "item-" + i.product.productId }
                             disabled={ disabled } 
                             pId={ i.product.productId } 
                             items={ items }

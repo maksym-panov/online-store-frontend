@@ -77,7 +77,11 @@ export default (props) => {
             <div className={s.productsList}>
                 {
                     products?.slice(0, PRODUCTS_PER_PAGE).map(
-                        p => <ProductCard product={ p } />
+                        p => 
+                            <ProductCard 
+                                key={ "prod-" + p.productId } 
+                                product={ p } 
+                            />
                     )
                 }
             </div>

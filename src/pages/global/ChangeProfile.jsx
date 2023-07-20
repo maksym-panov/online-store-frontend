@@ -1,6 +1,6 @@
 import { 
     useState,
-    useEffect 
+    useEffect
 } from "react";
 import { 
     useDispatch, 
@@ -13,13 +13,12 @@ import { useNavigate } from "react-router-dom";
 import { 
     PROFILE_PAGE, 
     USERS, 
-    LOGIN_PAGE ,
     BASE64_RESOLVER
 } from "../../utils/constants";
 import api from "../../utils/axiosHelper";
 import { setUser } from "../../features/auth/userSlice";
-import FormInput from "../../components/cart/FormInput";
-
+import FormInput from "../../components/cart/FormInput"
+import { ping } from "../../utils/webHelpers";
 
 export default () => {
     const [err, setErr] = useState({});
@@ -111,35 +110,8 @@ export default () => {
         navigate(PROFILE_PAGE);
     };
 
-    const ping = async () => {
-        if (!cusr.userId) {
-            navigate(LOGIN_PAGE);
-            return;
-        }
-        
-        try {
-            const valid = await api.post(
-                "/ping/" + cusr.userId,
-                cusr.jwt.substring(7),
-                {
-                    headers: {
-                        "Authorization": cusr.jwt
-                    }
-                }
-            );
-
-            if (!valid) {
-                dispatch(setUser({}));
-                navigate(LOGIN_PAGE);
-            }
-        } catch(error) {
-            dispatch(setUser({}));
-            navigate(LOGIN_PAGE);
-        }
-    }
-
     useEffect(() => {
-        ping();
+        ping(cusr, dispatch);
     }, []);
 
     return (

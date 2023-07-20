@@ -1,7 +1,7 @@
 import s from "../../style/ManagerProducts.module.css";
 
 export default (props) => {
-    const name = props.name
+    const name = props.name;
     const setName = props.setName;
     const price = props.price;
     const setPrice = props.setPrice;

@@ -1,9 +1,6 @@
-import { 
-    useSelector,
-    useDispatch
-} from "react-redux";
-import api from "../../utils/axiosHelper";
-import { setUser } from "../../features/auth/userSlice"
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { ping } from "../../utils/webHelpers";
 import { useEffect } from "react";
 
 export default () => {
@@ -35,32 +32,9 @@ export default () => {
 
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
-    const ping = async () => {
-        if (!user.userId) {
-            return;
-        }
-        
-        try {
-            const valid = await api.post(
-                "/ping/" + user.userId,
-                user.jwt.substring(7),
-                {
-                    headers: {
-                        "Authorization": user.jwt
-                    }
-                }
-            );
-
-            if (!valid) {
-                dispatch(setUser({}));
-            }
-        } catch(error) {
-            dispatch(setUser({}));
-        }
-    }
 
     useEffect(() => {
-        ping();
+        ping(user, dispatch);
     }, []);
 
     return (

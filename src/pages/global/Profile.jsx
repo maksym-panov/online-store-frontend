@@ -6,19 +6,16 @@ import { useNavigate } from "react-router-dom";
 import { 
     BASE64_RESOLVER, 
     EMPTY_PAGE, 
-    LOGIN_PAGE, 
     PROFILE_PAGE
 } from "../../utils/constants";
 import { setUser } from "../../features/auth/userSlice";
 import { clearCart } from "../../features/cartSlice";
 import s from "../../style/Profile.module.css";
 import accountWhite from "../../img/accountWhite.png";
-import api from "../../utils/axiosHelper";
-import { 
-    useEffect
-} from "react";
 import Orders from "./Orders";
 import ProfileDataPiece from "../../components/users/ProfileDataPiece";
+import { ping } from "../../utils/webHelpers";
+import { useEffect } from "react";
 
 export default () => {
     const user = useSelector(state => state.user);
@@ -33,35 +30,8 @@ export default () => {
         navigate(EMPTY_PAGE);
     };
 
-    const ping = async () => {
-        if (!user.userId) {
-            navigate(LOGIN_PAGE)
-            return;
-        }
-        
-        try {
-            const valid = await api.post(
-                "/ping/" + user.userId,
-                user.jwt.substring(7),
-                {
-                    headers: {
-                        "Authorization": user.jwt
-                    }
-                }
-            );
-
-            if (!valid) {
-                dispatch(setUser({}));
-                navigate(LOGIN_PAGE);
-            }
-        } catch(error) {
-            dispatch(setUser({}));
-            navigate(LOGIN_PAGE);
-        }
-    }
-
     useEffect(() => {
-        ping();
+        ping(user, dispatch);
     }, []);
 
     return (

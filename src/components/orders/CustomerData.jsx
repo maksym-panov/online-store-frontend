@@ -8,16 +8,16 @@ export default (props) => {
 
     const c = order.unregCust;
 
-    const [firstname, setFirstname] = useState(c.firstname);
-    const [lastname, setLastname] = useState(c.lastname);
-    const [phoneNumber, setPhoneNumber] = useState(c.phoneNumber);
-    const [region, setRegion] = useState(c.region);
-    const [district, setDistrict] = useState(c.district);
-    const [city, setCity] = useState(c.city);
-    const [street, setStreet] = useState(c.street);
-    const [building, setBuilding] = useState(c.building);
-    const [apartment, setApartment] = useState(c.apartment);
-    const [postalCode, setPostalCode] = useState(c.postalCode);
+    const [firstname, setFirstname] = useState(c.firstname ? c.firstname : "");
+    const [lastname, setLastname] = useState(c.lastname ? c.lastname : "");
+    const [phoneNumber, setPhoneNumber] = useState(c.phoneNumber ? c.phoneNumber : "");
+    const [region, setRegion] = useState(c.region ? c.region : "");
+    const [district, setDistrict] = useState(c.district ? c.district : "");
+    const [city, setCity] = useState(c.city ? c.city : "");
+    const [street, setStreet] = useState(c.street ? c.street : "");
+    const [building, setBuilding] = useState(c.building ? c.building : "");
+    const [apartment, setApartment] = useState(c.apartment ? c.apartment : "");
+    const [postalCode, setPostalCode] = useState(c.postalCode ? c.postalCode : "");
 
     c.firstname = firstname;
     c.lastname = lastname;

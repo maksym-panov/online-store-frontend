@@ -7,13 +7,18 @@ import s from "../../style/Cart.module.css";
 import { EMPTY_PAGE } from "../../utils/constants";
 import { useDispatch } from "react-redux";
 import { clearCart } from "../../features/cartSlice";
+import { useEffect } from "react";
 
 export default () => {
     const [params, setParams] = useSearchParams();
     const id = params.get("id");
 
+
     const dispatch = useDispatch();
-    dispatch(clearCart());
+
+    useEffect(() => {
+        dispatch(clearCart());
+    }, []);
 
     return (
         <div className={s.sCont}>

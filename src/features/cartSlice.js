@@ -36,7 +36,6 @@ export const cartSlice = createSlice({
         incrementQuantity: (state, action) => {
             const id = action.payload.id;
             const stock = action.payload.stock;
-            console.log(id + " " + stock);
 
             const inCart = state.products.find(
                 p => p.id === id

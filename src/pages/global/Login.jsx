@@ -22,6 +22,7 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../utils/axiosHelper";
+import { ping } from "../../utils/webHelpers";
 
 export default () => {
     const [err, setErr] = useState({});
@@ -75,32 +76,10 @@ export default () => {
         }
     }
 
-    const ping = async () => {
-        if (!user.userId) {
-            return;
-        }
-        
-        try {
-            const valid = await api.post(
-                "/ping/" + user.userId,
-                user.jwt.substring(7),
-                {
-                    headers: {
-                        "Authorization": user.jwt
-                    }
-                }
-            );
-
-            if (!valid) {
-                dispatch(setUser({}));
-            }
-        } catch(error) {
-            dispatch(setUser({}));
-        }
-    }
 
     useEffect(() => {
-        ping();
+        ping(user, dispatch);
+        
         if (user.userId && user.jwt) {
             navigate(PROFILE_PAGE);
         }

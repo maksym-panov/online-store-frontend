@@ -80,7 +80,7 @@ export default () => {
             <div className={s.pLst}>
                 {
                     products?.slice(0, PRODUCTS_PER_PAGE).map(p => (
-                        <ManagerProductListEntry product={ p } />
+                        <ManagerProductListEntry key={ "pentry-" + p.productId } product={ p } />
                     ))
                 }
             </div>

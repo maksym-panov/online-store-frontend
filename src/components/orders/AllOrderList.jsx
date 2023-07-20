@@ -118,7 +118,6 @@ const fetchById = async (id, setOrders, token, navigate, setParams) => {
             )
             .then(resp => resp.data);
             
-            console.log(result)
             setOrders([result]);
     } catch(ignored) {}
 }

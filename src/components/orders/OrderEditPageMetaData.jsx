@@ -31,7 +31,6 @@ export default (props) => {
     useEffect(() => {
         fetchDeliveries(setDeliveries, navigate);
     }, []);
-    console.log(order.status)
 
     return (
         <div className={s.meta}>

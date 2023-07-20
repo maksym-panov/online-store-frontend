@@ -5,6 +5,13 @@ import {
   QueryClient, 
   QueryClientProvider 
 } from "@tanstack/react-query";
+import { Provider } from 'react-redux';
+import { 
+  store, 
+  persistor 
+} from "./features/store";
+import { PersistGate } from 'redux-persist/integration/react';
+import { BrowserRouter } from 'react-router-dom';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -18,7 +25,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={ client }>
-      <App />
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </PersistGate>
+        </Provider>
     </QueryClientProvider>
   </React.StrictMode>
 );

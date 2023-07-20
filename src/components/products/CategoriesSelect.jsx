@@ -30,7 +30,8 @@ export default (props) => {
                     );
 
                     return (
-                        <label 
+                        <label
+                            key={ "categ-" + c.productTypeId } 
                             style={ checked && { backgroundColor: "#2473FF", border: "none" } }
                             className={s.cat}
                         >

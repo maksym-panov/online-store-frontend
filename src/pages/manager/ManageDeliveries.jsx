@@ -58,7 +58,10 @@ export default (props) => {
                 <div className={s.list}>
                     {
                         deliveries?.map(d => 
-                            <div className={s.ent}>
+                            <div 
+                                key={ "deliv-" + d.deliveryTypeId }
+                                className={s.ent}
+                            >
                                 <div className={s.iCont}>
                                     <p className={s.text}>Id: { d.deliveryTypeId }</p>
                                 </div>
