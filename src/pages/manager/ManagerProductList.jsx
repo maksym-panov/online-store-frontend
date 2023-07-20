@@ -8,7 +8,6 @@ import {
     API_OFFSET_PARAM, 
     ERROR_PAGE, 
     MANAGE_NEW_PRODUCT_PAGE, 
-    MANAGE_PRODUCTS_PAGE, 
     PRODUCTS, 
     PRODUCTS_PER_PAGE 
 } from "../../utils/constants";
@@ -20,6 +19,7 @@ import {
 import ManagerProductPage from "./ManagerProductPage";
 import s from "../../style/ManagerProducts.module.css";
 import Pagination from "../../components/common/Pagination";
+import ManagerProductListEntry from "../../components/products/ManagerProductListEntry";
 
 export default () => {
     const [params, setParams] = useSearchParams();
@@ -80,23 +80,7 @@ export default () => {
             <div className={s.pLst}>
                 {
                     products?.slice(0, PRODUCTS_PER_PAGE).map(p => (
-                        <div className={s.p}>
-                            <div className={s.idCont}>
-                                <p className={s.text}>Id: {p.productId}</p> 
-                            </div>
-                            <div className={s.nCont}>
-                                <Link 
-                                    to={ MANAGE_PRODUCTS_PAGE + "?id=" + p.productId }
-                                    className={s.text}
-                                >
-                                    {p.name}
-                                </Link> 
-                            </div>
-                            <div className={s.metaCont}>
-                                <p className={s.text}>Price: {" $" + p.price}</p>
-                                <p className={s.text}>Stock: {p.stock}</p>
-                            </div>
-                        </div>
+                        <ManagerProductListEntry product={ p } />
                     ))
                 }
             </div>
@@ -112,7 +96,6 @@ export default () => {
 
 const fetchProducts = async (page, setProducts, navigate, setParams, name, prompt) => {
     try {
-        console.log(name + "            " + prompt)
         if (prompt === "") {
             prompt = null;
         }

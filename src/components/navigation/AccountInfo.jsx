@@ -1,6 +1,7 @@
 import { 
   LOGIN_PAGE, 
-  CART_PAGE 
+  CART_PAGE, 
+  BASE64_RESOLVER
 } from "../../utils/constants";
 import s from "../../style/NavigationBar.module.css";
 import { Link } from "react-router-dom";
@@ -49,7 +50,7 @@ export default () => {
             <div style=
               {
                 user && user.image ?
-                { backgroundImage: `url("data:image/jpg;base64,${user.image}")` }
+                { backgroundImage: `url("${ BASE64_RESOLVER + user.image }")` }
                 :
                 { backgroundImage: `url(${account})` }
               }

@@ -21,6 +21,7 @@ import {
     useSelector 
 } from "react-redux";
 import { setUser } from "../../features/auth/userSlice";
+import RegistrationFormInput from "../../components/users/RegistrationFormInput";
 
 export default () => {
     const [err, setErr] = useState({});
@@ -119,56 +120,44 @@ export default () => {
                 <img className={loginStyles.logo} src={greeting} alt="greeting" />
                 <h1 className={loginStyles.title}>Nice to meet you!</h1>
                 <div className={loginStyles.inputs}>
-                    <label className={loginStyles.inputLabel}>
-                        First name*
-                        { err.firstname && <p className={loginStyles.validationError}>{err.firstname}</p>}
-                        <input 
-                            onChange={e => setFirstname(e.target.value)}
-                            className={loginStyles.prompt} 
-                            type="text" 
-                            placeholder="John" 
-                        />
-                    </label>
-                    <label className={loginStyles.inputLabel}>
-                        Last name
-                        { err.lastname && <p className={loginStyles.validationError}>{err.lastname}</p>}
-                        <input 
-                            onChange={e => setLastname(e.target.value)}
-                            className={loginStyles.prompt} 
-                            type="text" 
-                            placeholder="Doe" 
-                        />
-                    </label>
-                    <label className={loginStyles.inputLabel}>
-                        Phone number*
-                        { err.phoneNumber && <p className={loginStyles.validationError}>{err.phoneNumber}</p>}
-                        <input 
-                            onChange={e => setPhoneNumber(e.target.value)}
-                            className={loginStyles.prompt} 
-                            type="text" 
-                            placeholder="0991234567" 
-                        />
-                    </label>
-                    <label className={loginStyles.inputLabel}>
-                        Email
-                        { err.email && <p className={loginStyles.validationError}>{err.email}</p>}
-                        <input 
-                            onChange={e => setEmail(e.target.value)}
-                            className={loginStyles.prompt} 
-                            type="email" 
-                            placeholder="email@example.com" 
-                        />
-                    </label>
-                    <label className={loginStyles.inputLabel}>
-                        Password
-                        { err.password && <p className={loginStyles.validationError}>{err.password}</p>}
-                        <input 
-                            onChange={e => setPassword(e.target.value)} 
-                            className={loginStyles.prompt} 
-                            type="password" 
-                            placeholder="********" 
-                        />
-                    </label>
+                    <RegistrationFormInput
+                        name={ "Firstname" } 
+                        err={ err.firstname }
+                        setValue={ setFirstname }
+                        plhol={ "John"}
+                        type={ "text" }
+                        req={ true }
+                    />
+                    <RegistrationFormInput
+                        name={ "Lastname" } 
+                        err={ err.lastname }
+                        setValue={ setLastname }
+                        plhol={ "Doe"}
+                        type={ "text" }
+                    />
+                    <RegistrationFormInput
+                        name={ "Phone number" } 
+                        err={ err.phoneNumber }
+                        setValue={ setPhoneNumber }
+                        plhol={ "0991234567" }
+                        type={ "text" }
+                        req={ true }
+                    />
+                    <RegistrationFormInput
+                        name={ "Email" } 
+                        err={ err.email }
+                        setValue={ setEmail }
+                        plhol={ "example@gmail.com" }
+                        type={ "email" }
+                    />
+                    <RegistrationFormInput
+                        name={ "Password" } 
+                        err={ err.password }
+                        setValue={ setPassword }
+                        plhol={ "********"}
+                        type={ "password" }
+                        req={ true }
+                    />
                 </div>
                 <Link 
                     className={loginStyles.signUpLink} 

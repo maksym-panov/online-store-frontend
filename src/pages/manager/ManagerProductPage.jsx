@@ -14,6 +14,8 @@ import s from "../../style/ManagerProducts.module.css";
 import { getBase64 } from "../../utils/webHelpers";
 import { useSelector } from "react-redux";
 import CategoriesSelect from "../../components/products/CategoriesSelect";
+import EditProductMeta from "../../components/products/EditProductMeta";
+import EditProductImage from "../../components/products/EditProductImage";
 
 export default (props) => {
     const id = props.productId;
@@ -28,6 +30,15 @@ export default (props) => {
     const [description, setDescription] = useState(null);
 
     const [categories, setCategories] = useState([]);
+
+    const newProduct = {};
+
+    newProduct.name = name;
+    newProduct.image = image;
+    newProduct.price = price;
+    newProduct.stock = stock;
+    newProduct.description = description;
+    newProduct.productTypes = categories;
 
     const [err, setErr] = useState(null);
 
@@ -50,6 +61,14 @@ export default (props) => {
         }
     }
 
+    const save = () => saveChanges(
+        product.productId, 
+        newProduct,
+        user.jwt,
+        navigate,
+        setErr
+    );
+
     useEffect(() => {
         fetchProduct(id, setProduct, navigate);
     }, [])
@@ -60,51 +79,18 @@ export default (props) => {
                 <div className={s.pTitleSect}>
                     <h1 className={s.text}>Product #{product.productId} information</h1>
                 </div>
-                <div 
-                    style={{
-                        backgroundImage: `url(${BASE64_RESOLVER + image})`
-                    }}
-                    className={s.imageSect}
-                ></div>
-                <input 
-                    className={s.inpF} 
-                    type="file"
-                    onChange={ e => 
-                        getBase64(
-                            e.target.files[0], 
-                            setImage
-                        )
-                    }
-                 /> 
-                <div className={s.pMetaSect}>
-                    <label className={s.lab}>
-                        { err?.name && <p className={s.validationError}>{ err.name }</p> }
-                        Product name
-                        <input 
-                            type="text" 
-                            value={ name } 
-                            onChange={ e => setName(e.target.value) }
-                        />
-                    </label>
-                    <label className={s.lab}>
-                        { err?.price && <p className={s.validationError}>{ err.price }</p> }
-                        Price ($)
-                        <input 
-                            type="number"
-                            value={ price } 
-                            onChange={ e => setPrice(e.target.value) }
-                        />
-                    </label>
-                    <label className={s.lab}>
-                        { err?.stock && <p className={s.validationError}>{ err.stock }</p> }
-                        Stock
-                        <input 
-                            type="number"
-                            value={ stock }
-                            onChange={ e => setStock(e.target.value) } 
-                        />
-                    </label>   
-                </div>
+
+                <EditProductImage
+                    image={ image }
+                    setImage={ setImage }
+                /> 
+
+                <EditProductMeta 
+                    name={ name } setName={ setName } 
+                    price={ price } setPrice={ setPrice }
+                    stock={ stock } setStock={ setStock }
+                    err={ err }
+                />
                 
                 <CategoriesSelect categories={ categories } setCategories={ setCategories } />
                 
@@ -119,26 +105,11 @@ export default (props) => {
                         />
                     </label>
                 </div>
+
                 <div className={s.submSect}>
                     { err && <p className={s.validationError}>Incorrect data</p> }
                     <button 
-                        onClick=
-                            { () => 
-                                saveChanges(
-                                    product.productId, 
-                                    {
-                                        name: name,
-                                        image: image,
-                                        price: price,
-                                        stock: stock,
-                                        description: description,
-                                        productTypes: categories
-                                    },
-                                    user.jwt,
-                                    navigate,
-                                    setErr
-                                ) 
-                            }
+                        onClick={ () => save() }
                         style={ btnPrim }
                         className={s.tColr}
                     >

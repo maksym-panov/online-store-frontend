@@ -130,9 +130,17 @@
     border-radius: 30px;
 }
 
+.bthP {
+    height: 2.5em;
+    width: 150px; 
+    background-color: #2473FF;
+    color: white;
+    border-radius: 10px 
+}
+
 .btnS {
     height: 3em;
-    width: 300px;
+    width: 150px;
     margin-top: 10px;
     border-radius: 10px;
     border: none;

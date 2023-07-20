@@ -66,7 +66,12 @@ export default () => {
                 navigate(ERROR_PAGE);
                 return;
             }
-            setErr(error.response.data);
+
+            if (!error.response.data.message) {
+                setErr({ message: "Could not find user" });
+            } else {
+                setErr(error.response.data);
+            }
         }
     }
 

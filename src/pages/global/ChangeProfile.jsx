@@ -18,7 +18,7 @@ import {
 } from "../../utils/constants";
 import api from "../../utils/axiosHelper";
 import { setUser } from "../../features/auth/userSlice";
-import DataInput from "../../components/common/DataInput";
+import FormInput from "../../components/cart/FormInput";
 
 
 export default () => {
@@ -36,7 +36,6 @@ export default () => {
     const [email, setEmail] = useState(cpi.email ? cpi.email : "");
     const [firstname, setFirstname] = useState(cpi.firstname);
     const [lastname, setLastname] = useState(cpi.lastname ? cpi.lastname : "");
-
     const [region, setRegion] = useState(ca.region ? ca.region : "");
     const [district, setDistrict] = useState(ca.district ? ca.district : "");
     const [city, setCity] = useState(ca.city ? ca.city : "");
@@ -174,109 +173,87 @@ export default () => {
                             />
                         </label>
                     </div>
-                    
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>Phone number</h4>
-                        {err.phoneNumber && <p className={s.validationError}>{err.phoneNumber}</p>}
-                        <input 
-                            onChange={e => setPhoneNumber(e.target.value)}
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="text"
-                            value={phoneNumber} />
-                    </label>
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>Email</h4>
-                        {err.email && <p className={s.validationError}>{err.email}</p>}
-                        <input 
-                            onChange={e => setEmail(e.target.value)}
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="email"
-                            value={email} />
-                    </label>
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>First name</h4>
-                        {err.firstname && <p className={s.validationError}>{err.firstname}</p>}
-                        <input 
-                            onChange={e => setFirstname(e.target.value)}
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="text"
-                            value={firstname} />
-                    </label>
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>Last name</h4>
-                        {err.lastname && <p className={s.validationError}>{err.lastname}</p>}
-                        <input 
-                            onChange={e => setLastname(e.target.value)}
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="text"
-                            value={lastname} />
-                    </label>
+                    <FormInput
+                        name="Phone number"
+                        err={ err.phoneNumber }
+                        value={ phoneNumber }
+                        setValue={ setPhoneNumber }
+                        type={ "text" }
+                    /> 
+                    <FormInput
+                        name="Email"
+                        err={ err.email }
+                        value={ email }
+                        setValue={ setEmail }
+                        type={ "email" }
+                    /> 
+                    <FormInput
+                        name="Firstname"
+                        err={ err.firstname }
+                        value={ firstname }
+                        setValue={ setFirstname }
+                        type={ "text" }
+                    /> 
+                    <FormInput
+                        name="Lastname"
+                        err={ err.lastname }
+                        value={ lastname }
+                        setValue={ setLastname }
+                        type={ "text" }
+                    /> 
 
                     <hr className={s.ruler} />
 
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>Region</h4>
-                        {err.region && <p className={s.validationError}>{err.region}</p>}
-                        <input 
-                            onChange={e => setRegion(e.target.value)}
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="text"
-                            value={region} />
-                    </label>
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>District</h4>
-                        {err.district && <p className={s.validationError}>{err.district}</p>}
-                        <input 
-                            onChange={e => setDistrict(e.target.value)}
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="text"
-                            value={district} />
-                    </label>
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>City</h4>
-                        {err.city && <p className={s.validationError}>{err.city}</p>}
-                        <input 
-                            onChange={e => setCity(e.target.value)}
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="text"
-                            value={city} />
-                    </label>
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>Street</h4>
-                        {err.street && <p className={s.validationError}>{err.street}</p>}
-                        <input
-                            onChange={e => setStreet(e.target.value)} 
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="text"
-                            value={street} />
-                    </label>
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>Building</h4>
-                        {err.building && <p className={s.validationError}>{err.building}</p>}
-                        <input 
-                            onChange={e => setBuilding(e.target.value)}
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="number"
-                            value={building} />
-                    </label>
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>Apartment</h4>
-                        {err.apartment && <p className={s.validationError}>{err.apartment}</p>}
-                        <input
-                            onChange={e => setApartment(e.target.value)} 
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="number"
-                            value={apartment} />
-                    </label>
-                    <label className={s.changeDataPiece}>
-                        <h4 className={s.dataHead}>Postal code</h4>
-                        {err.postalCode && <p className={s.validationError}>{err.postalCode}</p>}
-                        <input 
-                            onChange={e => setPostalCode(e.target.value)}
-                            className={`${s.dataBody} ${s.prompt}`} 
-                            type="number"
-                            value={postalCode} />
-                    </label>
+                    <FormInput
+                        name="Region"
+                        err={ err.region }
+                        value={ region }
+                        setValue={ setRegion }
+                        type={ "text" }
+                    /> 
+                    <FormInput
+                        name="District"
+                        err={ err.district }
+                        value={ district }
+                        setValue={ setDistrict }
+                        type={ "text" }
+                    /> 
+                    <FormInput
+                        name="City"
+                        err={ err.city }
+                        value={ city }
+                        setValue={ setCity }
+                        type={ "text" }
+                    /> 
+                    <FormInput
+                        name="Street"
+                        err={ err.street }
+                        value={ street }
+                        setValue={ setStreet }
+                        type={ "text" }
+                    /> 
+                    <FormInput
+                        name="Building"
+                        err={ err.building }
+                        value={ building }
+                        setValue={ setBuilding }
+                        type={ "number" }
+                    /> 
+                    <FormInput
+                        name="Apartment"
+                        err={ err.apartment }
+                        value={ apartment }
+                        setValue={ setApartment }
+                        type={ "number" }
+                    /> 
+                    <FormInput
+                        name="Postal code"
+                        err={ err.postalCode }
+                        value={ postalCode }
+                        setValue={ setPostalCode }
+                        type={ "number" }
+                    /> 
+         
                     <div className={s.buttonContainer}>
                         <button 
                             onClick={applyChanges}

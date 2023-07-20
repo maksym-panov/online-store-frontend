@@ -1,136 +1,100 @@
 import s from "../../style/Cart.module.css";
-import profileS from "../../style/Profile.module.css";
+import FormInput from "./FormInput";
+import { useState } from "react";
 
 export default (props) => {
     const customer = props.customer;
-    const setCustomer = props.setCustomer;
     const err = props.err;
+
+    const [phoneNumber, setPhoneNumber] = useState();
+    const [firstname, setFirstname] = useState();
+    const [lastname, setLastname] = useState();
+    const [region, setRegion] = useState();
+    const [district, setDistrict] = useState();
+    const [city, setCity] = useState();
+    const [street, setStreet] = useState();
+    const [building, setBuilding] = useState();
+    const [apartment, setApartment] = useState();
+    const [postalCode, setPostalCode] = useState();
+
+    customer.phoneNumber = phoneNumber;
+    customer.firstname = firstname;
+    customer.lastname = lastname;
+    customer.region = region;
+    customer.district = district;
+    customer.city = city;
+    customer.street = street;
+    customer.building = building;
+    customer.apartment = apartment;
+    customer.postalCode = postalCode;
 
     return (
         <div className={s.unregisteredForm}>
-            <label className={profileS.changeDataPiece}>
-                <h4 className={profileS.dataHead}>Phone number*</h4>
-                {err.phoneNumber && <p className={profileS.validationError}>{err.phoneNumber}</p>}
-                <input 
-                    onChange={e => {
-                        customer.phoneNumber = e.target.value
-                        setCustomer(customer)
-                    }}
-                    className={`${profileS.dataBody} ${profileS.prompt}`} 
-                    type="text"
-                />
-            </label>
-            <label className={profileS.changeDataPiece}>
-                <h4 className={profileS.dataHead}>First name*</h4>
-                {err.firstname && <p className={profileS.validationError}>{err.firstname}</p>}
-                <input 
-                    onChange={e => {
-                        customer.firstname = e.target.value
-                        setCustomer(customer)
-                    }}
-                    className={`${profileS.dataBody} ${profileS.prompt}`} 
-                    type="text"
-                />
-            </label>
-            <label className={profileS.changeDataPiece}>
-                <h4 className={profileS.dataHead}>Last name</h4>
-                {err.lastname && <p className={profileS.validationError}>{err.lastname}</p>}
-                <input 
-                    onChange={e => {
-                        customer.lastname = e.target.value
-                        setCustomer(customer)
-                    }}
-                    className={`${profileS.dataBody} ${profileS.prompt}`} 
-                    type="text"
-                />
-            </label>
-
-            <hr className={profileS.ruler} />
-
-            <label className={profileS.changeDataPiece}>
-                <h4 className={profileS.dataHead}>Region*</h4>
-                {err.region && <p className={profileS.validationError}>{err.region}</p>}
-                <input 
-                    onChange={e => {
-                        customer.region = e.target.value
-                        setCustomer(customer)
-                    }}
-                    className={`${profileS.dataBody} ${profileS.prompt}`} 
-                    type="text"
-                />
-            </label>
-            <label className={profileS.changeDataPiece}>
-                <h4 className={profileS.dataHead}>District*</h4>
-                {err.district && <p className={profileS.validationError}>{err.district}</p>}
-                <input 
-                    onChange={e => {
-                        customer.district = e.target.value
-                        setCustomer(customer)
-                    }}
-                    className={`${profileS.dataBody} ${profileS.prompt}`} 
-                    type="text"
-                />
-            </label>
-            <label className={profileS.changeDataPiece}>
-                <h4 className={profileS.dataHead}>City*</h4>
-                {err.city && <p className={profileS.validationError}>{err.city}</p>}
-                <input 
-                    onChange={e => {
-                        customer.city = e.target.value
-                        setCustomer(customer)
-                    }}
-                    className={`${profileS.dataBody} ${profileS.prompt}`} 
-                    type="text"
-                />
-            </label>
-            <label className={profileS.changeDataPiece}>
-                <h4 className={profileS.dataHead}>Street</h4>
-                {err.street && <p className={profileS.validationError}>{err.street}</p>}
-                <input
-                    onChange={e => {
-                        customer.street = e.target.value
-                        setCustomer(customer)
-                    }}
-                    className={`${profileS.dataBody} ${profileS.prompt}`} 
-                    type="text"
-                />
-            </label>
-            <label className={profileS.changeDataPiece}>
-                <h4 className={profileS.dataHead}>Building</h4>
-                {err.building && <p className={profileS.validationError}>{err.building}</p>}
-                <input 
-                    onChange={e => {
-                        customer.building = e.target.value
-                        setCustomer(customer)
-                    }}
-                    className={`${profileS.dataBody} ${profileS.prompt}`} 
-                    type="number"
-                />
-            </label>
-            <label className={profileS.changeDataPiece}>
-                <h4 className={profileS.dataHead}>Apartment</h4>
-                {err.apartment && <p className={profileS.validationError}>{err.apartment}</p>}
-                <input
-                    onChange={e => {
-                        customer.apartment = e.target.value
-                        setCustomer(customer)
-                    }}
-                    className={`${profileS.dataBody} ${profileS.prompt}`} 
-                    type="number"
-                />
-            </label>
-            <label className={profileS.changeDataPiece}>
-                <h4 className={profileS.dataHead}>Postal code</h4>
-                {err.postalCode && <p className={profileS.validationError}>{err.postalCode}</p>}
-                <input 
-                    onChange={e => {
-                        customer.postalCode = e.target.value
-                        setCustomer(customer)
-                    }}
-                    className={`${profileS.dataBody} ${profileS.prompt}`} 
-                    type="number"
-                />
-            </label>
+            <FormInput
+                name="Phone number"
+                err={ err.phoneNumber }
+                setValue={ setPhoneNumber }
+                type={ "text" }
+                req={ true }
+            />
+            <FormInput
+                name="Firstname"
+                err={ err.firstname }
+                setValue={ setFirstname }
+                type={ "text" }
+                req={ true }
+            />
+            <FormInput
+                name="Lastname"
+                err={ err.lastname }
+                setValue={ setLastname }
+                type={ "text" }
+            />
+            <FormInput
+                name="Region"
+                err={ err.region }
+                setValue={ setRegion }
+                type={ "text" }
+                req={ true }
+            />
+            <FormInput
+                name="District"
+                err={ err.district }
+                setValue={ setDistrict }
+                type={ "text" }
+                req={ true }
+            />
+            <FormInput
+                name="City"
+                err={ err.city }
+                setValue={ setCity }
+                type={ "text" }
+                req={ true }
+            />
+            <FormInput
+                name="Street"
+                err={ err.street }
+                setValue={ setStreet }
+                type={ "text" }
+            />
+            <FormInput
+                name="Building"
+                err={ err.building }
+                setValue={ setBuilding }
+                type={ "number" }
+            />
+            <FormInput
+                name="Apartment"
+                err={ err.apartment }
+                setValue={ setApartment }
+                type={ "number" }
+            />
+            <FormInput
+                name="Postal code"
+                err={ err.postalCode }
+                setValue={ setPostalCode }
+                type={ "number" }
+            />
         </div>
     );
 }

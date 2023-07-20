@@ -11,6 +11,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { getBase64 } from "../../utils/webHelpers";
 import CategoriesSelect from "../../components/products/CategoriesSelect";
+import EditProductMeta from "../../components/products/EditProductMeta";
+import EditProductImage from "../../components/products/EditProductImage";
 
 export default () => {
     const navigate = useNavigate();
@@ -32,54 +34,18 @@ export default () => {
                 <div className={s.pTitleSect}>
                     <h1 className={s.text}>Add new product</h1>
                 </div>
-                {
-                    image &&
-                    <div 
-                        style={{
-                            backgroundImage: `url(${BASE64_RESOLVER + image})`
-                        }}
-                        className={s.imageSect}
-                    ></div>
-                }
-                <input 
-                    className={s.inpF} 
-                    type="file"
-                    onChange={ e => 
-                        getBase64(
-                            e.target.files[0], 
-                            setImage
-                        )
-                    }
-                 /> 
-                <div className={s.pMetaSect}>
-                    <label className={s.lab}>
-                        { err?.name && <p className={s.validationError}>{ err.name }</p> }
-                        Product name
-                        <input 
-                            type="text" 
-                            value={ name } 
-                            onChange={ e => setName(e.target.value) }
-                        />
-                    </label>
-                    <label className={s.lab}>
-                        { err?.price && <p className={s.validationError}>{ err.price }</p> }
-                        Price ($)
-                        <input 
-                            type="number"
-                            value={ price } 
-                            onChange={ e => setPrice(e.target.value) }
-                        />
-                    </label>
-                    <label className={s.lab}>
-                        { err?.stock && <p className={s.validationError}>{ err.stock }</p> }
-                        Stock
-                        <input 
-                            type="number"
-                            value={ stock }
-                            onChange={ e => setStock(e.target.value) } 
-                        />
-                    </label>   
-                </div>
+                
+                <EditProductImage 
+                    image={ image }
+                    setImage={ setImage }
+                />
+
+                <EditProductMeta 
+                    name={ name } setName={ setName } 
+                    price={ price } setPrice={ setPrice }
+                    stock={ stock } setStock={ setStock }
+                    err={ err }
+                />
 
                 <CategoriesSelect categories={ categories } setCategories={ setCategories } />
 

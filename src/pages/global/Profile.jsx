@@ -18,9 +18,12 @@ import {
     useEffect
 } from "react";
 import Orders from "./Orders";
+import ProfileDataPiece from "../../components/users/ProfileDataPiece";
 
 export default () => {
     const user = useSelector(state => state.user);
+    const pi = user.personalInfo;
+    const a = user.address;
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -82,127 +85,61 @@ export default () => {
                         </div>
                         <h1 className={s.userName}>
                             {
-                                user.personalInfo?.firstname + 
+                                pi?.firstname + 
                                 (
-                                    user.personalInfo?.lastname ? 
-                                    " " + user.personalInfo.lastname : 
+                                    pi?.lastname ? 
+                                    " " + pi.lastname : 
                                     ""
                                 )
                             }
                         </h1>
                     </div>
 
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>Phone number</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.personalInfo?.phoneNumber ?
-                                user.personalInfo.phoneNumber :
-                                "-"
-                            }
-                        </p>
-                    </div>
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>Email</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.personalInfo?.email ?
-                                user.personalInfo.email :
-                                "-"
-                            }
-                        </p>
-                    </div>
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>First name</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.personalInfo?.firstname ?
-                                user.personalInfo.firstname :
-                                "-"
-                            }
-                        </p>
-                    </div>
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>Last name</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.personalInfo?.lastname ?
-                                user.personalInfo.lastname :
-                                "-"
-                            }
-                        </p>
-                    </div>
-                    <hr />
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>Region</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.address?.region ?
-                                user.address.region :
-                                "-"
-                            }
-                        </p>
-                    </div>
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>District</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.address?.district ?
-                                user.address.district :
-                                "-"
-                            }
-                        </p>
-                    </div>
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>City</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.address?.city ?
-                                user.address.city :
-                                "-"
-                            }
-                        </p>
-                    </div>
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>Street</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.address?.street ?
-                                user.address.street :
-                                "-"
-                            }
-                        </p>
-                    </div>
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>Building</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.address?.building ?
-                                user.address.building :
-                                "-"
-                            }
-                        </p>
-                    </div>
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>Apartment</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.address?.apartment ?
-                                user.address.apartment :
-                                "-"
-                            }
-                        </p>
-                    </div>
-                    <div className={s.dataPiece}>
-                        <h5 className={s.dataHead}>Postal code</h5>
-                        <p className={s.dataBody}>
-                            {
-                                user.address?.postalCode ?
-                                user.address.postalCode :
-                                "-"
-                            }
-                        </p>
-                    </div>
+                    <ProfileDataPiece 
+                        name={ "Phone number" } 
+                        value={ pi?.phoneNumber }
+                    />
+                    <ProfileDataPiece 
+                        name={ "Email" } 
+                        value={ pi?.email }
+                    />
+                    <ProfileDataPiece 
+                        name={ "Firstname" } 
+                        value={ pi?.firstname }
+                    />
+                    <ProfileDataPiece 
+                        name={ "Lastname" } 
+                        value={ pi?.lastname }
+                    />
+                    <ProfileDataPiece 
+                        name={ "Region" } 
+                        value={ a?.region }
+                    />
+                    <ProfileDataPiece 
+                        name={ "District" } 
+                        value={ a?.district }
+                    />
+                    <ProfileDataPiece 
+                        name={ "City" } 
+                        value={ a?.city }
+                    />
+                    <ProfileDataPiece 
+                        name={ "Street" } 
+                        value={ a?.street }
+                    />
+                    <ProfileDataPiece 
+                        name={ "Building" } 
+                        value={ a?.building }
+                    />
+                    <ProfileDataPiece 
+                        name={ "Apartment" } 
+                        value={ a?.apartment }
+                    />
+                    <ProfileDataPiece 
+                        name={ "Postal code" } 
+                        value={ a?.postalCode }
+                    />
+                    
                     <div className={s.buttonContainer}>
                         <button
                             onClick={

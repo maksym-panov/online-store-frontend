@@ -80,8 +80,13 @@ export default (props) => {
                     .then(resp => resp.data);
             }
         } catch(error) {
-            setErr(error.response?.data);
-            setErrorState(true);
+            if (error.response?.data) {
+                setErr(error.response.data);
+                setErrorState(true);
+                return;
+            }
+
+            navigate(ERROR_PAGE);
             return;
         }
 

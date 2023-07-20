@@ -1,10 +1,9 @@
 import { useState } from "react";
 import s from "../../style/Orders.module.css";
-import DataInput from "../common/DataInput";
+import DataInput from "./DataInput";
 
 export default (props) => {
     const order = props.order;
-    const setOrder = props.setOrder;
     const err = props.err;
 
     const c = order.unregCust;

@@ -22,10 +22,40 @@ export default (props) => {
         <div className={s.i}>
             <h5 className={s.itTCont}>{ item.product.name }</h5>
             <div className={s.ordItQ}>
-                { !d && <button className={`${s.tColr} ${s.btn}`} onClick={ decr(item, items, setItems, setErr, products, setProducts) }>-</button> }
+                { 
+                    !d && 
+                    <button 
+                        className={`${s.tColr} ${s.btn}`} 
+                        onClick={ 
+                            decr(item, items, setItems, setErr, products, setProducts) 
+                        }
+                    >
+                    -
+                    </button> 
+                }
                 <h3>{ item.quantity }</h3> 
-                { !d && <button className={`${s.tColr} ${s.btn}`} onClick={ incr(item, items, setItems, setErr) }>+</button> }
-                { !d && <button className={`${s.tColr} ${s.btn}`} onClick={ rem(item, items, setItems, setErr, products, setProducts) }>X</button> }
+                { 
+                    !d && 
+                    <button 
+                        className={`${s.tColr} ${s.btn}`} 
+                        onClick={ 
+                            incr(item, items, setItems, setErr) 
+                        }
+                    >
+                    +
+                    </button>
+                }
+                { 
+                    !d && 
+                    <button 
+                        className={`${s.tColr} ${s.btn}`} 
+                        onClick={ 
+                            rem(item, items, setItems, setErr, products, setProducts) 
+                        }
+                    >
+                    X
+                    </button> 
+                }
             </div>
         </div>
     );

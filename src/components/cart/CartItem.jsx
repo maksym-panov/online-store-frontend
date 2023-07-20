@@ -31,48 +31,24 @@ export default (props) => {
 
     const fetchProduct = async () => {
         try {
-            const result = await api.get(PRODUCTS + "/" + id)
-                            .then(resp => resp.data);
+            const result = await api
+                .get(PRODUCTS + "/" + id)
+                .then(resp => resp.data);
+            
             setProduct(result);
-            dispatch(
-                setPrice(
-                    { 
-                        id: id, 
-                        price: result.price 
-                    }
-                )
-            );
+            dispatch(setPrice({ id: id, price: result.price }));
         } catch(error) {
             navigate(ERROR_PAGE);
         }
     }
 
-    useEffect(() => {
-        fetchProduct();
-    }, []);
+    useEffect(() => fetchProduct, []);
 
-    const incr = () => {
-        dispatch(
-            incrementQuantity(
-                {
-                    id: id, 
-                    stock: product.stock
-                }
-            )
-        )
-    };
+    const incr = () => dispatch(incrementQuantity({ id: id, stock: product.stock }));
 
-    const decr = () => {
-        dispatch(
-            decrementQuantity(id)
-        )
-    };
+    const decr = () => dispatch(decrementQuantity(id));
 
-    const remove = () => {
-        dispatch(
-            removeProduct(id)
-        )
-    };
+    const remove = () => dispatch(removeProduct(id));
 
     let quantity = products.find(p => p.id === id).quantity;
     let sum = Math.round(product.price * quantity * 100) / 100;
