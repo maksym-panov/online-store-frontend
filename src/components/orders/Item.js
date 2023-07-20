@@ -7,6 +7,9 @@ export default (props) => {
     const d = props.disabled;
     const setErr = props.setErr;
 
+    const products = props.products;
+    const setProducts = props.setProducts;
+
     const item = items.find(
         i => i.product.productId === props.pId
     );
@@ -19,10 +22,10 @@ export default (props) => {
         <div className={s.i}>
             <h5 className={s.itTCont}>{ item.product.name }</h5>
             <div className={s.ordItQ}>
-                { !d && <button className={`${s.tColr} ${s.btn}`} onClick={ decr(item, items, setItems, setErr) }>-</button> }
+                { !d && <button className={`${s.tColr} ${s.btn}`} onClick={ decr(item, items, setItems, setErr, products, setProducts) }>-</button> }
                 <h3>{ item.quantity }</h3> 
                 { !d && <button className={`${s.tColr} ${s.btn}`} onClick={ incr(item, items, setItems, setErr) }>+</button> }
-                { !d && <button className={`${s.tColr} ${s.btn}`} onClick={ rem(item, items, setItems, setErr) }>X</button> }
+                { !d && <button className={`${s.tColr} ${s.btn}`} onClick={ rem(item, items, setItems, setErr, products, setProducts) }>X</button> }
             </div>
         </div>
     );
@@ -44,10 +47,10 @@ const incr = (item, items, setItems, setErr) => () => {
     upd(items, setItems);
 }
 
-const decr = (item, items, setItems, setErr) => () => {
+const decr = (item, items, setItems, setErr, products, setProducts) => () => {
     setErr(null);
     if (item.quantity <= 1) {
-        rem(item, items, setItems, setErr)();
+        rem(item, items, setItems, setErr, products, setProducts)();
         return;
     }
 
@@ -56,13 +59,25 @@ const decr = (item, items, setItems, setErr) => () => {
     upd(items, setItems);
 }
 
-const rem = (item, items, setItems, setErr) => () => {
+const rem = (item, items, setItems, setErr, products, setProducts) => () => {
     setErr(null); 
     if (items.length === 1) {
         setErr("Order cannot be empty")
         return;
     }
+
+    if (products) {
+        const selProduct = products
+            .find(
+                p => p.productId === item.product.productId
+            );
+
+        selProduct.stock += item.quantity;
+
+        setProducts([...products]);
+    }
     
     items = items.filter(i => i.product.productId !== item.product.productId);
+
     upd(items, setItems);
 }

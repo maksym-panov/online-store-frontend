@@ -143,7 +143,7 @@ export function ChangeProfile() {
                             className={s.image}
                             style={
                                 image ? 
-                                { backgroundImage: "url(" + BASE64_RESOLVER + cusr.image + ")" } :
+                                { backgroundImage: "url(" + BASE64_RESOLVER + image + ")" } :
                                 { 
                                     backgroundImage: `url(${accountWhite})`, 
                                     border: "2px black solid",

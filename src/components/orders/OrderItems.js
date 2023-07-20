@@ -74,6 +74,8 @@ export default (props) => {
                             items={ items }
                             setItems={ setItems }
                             setErr={ setErr }
+                            products={ products }
+                            setProducts={ setProducts }
                         />
                     )
                 }
@@ -121,6 +123,7 @@ const fetchProducts = async (name, setProducts) => {
 }
 
 const addItem = async (p, items, setItems, setErr) => {
+    console.log(p.stock)
     setErr(null);
     try {
         const curItem = items.find(
@@ -142,9 +145,7 @@ const addItem = async (p, items, setItems, setErr) => {
             --p.stock;
             setItems([newItem, ...items]);
             return;
-        }
-
-        if (p.stock >= curItem.quantity + 1) {
+        } else if (p.stock > 0) {
             ++curItem.quantity; 
             --curItem.product.stock;
             setItems([...items]);
