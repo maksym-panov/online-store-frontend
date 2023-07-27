@@ -24,4 +24,17 @@ export const API_BASE_URL = "http://192.168.0.XXX:8080/api/v2";
   npm start
 ```
 
-### 4. Open your browser and go to `localhost:3000`
+### 4. Open website
+
+Open your browser and go to `http://localhost:3000` or `http://localhost:3000/manager` (only for authorized users with Manager or Administrator role) to start interacting with the application.
+
+### Initial users
+
+If you seeded the database with initial data then you have access to 5 accounts:
+| User ID | Name            | Role          | Phone number | Password |
+|---------|-----------------|---------------|--------------|----------|
+| 1       | Marcus Aurelius | USER          | 0964261301   | 11111111 |
+| 2       | Vesta           | USER          | 0673291411   | 22222222 |
+| 3       | Arno            | USER          | 0505005713   | 33333333 |
+| 4       | Valeriia        | MANAGER       | 0994824581   | 44444444 |
+| 5       | Admin           | ADMINISTRATOR | 0505050055   | 55555555 |
