@@ -1,6 +1,41 @@
 # Online store (frontend)
 ReactJS + Redux Toolkit frontend part for maksym-panov/online-store-backend
 
+## Start with Docker
+
+Use following commands in this exact order to start database, backend and frontend of the application.
+
+1. Pull database image from registry.
+```
+docker pull maksympanov/store-persistence:alpine
+```
+2. Run database container.
+```
+docker run -d -p 5332:5432 --name Persistence maksympanov/store-persistence:alpine
+```
+
+3. Pull backend image from registry.
+```
+docker pull maksympanov/store-backend:latest
+```
+
+4. Run backend container.
+```
+docker run -d -p 8080:8080 --name Backend maksympanov/store-backend:latest
+```
+
+5. Pull frontend image from registry.
+```
+docker pull maksympanov/store-frontend:alpine
+```
+
+6. Run frontend container.
+```
+docker run -d -p 3000:3000 --name Frontend maksympanov/store-frontend:alpine
+```
+
+## Start on your local machine
+
 You should already have NodeJS installed on your machine ([Download from official site](https://nodejs.org/en)).
 Also should already have installed, built and deployed backend side of the application ([Backend](https://github.com/maksym-panov/online-store-backend))
 
