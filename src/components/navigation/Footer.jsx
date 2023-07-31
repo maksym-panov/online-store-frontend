@@ -11,7 +11,7 @@ import {
     PRODUCTS_PAGE 
 } from "../../utils/constants";
 
-export default () => {
+const Footer = () => {
     return (
         <footer className={s.pageFooter}>
             <div className={s.footerContentContainer}>
@@ -39,3 +39,5 @@ export default () => {
         </footer>
     );
 }
+
+export default Footer;

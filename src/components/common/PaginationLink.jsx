@@ -3,46 +3,31 @@ import {
     useLocation, 
     useSearchParams 
 } from "react-router-dom";
-import s from "../../style/Pagination.module.css";
+import ph from "../../utils/paginationHelper";
 
 export default (props) => {
-    const PAGE = props.page;
-    const TYPE = props.type;
-    const l = useLocation();
-    const [p, setP] = useSearchParams();
+    const ctx = {};
+    ctx.PAGE = props.page;
+    ctx.TYPE = props.type;
+    ctx.l = useLocation();
+    [ctx.p, ctx.setP] = useSearchParams();
 
-    let URL = l.pathname + "?";
+    let URL = ctx.l.pathname + "?";
 
-    for (let e of p.entries()) {
+    for (let e of ctx.p.entries()) {
         if (e[0] !== "page") {
             URL += e[0] + "=" + e[1] + "&";
         }    
     }
 
-    URL += "page=" + PAGE;
-
-    if (TYPE == "primary") {
-        return (
-            <Link 
-                className={`${s.link} ${s.primaryPageNumber}`} 
-                to={ URL }
-            >
-                <div>
-                    {PAGE}
-                </div>
-            </Link>
-        );
-    }
+    URL += "page=" + ctx.PAGE;
 
     return (
-        <Link 
-            onClick={ () => document.getElementById("list")?.scrollIntoView() }
-            className={`${s.link} ${s.secondaryPageNumber}`} 
+        <Link onClick={ ph.afterRefresh(ctx) } 
+            className={ ph.numberClass(ctx) } 
             to={ URL }
         >
-            <div>
-                {PAGE}
-            </div>
+            <div>{ ctx.PAGE }</div>
         </Link>
     );
 }

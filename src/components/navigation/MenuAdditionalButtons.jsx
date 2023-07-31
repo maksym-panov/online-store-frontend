@@ -1,87 +1,42 @@
 import { 
     LOGIN_PAGE, 
-    CART_PAGE, 
-    BASE64_RESOLVER
+    CART_PAGE
 } from "../../utils/constants";
 import s from "../../style/NavigationBar.module.css";
-import account from "../../img/account.png";
-import cart from "../../img/cart.png";
 import { useSelector } from "react-redux";
+import nh from "../../utils/navigationHelper";
 
-export default () => {
-    const user = useSelector(state => state.user);
-    const products = useSelector(state => state.cart.products);
+const MenuAdditionalButtons = () => {
+    const ctx = {};
+    ctx.user = useSelector(state => state.user);
+    ctx.products = useSelector(state => state.cart.products);
 
-    const evalProductsInCart = () => {
-        let count = 0;
-        products.forEach(p => {
-            count += p.quantity;
-        });
-        return count;
-    }
-
-    let productsInCart = evalProductsInCart();
-    let font = 0.8;
-
-    const showStyle = {
-        display: "flex",
-        fontSize: `${font}rem`
-    }
+    let productsInCart = nh.evalProductsInCart(ctx);
     
     return (
         <div className={s.menuAdditionalButtonsContainer}>
-            
-
             <div className={s.accountButtonMenu}>
-                <a 
-                    href={CART_PAGE} 
+                <a href={CART_PAGE} 
                     className={
                         `${s.cartButton} 
                         ${s.accountButton} 
                         ${s.accountButtonMenuContent}`
                     }
                 >
-                    <div 
-                        style={{
-                            backgroundImage: `url(${cart})`
-                        }}
-                        className={`${s.icon} ${s.cartIcon}`} 
-                    >
-                    </div>
-                    <div className={s.counterStyle} style={productsInCart ? showStyle : {}}>
-                        <div>
-                        {productsInCart}
-                        </div>
+                    <div style={ nh.cartImage } className={`${s.icon} ${s.cartIcon}`}></div>
+                    <div className={s.counterStyle} style={ productsInCart ? nh.showStyle : {} }>
+                        <div>{productsInCart}</div>
                     </div>
                     <p className={s.accountText}>Cart</p>
                 </a>
                 
-                <a 
-                    href={LOGIN_PAGE} 
-                    className={
-                        `${s.accountButton} 
-                        ${s.accountButtonMenuContent}`}
-                >
-                    <div 
-                        style=
-                        {
-                            user && user.image ?
-                            { backgroundImage: `url("${ BASE64_RESOLVER + user.image}")` }
-                            :
-                            { backgroundImage: `url(${account})` }
-                        }
-                        className={s.icon} 
-                    >
-                    </div>
-                    <p className={s.accountText}>
-                        {
-                            user && user.personalInfo && user.personalInfo.firstname ? 
-                            user.personalInfo.firstname : 
-                            "Account"
-                        }
-                    </p>
+                <a href={LOGIN_PAGE} className={`${s.accountButton} ${s.accountButtonMenuContent}`}>
+                    <div style={ nh.accountImage(ctx) } className={s.icon}></div>
+                    <p className={s.accountText}>{ nh.accountText(ctx) }</p>
                 </a>
             </div>
         </div>
     );
 }
+
+export default MenuAdditionalButtons;

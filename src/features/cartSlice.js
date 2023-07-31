@@ -71,7 +71,7 @@ export const cartSlice = createSlice({
                 p => p.id !== id
             );
         },
-        clearCart: (state, action) => {
+        clearCart: (state) => {
             state.products = [];
         }
     }

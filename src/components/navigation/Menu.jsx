@@ -3,9 +3,12 @@ import menuImg from "../../img/menu.png";
 import x from "../../img/x.png";
 import MenuLinks from "./MenuLinks";
 import MenuAdditionalButtons from "./MenuAdditionalButtons";
-import { isIOS, isSafari } from "react-device-detect";
+import { 
+  isIOS, 
+  isSafari 
+} from "react-device-detect";
 
-export default () => {
+const Menu = () => {
   const TI = isSafari || isIOS ? 0 : null;
 
   return (
@@ -27,3 +30,5 @@ export default () => {
     </div>
   );
 }
+
+export default Menu;

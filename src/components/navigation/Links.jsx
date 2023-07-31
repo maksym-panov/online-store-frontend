@@ -8,7 +8,7 @@ import {
 import s from "../../style/NavigationBar.module.css";
 import { Link } from "react-router-dom";
 
-export default () => {
+const Links = () => {
     return (
         <div className={s.linksContainer}>
           <Link className={`${s.headerLink} ${s.linkContainer}`} to={EMPTY_PAGE}>Products</Link>
@@ -19,3 +19,5 @@ export default () => {
         </div>
     );
 }
+
+export default Links;

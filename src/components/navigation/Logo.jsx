@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { EMPTY_PAGE } from "../../utils/constants";
 import logo from "../../img/raccoon.png";
 
-export default () => {
+const Logo = () => {
     return (
         <div className={s.logoContainer}>
           <Link className={s.logoLink} to={ EMPTY_PAGE }>
@@ -16,3 +16,4 @@ export default () => {
     );
 }
 
+export default Logo;
