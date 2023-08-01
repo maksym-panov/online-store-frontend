@@ -5,43 +5,32 @@ import {
 import CartItem from "../../components/cart/CartItem";
 import s from "../../style/Cart.module.css";
 import empty from "../../img/empty_cart.png";
-import { CHECKOUT_PAGE } from "../../utils/constants";
 import { useNavigate } from "react-router-dom";
 import { 
     useState,
     useEffect 
 } from "react";
 import { ping } from "../../utils/webHelpers";
+import ch from "../../utils/cartHelper";
 
 export default () => {
-    const [err, setErr] = useState(false);
-    const products = useSelector(state => state.cart.products);
-    const navigate = useNavigate();
-
-    const evalTotal = () => {
-        if (products.length === 0) {
-            return 0;
-        }
-
-        const total = products
-            .map(p => p.quantity * p.price)
-            .reduce((a, c) => a + c, 0)
-        
-        return Math.round(total * 100) / 100;
-    }
-
-    const user = useSelector(state => state.user);
-    const dispatch = useDispatch();
+    const ctx = {};
+    [ctx.err, ctx.setErr] = useState(false);
+    ctx.products = useSelector(state => state.cart.products);
+    ctx.navigate = useNavigate();
+    ctx.dispatch = useDispatch();
+    ctx.user = useSelector(state => state.user);
+    const checkoutCommand = ch.getCheckoutCommand(ctx);
 
     useEffect(() => {
-        ping(user, dispatch);
+        ping(ctx.user, ctx.dispatch);
     }, []);
 
     return (
         <div className={s.cartContainer}>
             <div className={s.itemsContainer}>
                 {
-                    !products.length &&
+                    !ctx.products.length &&
                     (
                         <div className={s.empty}>
                             <img className={s.emptyImage} src={empty} />
@@ -50,10 +39,11 @@ export default () => {
                     )
                 }
                 {
-                    products.map(p => 
+                    ctx.products.map(p => 
                         <CartItem 
                             key={p.id}
                             id={p.id} 
+                            mediator={ctx}
                         />
                     )
                 }
@@ -61,23 +51,17 @@ export default () => {
             <div className={s.checkout}>
                 <div>
                     <h1>
-                        { "Total $" + evalTotal().toFixed(2) }
+                        { "Total $" + ch.evalTotal(ctx).toFixed(2) }
                     </h1>
                 </div>
                 <div>
                     <button 
-                        className={s.checkoutButton}
-                        onClick={ () => {
-                            if (!(products.length === 0)) {
-                                navigate(CHECKOUT_PAGE);
-                            } else {
-                                setErr(true);
-                            }
-                        }}>
+                        className={ s.checkoutButton }
+                        onClick={ checkoutCommand }>
                         Checkout
                     </button>
                 </div>
-                { err && <p className={s.error}>Your cart is empty!</p> }
+                { ctx.err && <p className={ s.error }>Your cart is empty!</p> }
             </div>
         </div>
     );

@@ -1,104 +1,16 @@
 import s from "../../style/Cart.module.css";
 import profiles from "../../style/Profile.module.css";
-import api from "../../utils/axiosHelper";
-import { 
-    DELIVERIES, 
-    ERROR_PAGE, 
-    ORDERS, 
-    ORDER_POSTED_PAGE 
-} from "../../utils/constants";
-import { 
-    useEffect, 
-    useState 
-} from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import ch from "../../utils/checkoutHelper";
 
 export default (props) => {
-    const navigate = useNavigate();
-    const user = props.user;
-    const customer = props.customer;
-    const products = props.products;
-    const setErr = props.setErr;
+    const ctx = props.mediator;
+    const fetchCommand = ch.getFetchDeliveriesCommand(ctx);
+    const checkoutCommand = ch.getDoCheckoutCommand(ctx);
 
-    const [deliveries, setDeliveries] = useState([]);
-    const [deliv, setDeliv] = useState();
-    const [errorState, setErrorState] = useState(false);
+    let total = ch.evalTotal(ctx);
 
-    const fetchDeliveries = async () => {
-        try {
-            const d = await api.get(DELIVERIES).then(resp => resp.data);
-            setDeliv(d[0]);
-            setDeliveries(d);
-        } catch(error) {
-            navigate(ERROR_PAGE);
-        }
-    }
-
-    useEffect(() => {
-        fetchDeliveries();
-    }, []);
-
-    const doCheckout = async () => {
-        const newOrder = {};
-
-        const orderProducts = 
-            products.map(p => (
-                {
-                    product: {
-                        productId: p.id
-                    },
-                    quantity: p.quantity
-                }
-            ))
-
-        newOrder.deliveryType = deliv;
-        newOrder.orderProducts = orderProducts;
-       
-        let newOrderId;
-
-        try {
-            if (!user.userId || !user.jwt) {
-                newOrder.unregCust = customer;
-                newOrderId = await api
-                    .post(
-                        ORDERS,
-                        newOrder
-                    )
-                    .then(resp => resp.data);
-            } else {
-                newOrder.user = user;
-                newOrderId = await api
-                    .post(
-                        ORDERS,
-                        newOrder,
-                        {
-                            headers: {
-                                "Authorization": user.jwt
-                            }
-                        }
-                    )
-                    .then(resp => resp.data);
-            }
-        } catch(error) {
-            if (error.response?.data) {
-                setErr(error.response.data);
-                setErrorState(true);
-                return;
-            }
-
-            navigate(ERROR_PAGE);
-            return;
-        }
-
-        navigate(ORDER_POSTED_PAGE + "?id=" + newOrderId)
-        return;
-    }
-
-    let total = products
-        .map(p => p.quantity * p.price)
-        .reduce((a, c) => a + c, 0);
-    
-    total = Math.round(total * 100) / 100;
+    useEffect(() => { fetchCommand() }, []);
 
     return (
         <div className={s.checkoutSummary}>
@@ -106,9 +18,9 @@ export default (props) => {
                 <h4 className={profiles.dataHead}>Delivery</h4>
                 <select>
                     {
-                        deliveries.map(d => 
+                        ctx.deliveries.map(d => 
                             <option 
-                                onClick={ () => setDeliv(d) } 
+                                onClick={ () => ctx.setDeliv(d) } 
                                 key={d.deliveryTypeId}
                                 value={d.deliveryTypeId}
                             >
@@ -119,14 +31,19 @@ export default (props) => {
                 </select>
             </label>
             <hr className={s.ruler} />
-            <h2 className={s.total}>Total - ${total.toFixed(2)}</h2>
+            <h2 className={s.total}>Total - ${ total }</h2>
             <button 
-                onClick={() => doCheckout()}
+                onClick={ checkoutCommand }
                 className={s.checkoutButton}
             >
             Checkout
             </button>
-            {errorState && <p className={`${profiles.validationError} ${s.incorrectData}`}>Incorrect data!</p>}
+            {
+                ctx.errorState && 
+                <p className={`${profiles.validationError} ${s.incorrectData}`}>
+                    Incorrect data!
+                </p>
+            }
         </div>
     );
 }

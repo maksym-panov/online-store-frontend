@@ -2,56 +2,26 @@ import {
     useEffect, 
     useState 
 } from "react";
-import api from "../../utils/axiosHelper";
-import { 
-    BASE64_RESOLVER, 
-    PRODUCTS, 
-    ERROR_PAGE 
-} from "../../utils/constants";
-import { 
-    decrementQuantity, 
-    incrementQuantity, 
-    removeProduct, 
-    setPrice 
-} from "../../features/cartSlice";
-import { 
-    useDispatch, 
-    useSelector 
-} from "react-redux";
+import { BASE64_RESOLVER } from "../../utils/constants";
+import { useSelector } from "react-redux";
 import s from "../../style/Cart.module.css";
-import { useNavigate } from "react-router-dom";
+import ch from "../../utils/cartHelper";
 
-export default (props) => {
+const CartItem = (props) => {
+    const ctx = props.mediator;
     const id = props.id;
     const products = useSelector(store => store.cart.products);
-    
-    const [product, setProduct] = useState({});
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const [product, setProduct] = useState({ productId: id });
 
-    const fetchProduct = async () => {
-        try {
-            const result = await api
-                .get(PRODUCTS + "/" + id)
-                .then(resp => resp.data);
-            
-            setProduct(result);
-            dispatch(setPrice({ id: id, price: result.price }));
-        } catch(error) {
-            navigate(ERROR_PAGE);
-        }
-    }
-
-    useEffect(() => fetchProduct, []);
-
-    const incr = () => dispatch(incrementQuantity({ id: id, stock: product.stock }));
-
-    const decr = () => dispatch(decrementQuantity(id));
-
-    const remove = () => dispatch(removeProduct(id));
+    const fetchCommand = ch.getFetchProductCommand(id, setProduct, ctx);
+    const incrCommand = ch.getIncrCommand(product, ctx);
+    const decrCommand = ch.getDecrCommand(product, ctx);
+    const removeCommand = ch.getRemoveCommand(product, ctx);
 
     let quantity = products.find(p => p.id === id).quantity;
     let sum = Math.round(product.price * quantity * 100) / 100;
+
+    useEffect(() => { fetchCommand() }, []);
 
     return (
         <div className={s.item}>
@@ -69,13 +39,15 @@ export default (props) => {
                 </div>
             </div>
             <div className={s.counterContainer}>
-                <button onClick={ decr } className={s.countButton}>-</button>
+                <button onClick={ decrCommand } className={s.countButton}>-</button>
                 <p className={s.count}>{quantity}</p>
-                <button onClick={ incr } className={s.countButton}>+</button>
+                <button onClick={ incrCommand } className={s.countButton}>+</button>
             </div>
             <div className={s.removeContainer}>
-                <button onClick={ remove } className={s.countButton}>X</button>
+                <button onClick={ removeCommand } className={s.countButton}>X</button>
             </div>
         </div>
     );
 }
+
+export default CartItem;
