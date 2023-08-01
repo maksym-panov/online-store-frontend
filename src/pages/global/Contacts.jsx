@@ -10,11 +10,8 @@ import { useEffect } from "react";
 import { ping } from "../../utils/webHelpers";
 
 export default () => {
-    const user = useSelector(state => state.user);
-    const dispatch = useDispatch();
-
     useEffect(() => {
-        ping(user, dispatch);
+        ping(useSelector(state => state.user), useDispatch());
     }, []); 
 
     return (

@@ -2,16 +2,11 @@ import {
     useState, 
     useEffect 
 } from "react";
-import { 
-    CATEGORIES_PAGE, 
-    ERROR_PAGE, 
-    PRODUCT_CATEGORIES 
-} from "../../utils/constants";
+import { CATEGORIES_PAGE } from "../../utils/constants";
 import { 
     useNavigate, 
     useSearchParams 
 } from "react-router-dom";
-import api from "../../utils/axiosHelper";
 import ProductsList from "../../components/products/ProductsList";
 import s from "../../style/Products.module.css";
 import { 
@@ -19,73 +14,69 @@ import {
     useDispatch 
 } from "react-redux";
 import { ping } from "../../utils/webHelpers";
+import ch from "../../utils/categoriesHelper";
 
 export default () => {
-    const navigate = useNavigate();
-    const [params, setParams] = useSearchParams();
-    const [categArr, setCategArr] = useState([]);
-    const [categ, setCateg] = useState({});
-
-    const id = params.get("id");
-
-    const titleStyle = {
-        backgroundColor: "#e6f4f1",
-        margin: 0,
-        textAlign: "center",
-        paddingTop: "30px"
-    }
-
-    const user = useSelector(state => state.user);
-    const dispatch = useDispatch();
+    const ctx = {};
+    [ctx.params, ctx.setParams] = useSearchParams();
+    [ctx.categArr, ctx.setCategArr] = useState([]);
+    [ctx.categ, ctx.setCateg] = useState({});
+    ctx.id = ctx.params.get("id");
+    ctx.user = useSelector(state => state.user);
+    ctx.dispatch = useDispatch();
+    ctx.navigate = useNavigate();
+    
+    const fetchCategoryCommand = ch.getFetchCategoryCommand(ctx);
+    const fetchCategoriesCommand = ch.getFetchCategoriesCommand(ctx);
 
     useEffect(() => {
-        ping(user, dispatch);
+        ping(ctx.user, ctx.dispatch);
 
-        if (id) {
-            fetchCateg(id, setCateg, navigate)
+        if (ctx.id) {
+            fetchCategoryCommand();
         } else {
-            fetchCategArr(setCategArr, navigate);
+            fetchCategoriesCommand();
         }
     }, []);
 
-    if (id) {
+    if (ctx.id) {
         return (
             <>
-                <h2 style={titleStyle}>Products in category "{categ?.name}"</h2>
-                <ProductsList categoryId={id} />
+                <h2 style={ ch.titleStyle }>Products in category "{ ctx.categ?.name }"</h2>
+                <ProductsList categoryId={ ctx.id } />
             </>
         );
     }
 
-    const size = categArr.length;
-    const firstCol = categArr.slice(0, Math.ceil(size / 2));
-    const secondCol = categArr.slice(Math.ceil(size / 2));
+    const size = ctx.categArr.length;
+    const firstCol = ctx.categArr.slice(0, Math.ceil(size / 2));
+    const secondCol = ctx.categArr.slice(Math.ceil(size / 2));
 
     return (
-        <div className={s.ptContainer}>
-            <div className={s.ptList}>
-                <div className={s.col}>
+        <div className={ s.ptContainer }>
+            <div className={ s.ptList }>
+                <div className={ s.col }>
                     {
                         firstCol.map(pt => (
                             <a 
-                                key={pt.productTypeId}
-                                className={s.link}
-                                href={CATEGORIES_PAGE + "?id=" + pt.productTypeId}
+                                key={ pt.productTypeId }
+                                className={ s.link }
+                                href={ CATEGORIES_PAGE + "?id=" + pt.productTypeId }
                             >
-                            {pt.name}
+                            { pt.name }
                             </a>
                         ))
                     }
                 </div>
-                <div className={s.col}>
+                <div className={ s.col }>
                     {
                         secondCol.map(pt => (
                             <a 
-                                key={pt.productTypeId}
-                                className={s.link}
-                                href={CATEGORIES_PAGE + "?id=" + pt.productTypeId}
+                                key={ pt.productTypeId }
+                                className={ s.link }
+                                href={ CATEGORIES_PAGE + "?id=" + pt.productTypeId }
                             >
-                            {pt.name}
+                            { pt.name }
                             </a>
                         ))
                     }
@@ -93,27 +84,4 @@ export default () => {
             </div>
         </div>
     )
-}
-
-async function fetchCategArr(setCategArr, navigate) {
-    try {
-        const categArr = await api
-            .get(PRODUCT_CATEGORIES)
-            .then(resp => resp.data);
-        setCategArr(categArr);
-    } catch(error) {
-        navigate(ERROR_PAGE);
-    }
-}
-
-async function fetchCateg(id, setCateg, navigate) {
-    try {
-        const categ = await api
-            .get(PRODUCT_CATEGORIES + "/" + id)
-            .then(resp => resp.data);
-        setCateg(categ);
-    } catch(error) {
-        navigate(ERROR_PAGE);
-    }
-   
 }

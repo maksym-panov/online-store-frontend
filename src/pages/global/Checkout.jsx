@@ -13,7 +13,7 @@ import {
 } from "react";
 import { ping } from "../../utils/webHelpers";
 
-export default () => {
+const Checkout = () => {
     const ctx = {};
     ctx.navigate = useNavigate();
     ctx.products = useSelector(state => state.cart.products);
@@ -44,3 +44,5 @@ export default () => {
         </div>
     );
 }
+
+export default Checkout;

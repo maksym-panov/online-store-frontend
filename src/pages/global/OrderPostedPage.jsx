@@ -9,10 +9,9 @@ import { useDispatch } from "react-redux";
 import { clearCart } from "../../features/cartSlice";
 import { useEffect } from "react";
 
-export default () => {
+const OrderPostedPage = () => {
     const [params, setParams] = useSearchParams();
     const id = params.get("id");
-
 
     const dispatch = useDispatch();
 
@@ -33,3 +32,5 @@ export default () => {
         </div>
     );
 }
+
+export default OrderPostedPage;

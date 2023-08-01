@@ -1,5 +1,5 @@
 import s from "../../style/Cart.module.css";
-import FormInput from "./FormInput";
+import FormInput from "../common/FormInput";
 import { useState } from "react";
 
 export default (props) => {
