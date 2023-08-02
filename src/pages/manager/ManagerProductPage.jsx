@@ -4,14 +4,12 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
-    BASE64_RESOLVER, 
     ERROR_PAGE, 
     MANAGE_PRODUCTS_PAGE, 
     PRODUCTS 
 } from "../../utils/constants";
 import api from "../../utils/axiosHelper";
 import s from "../../style/ManagerProducts.module.css";
-import { getBase64 } from "../../utils/webHelpers";
 import { useSelector } from "react-redux";
 import CategoriesSelect from "../../components/products/CategoriesSelect";
 import EditProductMeta from "../../components/products/EditProductMeta";
