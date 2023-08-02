@@ -1,7 +1,9 @@
-import s from "../../style/Orders.module.css";
+import s from "../../../style/Orders.module.css";
 
 export default (props) => {
-    const user = props.user;
+    const ctx = props.mediator;
+    
+    const user = ctx.order.user;
     const pi = user.personalInfo;
     const a = user.address;
     

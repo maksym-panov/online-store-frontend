@@ -1,4 +1,4 @@
-import s from "../../style/Orders.module.css";
+import s from "../../../style/Orders.module.css";
 
 export default (props) => {
     const value = props.value;

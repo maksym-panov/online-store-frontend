@@ -1,6 +1,5 @@
 import s from "../../style/ManagerProducts.module.css";
 import { 
-    BASE64_RESOLVER, 
     MANAGE_PRODUCTS_PAGE, 
     PRODUCTS, 
     ERROR_PAGE 
@@ -9,7 +8,6 @@ import api from "../../utils/axiosHelper";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { getBase64 } from "../../utils/webHelpers";
 import CategoriesSelect from "../../components/products/CategoriesSelect";
 import EditProductMeta from "../../components/products/EditProductMeta";
 import EditProductImage from "../../components/products/EditProductImage";

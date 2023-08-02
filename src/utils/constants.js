@@ -1,5 +1,5 @@
 // API ENDPOINTS
-export const API_BASE_URL = "http://localhost:8080/api/v2";
+export const API_BASE_URL = "http://192.168.0.103:8080/api/v2";
 export const PRODUCT_CATEGORIES = "/product_types";
 export const DELIVERIES = "/delivery_types";
 export const PRODUCTS = "/products";

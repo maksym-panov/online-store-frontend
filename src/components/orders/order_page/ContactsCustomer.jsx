@@ -1,12 +1,16 @@
 import { useState } from "react";
-import s from "../../style/Orders.module.css";
+import s from "../../../style/Orders.module.css";
 import DataInput from "./DataInput";
 
 export default (props) => {
-    const order = props.order;
-    const err = props.err;
+    const ctx = props.mediator;
+
+    const order = ctx.order;
+    const err = ctx.err;
 
     const c = order.unregCust;
+
+    console.log(c.phoneNumber)
 
     const [firstname, setFirstname] = useState(c.firstname ? c.firstname : "");
     const [lastname, setLastname] = useState(c.lastname ? c.lastname : "");

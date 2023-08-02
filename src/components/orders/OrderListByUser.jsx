@@ -5,61 +5,44 @@ import {
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import s from "../../style/Orders.module.css";
-import Order from "./Order";
-import api from "../../utils/axiosHelper";
-import {
-    USERS,
-    MANAGER_PAGE,
-    ORDERS
-} from "../../utils/constants";
+import Order from "./order_record/Order";
+import oh from "../../utils/ordersHelper";
 
 export default (props) => {
-    const userId = props.userId;
-    const userIdParam = props.userIdParam;
-    const isManagement = props.isManagement;
-    const [orders, setOrders] = useState([]);
+    const ctx = props.mediator;
+    [ctx.orders, ctx.setOrders] = useState([]);
+    [ctx.ordersOwner, ctx.setOrdersOwner] = useState({});
+    ctx.currentUser = useSelector(state => state.user);
+    ctx.navigate = useNavigate();
+    ctx.fname = ctx.ordersOwner.personalInfo?.firstname;
+    ctx.lname = ctx.ordersOwner.personalInfo?.lastname;
+    ctx.phone = ctx.ordersOwner.personalInfo?.phoneNumber;
 
-    const [ordersOwner, setOrdersOwner] = useState({});
-    const currentUser = useSelector(state => state.user);
-
-    const navigate = useNavigate();
-
-    let fname, lname, phone;
-        fname = ordersOwner.personalInfo?.firstname;
-        lname = ordersOwner.personalInfo?.lastname;
-        phone = ordersOwner.personalInfo?.phoneNumber;
+    const fetchOrdersCommand = oh.getFetchOrdersCommand(ctx);
+    const fetchUserCommand = oh.getFetchUserCommand(ctx);
 
     useEffect(() => {
-        if (userId) {
-            fetchByUser(userId, setOrders, currentUser.jwt, navigate);
-        } else if (userIdParam) {
-            fetchByUser(userIdParam, setOrders, currentUser.jwt, navigate);
-            fetchUser(userIdParam, setOrdersOwner, currentUser.jwt, navigate);
+        fetchOrdersCommand();
+        if (ctx.userIdParam) {
+            fetchUserCommand();
         }
     }, []);
-
-    let title = 
-        userIdParam 
-        ? 
-        "Orders, posted by user #" + userIdParam + 
-        ` (${fname ? fname : ""} ${lname ? lname : ""}, ${phone ? "+38" + phone : ""})` 
-        :
-        "Posted orders";
-    
+        
     return (
         <div className={s.ordCont}>
-            <h1 className={s.title}>{ title }</h1>
+            <h1 className={s.title}>{ oh.title(ctx) }</h1>
             <hr />
-            { !orders.length && <h5 className={s.ordProdTitle}>There is nothing here</h5> }
+            { !ctx.orders.length && <h5 className={s.ordProdTitle}>There is nothing here</h5> }
             {
-                orders.map(o => (
-                    <Order key={ o.orderId } order={ o } management={ isManagement } />
+                ctx.orders.map(o => (
+                    <Order key={ o.orderId } order={ o } mediator={ ctx } />
                 ))
             }
-            { userIdParam && 
+            { 
+                ctx.userIdParam && 
                 <button
                     onClick={ () => window.history.back() }
-                    className={s.btnS} 
+                    className={ s.btnS } 
                 >
                 Back
                 </button>
@@ -68,42 +51,3 @@ export default (props) => {
     );
 }
 
-const fetchUser = async (userId, setUser, token, navigate) => {
-    try {
-        const user = await api
-            .get(
-                USERS + "/" + userId,
-                {
-                    headers: {
-                        "Authorization": token
-                    }
-                }
-            )
-            .then(resp => resp.data)
-
-        setUser(user);
-    } catch(error) {
-        navigate(MANAGER_PAGE);
-    }
-}
-
-const fetchByUser = async (userId, setOrders, token, navigate) => {
-    try {
-        const orders = await api
-            .get(
-                USERS + "/" + userId + ORDERS,
-                {
-                    headers: {
-                        "Authorization": token
-                    }
-                }
-            )
-            .then(resp => resp.data);
-
-        setOrders(orders);
-    } catch(error) {
-        navigate(MANAGER_PAGE);
-    }
-    
-    
-}

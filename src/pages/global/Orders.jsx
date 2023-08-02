@@ -1,30 +1,23 @@
 import { useSearchParams } from "react-router-dom";
 import OrderPage from "../manager/OrderPage";
 import OrderListByUser from "../../components/orders/OrderListByUser";
-import AllOrderList from "../../components/orders/AllOrderList";
+import AllOrderList from "../../components/orders/manager_orders_list/AllOrderList";
 
 export default (props) => {
-    const [params, setParams] = useSearchParams();
-   
-    const userId = props.userId;
-    const order = params.get("id");
-    const userIdParam = params.get("user");
+    const ctx = {}; 
+    [ctx.params, ctx.setParams] = useSearchParams();
+    ctx.userId = props.userId;
+    ctx.order = ctx.params.get("id");
+    ctx.userIdParam = ctx.params.get("user");
+    ctx.isManagement = ctx.userIdParam || ctx.order || !ctx.userId;
     
-    const isManagement = userIdParam || order || !userId;
-    
-    if (userId || userIdParam) {
-        return (
-            <OrderListByUser
-                userId={ userId } 
-                userIdParam={ userIdParam } 
-                isManagement={ isManagement }
-            />
-        ) 
+    if (ctx.userId || ctx.userIdParam) {
+        return <OrderListByUser mediator={ ctx } />;
     }
 
-    if (order) {
+    if (ctx.order) {
         return (
-            <OrderPage orderId={ order } />
+            <OrderPage orderId={ ctx.order } />
         );
     }
 
